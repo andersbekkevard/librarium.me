@@ -1,6 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { BRAND_CLASSES } from "@/lib/colors";
+import { fadeInUp, fadeInScale, staggerContainer, defaultTransition, hoverLift } from "@/lib/animations";
+import { useScrollAnimation, useReducedMotion } from "@/lib/useAnimations";
 
 enum ProService {
   YES = 1,
@@ -41,45 +44,73 @@ const serviceList: ServiceProps[] = [
 ];
 
 export const ServicesSection = () => {
+  const { ref, isInView } = useScrollAnimation();
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="services" className="container py-24 sm:py-32">
-      <h2
-        className={`text-lg ${BRAND_CLASSES.primary.text} text-center mb-2 tracking-wider`}
+    <section id="services" className="container py-24 sm:py-32" ref={ref}>
+      <motion.div
+        variants={fadeInUp}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        transition={prefersReducedMotion ? { duration: 0 } : defaultTransition}
       >
-        Integrations
-      </h2>
-      <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-        Powerful Reading Tools
-      </h2>
-      <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-16">
-        Connect with your favorite book platforms and unlock advanced features
-        to enhance your reading journey.
-      </h3>
-      <div className="grid lg:grid-cols-2 gap-4 w-full lg:gap-x-20">
-        {serviceList.map(({ title, description, pro }) => (
-          <Card
+        <h2
+          className={`text-lg ${BRAND_CLASSES.primary.text} text-center mb-2 tracking-wider`}
+        >
+          Integrations
+        </h2>
+        <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
+          Powerful Reading Tools
+        </h2>
+        <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-16">
+          Connect with your favorite book platforms and unlock advanced features
+          to enhance your reading journey.
+        </h3>
+      </motion.div>
+      
+      <motion.div 
+        className="grid lg:grid-cols-2 gap-4 w-full lg:gap-x-20"
+        variants={staggerContainer}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        {serviceList.map(({ title, description, pro }, index) => (
+          <motion.div
             key={title}
-            className="bg-muted/60 dark:bg-card h-full relative"
+            variants={fadeInScale}
+            transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: index * 0.1 }}
+            whileHover={prefersReducedMotion ? {} : hoverLift}
           >
-            <CardHeader className="pb-2">
-              <div className="flex justify-between">
-                <CardTitle className="mb-2">{title}</CardTitle>
-                {pro === ProService.YES && (
-                  <Badge
-                    variant="secondary"
-                    className={`${BRAND_CLASSES.primary.bg} text-primary-foreground`}
-                  >
-                    PRO
-                  </Badge>
-                )}
-              </div>
-            </CardHeader>
-            <CardContent className="text-muted-foreground">
-              {description}
-            </CardContent>
-          </Card>
+            <Card
+              className="bg-muted/60 dark:bg-card h-full relative"
+            >
+              <CardHeader className="pb-2">
+                <div className="flex justify-between">
+                  <CardTitle className="mb-2">{title}</CardTitle>
+                  {pro === ProService.YES && (
+                    <motion.div
+                      whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
+                      transition={{ type: "spring", damping: 15, stiffness: 300 }}
+                    >
+                      <Badge
+                        variant="secondary"
+                        className={`${BRAND_CLASSES.primary.bg} text-primary-foreground`}
+                      >
+                        PRO
+                      </Badge>
+                    </motion.div>
+                  )}
+                </div>
+              </CardHeader>
+              <CardContent className="text-muted-foreground">
+                {description}
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
+

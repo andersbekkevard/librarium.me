@@ -1,6 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Book, TrendingUp, Users2, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import { BRAND_CLASSES } from "@/lib/colors";
+import { slideInLeft, slideInRight, staggerContainer, defaultTransition, hoverLift } from "@/lib/animations";
+import { useScrollAnimation, useReducedMotion } from "@/lib/useAnimations";
 
 interface BenefitsProps {
   icon: React.ReactElement;
@@ -36,10 +39,18 @@ const benefitList: BenefitsProps[] = [
 ];
 
 export const BenefitsSection = () => {
+  const { ref, isInView } = useScrollAnimation();
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="benefits" className="container py-24 sm:py-32">
+    <section id="benefits" className="container py-24 sm:py-32" ref={ref}>
       <div className="grid lg:grid-cols-2 place-items-center lg:gap-24">
-        <div>
+        <motion.div
+          variants={slideInLeft}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          transition={prefersReducedMotion ? { duration: 0 } : defaultTransition}
+        >
           <h2
             className={`text-lg ${BRAND_CLASSES.primary.text} mb-2 tracking-wider`}
           >
@@ -53,31 +64,46 @@ export const BenefitsSection = () => {
             book lovers. From casual readers to voracious bibliophiles,
             Librarium adapts to your reading style.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-4 w-full">
+        <motion.div 
+          className="grid lg:grid-cols-2 gap-4 w-full"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {benefitList.map(({ icon, title, description }, index) => (
-            <Card
+            <motion.div
               key={title}
-              className={`bg-muted/50 dark:bg-card hover:bg-background transition-all delay-75 group/number`}
+              variants={slideInRight}
+              transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: index * 0.1 }}
+              whileHover={prefersReducedMotion ? {} : hoverLift}
             >
-              <CardHeader>
-                <div className="flex justify-between">
-                  <div className={`${BRAND_CLASSES.primary.text} mb-6`}>
-                    {icon}
+              <Card
+                className={`bg-muted/50 dark:bg-card hover:bg-background transition-all delay-75 group/number h-full`}
+              >
+                <CardHeader>
+                  <div className="flex justify-between">
+                    <motion.div 
+                      className={`${BRAND_CLASSES.primary.text} mb-6`}
+                      whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", damping: 15, stiffness: 300 }}
+                    >
+                      {icon}
+                    </motion.div>
+                    <span className="text-5xl text-muted-foreground/15 font-medium transition-all delay-75 group-hover/number:text-muted-foreground/30">
+                      0{index + 1}
+                    </span>
                   </div>
-                  <span className="text-5xl text-muted-foreground/15 font-medium transition-all delay-75 group-hover/number:text-muted-foreground/30">
-                    0{index + 1}
-                  </span>
-                </div>
-                <CardTitle>{title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                {description}
-              </CardContent>
-            </Card>
+                  <CardTitle>{title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-muted-foreground">
+                  {description}
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

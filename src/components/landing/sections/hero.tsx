@@ -7,17 +7,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { BRAND_CLASSES } from "@/lib/colors";
 import { signInWithGoogle } from "@/lib/auth";
 import { useAuthContext } from "@/components/auth/AuthProvider";
+import { fadeInUp, staggerContainer, defaultTransition, smoothTransition, hoverScale } from "@/lib/animations";
+import { useScrollAnimation, useReducedMotion } from "@/lib/useAnimations";
 
 export const HeroSection = () => {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const router = useRouter();
-  const { user, loading, isAuthenticated } = useAuthContext();
+  const { loading, isAuthenticated } = useAuthContext();
   const { theme } = useTheme();
+  const { ref, isInView } = useScrollAnimation();
+  const prefersReducedMotion = useReducedMotion();
 
   const handleGetStarted = async () => {
     if (isAuthenticated) {
@@ -57,15 +62,17 @@ export const HeroSection = () => {
   }
 
   return (
-    <section className="container w-full">
+    <section className="container w-full" ref={ref}>
       <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
         <div className="text-center space-y-8">
-          <Badge variant="outline" className="text-sm py-2">
-            <span className="mr-2 text-brand-primary">
-              <Badge className={BRAND_CLASSES.primary.bg}>New</Badge>
-            </span>
-            <span>Reading analytics are here!</span>
-          </Badge>
+          <div>
+            <Badge variant="outline" className="text-sm py-2">
+              <span className="mr-2 text-brand-primary">
+                <Badge className={BRAND_CLASSES.primary.bg}>New</Badge>
+              </span>
+              <span>Reading analytics are here!</span>
+            </Badge>
+          </div>
 
           <div className="max-w-screen-md mx-auto text-center text-4xl md:text-6xl font-bold">
             <h1>

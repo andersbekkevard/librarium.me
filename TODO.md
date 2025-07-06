@@ -10,3 +10,5 @@
 - [ ] Add shelf/collection functionality
 - [ ] Clean the codebase, extract components where possible
 - [ ] Force rating on "finish"
+- [ ] Add functionality for comments etc
+- [ ] 
