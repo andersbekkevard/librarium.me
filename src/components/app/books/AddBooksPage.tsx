@@ -1,6 +1,12 @@
 "use client";
 
-import { CameraIcon, CheckIcon, FileTextIcon, CircleNotchIcon, MagnifyingGlassIcon } from "@phosphor-icons/react";
+import {
+  CameraIcon,
+  CheckIcon,
+  CircleNotchIcon,
+  FileTextIcon,
+  MagnifyingGlassIcon,
+} from "@phosphor-icons/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { useEffect, useState } from "react";
@@ -346,7 +352,10 @@ const AddBooksPageContent: React.FC<AddBooksPageContentProps> = ({
 
               {isSearching ? (
                 <div className="flex items-center justify-center py-8">
-                  <CircleNotchIcon className="h-6 w-6 animate-spin text-muted-foreground" weight="bold" />
+                  <CircleNotchIcon
+                    className="h-6 w-6 animate-spin text-muted-foreground"
+                    weight="bold"
+                  />
                   <span className="ml-2 text-muted-foreground">
                     Searching...
                   </span>
