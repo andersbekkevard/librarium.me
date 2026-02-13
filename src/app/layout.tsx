@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   title: "Librarium - Your Personal Book Collection",
   description:
     "Track your reading progress and organize your personal library with Librarium",
+  verification: {
+    google: "VUAQN43dnQdrEpyAgK0L9-GeyQHXydSUfI2Zmw9nD1Q",
+  },
   icons: {
     icon: "/favicon.svg",
   },
@@ -46,7 +49,7 @@ export default function RootLayout({
           geistSans.variable,
           geistMono.variable,
           playfairDisplay.variable,
-          "antialiased"
+          "antialiased",
         )}
       >
         <ThemeProvider
