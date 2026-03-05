@@ -1,119 +1,60 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BRAND_COLORS } from "@/lib/design/colors";
-import {
-  useScrollAnimation,
-  useStaggeredScrollAnimation,
-} from "@/lib/hooks/useScrollAnimation";
-
-enum ProService {
-  YES = 1,
-  NO = 0,
-}
-
-interface ServiceProps {
-  title: string;
-  pro: ProService;
-  description: string;
-}
-
-const serviceList: ServiceProps[] = [
+const services = [
   {
-    title: "Google Books Integration",
-    pro: 0,
-    description:
-      "Search millions of books and automatically fetch metadata, covers, and descriptions. Add books to your library with one click.",
+    title: "Google Books",
+    state: "Live",
+    body: "Search millions of titles, import descriptions and covers, and move from discovery to shelf in one action.",
   },
   {
-    title: "Firebase Authentication",
-    pro: 0,
-    description:
-      "Secure Google sign-in with cloud synchronization across all your devices. Your library stays up-to-date everywhere.",
+    title: "Firebase Auth",
+    state: "Live",
+    body: "Secure Google sign-in with profile creation and cross-device access to your personal library.",
   },
   {
-    title: "Advanced Reading Analytics",
-    pro: 1,
-    description:
-      "Detailed insights into your reading patterns, speed, and preferences with comprehensive data visualization. Coming soon!",
+    title: "Advanced Analytics",
+    state: "Roadmap",
+    body: "Deeper trend analysis, genre pacing, and personalized reading velocity dashboards.",
   },
   {
-    title: "Social Reading Features",
-    pro: 1,
-    description:
-      "Share books with friends, join reading groups, and discover what fellow readers are enjoying. In development!",
+    title: "Reading Circles",
+    state: "Roadmap",
+    body: "Shared shelves, discussion spaces, and collaborative momentum for book clubs.",
   },
 ];
 
 export const ServicesSection = () => {
-  const { elementRef: headerRef, isVisible: headerVisible } =
-    useScrollAnimation();
-  const { elementRef: cardsRef, visibleItems } = useStaggeredScrollAnimation(
-    serviceList.length
-  );
-
   return (
-    <section id="services" className="container py-24 sm:py-32">
-      <div
-        ref={headerRef as React.RefObject<HTMLDivElement>}
-        className={`text-center mb-16 scroll-fade-in-up ${
-          headerVisible ? "animate" : ""
-        }`}
-      >
-        <h2
-          className={`text-lg ${BRAND_COLORS.primary.text} text-center mb-2 tracking-wider`}
-        >
-          Integrations
-        </h2>
-        <h2 className="text-3xl md:text-4xl text-center mb-4">
-          Current & Planned Integrations
-        </h2>
-        <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground">
-          Essential integrations are live now, with advanced features and social
-          capabilities coming in future releases.
-        </h3>
-      </div>
+    <section id="services" className="landing-shell section-spacing">
+      <div className="landing-split-grid">
+        <div className="reveal-up">
+          <p className="landing-section-label">Integrations</p>
+          <h2 className="landing-section-title">Built on stable foundations, expanding with intent.</h2>
+          <p className="mt-4 max-w-md text-muted-foreground">
+            The platform starts with reliable core services and layers premium capabilities only where they improve the
+            reading experience.
+          </p>
+          <div className="mt-8 rounded-3xl border border-border/70 bg-card/85 p-5">
+            <p className="text-[0.66rem] uppercase tracking-[0.2em] text-muted-foreground">Current Stack</p>
+            <ul className="mt-4 space-y-2 text-sm text-foreground">
+              <li>Next.js 15 + React 19</li>
+              <li>Firebase Auth + Firestore</li>
+              <li>Google Books metadata intake</li>
+            </ul>
+          </div>
+        </div>
 
-      <div
-        ref={cardsRef as React.RefObject<HTMLDivElement>}
-        className="grid lg:grid-cols-2 gap-4 w-full lg:gap-x-4"
-      >
-        {serviceList.map(({ title, description, pro }, index) => (
-          <Card
-            key={title}
-            className={`bg-muted/60 dark:bg-card h-full relative hover-lift scroll-fade-in-up ${
-              visibleItems[index] ? "animate" : ""
-            }`}
-            style={{
-              transitionDelay: visibleItems[index] ? `${index * 200}ms` : "0ms",
-            }}
-          >
-            <CardHeader className="pb-2">
-              <div className="flex justify-between">
-                <CardTitle className="mb-2 text-lg">{title}</CardTitle>
-                {pro === ProService.YES && (
-                  <Badge
-                    variant="secondary"
-                    className={`${
-                      BRAND_COLORS.primary.bg
-                    } text-primary-foreground scroll-bounce-in ${
-                      visibleItems[index] ? "animate" : ""
-                    }`}
-                    style={{
-                      transitionDelay: visibleItems[index]
-                        ? `${index * 200 + 400}ms`
-                        : "0ms",
-                    }}
-                  >
-                    PRO
-                  </Badge>
-                )}
+        <div className="space-y-3">
+          {services.map((service, index) => (
+            <article key={service.title} className={`landing-row reveal-up delay-${(index % 3) + 1}`}>
+              <div>
+                <h3 className="font-heading text-2xl">{service.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{service.body}</p>
               </div>
-            </CardHeader>
-            <CardContent className="text-muted-foreground text-sm">
-              {description}
-            </CardContent>
-          </Card>
-        ))}
+              <span className={`landing-chip ${service.state === "Live" ? "landing-chip-live" : "landing-chip-roadmap"}`}>
+                {service.state}
+              </span>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

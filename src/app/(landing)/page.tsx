@@ -5,41 +5,36 @@ import { FAQSection } from "@/components/landing/sections/faq";
 import { FeaturesSection } from "@/components/landing/sections/features";
 import { FooterSection } from "@/components/landing/sections/footer";
 import { HeroSection } from "@/components/landing/sections/hero";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-// import { PricingSection } from "@/components/landing/sections/pricing";
 import { ServicesSection } from "@/components/landing/sections/services";
-// import { SponsorsSection } from "@/components/landing/sections/sponsors";
 import { TestimonialSection } from "@/components/landing/sections/testimonial";
 import { useAuthContext } from "@/lib/providers/AuthProvider";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function LandingPage() {
   const { isAuthenticated, loading } = useAuthContext();
   const router = useRouter();
 
-  // Redirect authenticated users to dashboard
   useEffect(() => {
     if (!loading && isAuthenticated) {
       router.push("/dashboard");
     }
-  }, [loading, isAuthenticated, router]);
+  }, [isAuthenticated, loading, router]);
 
-  // Don't render anything if authenticated (redirect will happen)
   if (!loading && isAuthenticated) {
     return null;
   }
 
   return (
-    <>
+    <main className="relative overflow-hidden pb-12">
+      <div className="landing-atmosphere" aria-hidden="true" />
       <HeroSection />
-      {/* <SponsorsSection /> */}
       <BenefitsSection />
       <FeaturesSection />
       <ServicesSection />
       <TestimonialSection />
-      {/* <PricingSection /> */}
       <FAQSection />
       <FooterSection />
-    </>
+    </main>
   );
 }
