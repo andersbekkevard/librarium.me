@@ -431,6 +431,25 @@
   .hover-scale:hover {
     transform: scale(1.02);
   }
+
+  .landing-grid {
+    background:
+      radial-gradient(circle at 15% 10%, oklch(0.65 0.08 145 / 0.24), transparent 40%),
+      radial-gradient(circle at 85% 0%, oklch(0.38 0.06 155 / 0.18), transparent 35%),
+      linear-gradient(
+        to right,
+        transparent 0,
+        transparent calc(100% - 1px),
+        oklch(0.84 0.01 120 / 0.3) calc(100% - 1px)
+      ),
+      linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent calc(100% - 1px),
+        oklch(0.84 0.01 120 / 0.3) calc(100% - 1px)
+      );
+    background-size: auto, auto, 44px 44px, 44px 44px;
+  }
 }
 
 /* Animation keyframes */
