@@ -246,6 +246,50 @@
 }
 
 @layer utilities {
+  .landing-organic {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 12% 10%, color-mix(in oklch, var(--brand-accent) 18%, transparent), transparent 35%),
+      radial-gradient(circle at 84% 18%, color-mix(in oklch, var(--brand-primary) 13%, transparent), transparent 30%),
+      linear-gradient(180deg, color-mix(in oklch, var(--background) 96%, var(--brand-accent) 4%) 0%, var(--background) 52%, color-mix(in oklch, var(--background) 95%, var(--brand-accent) 5%) 100%);
+  }
+
+  .landing-organic::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      radial-gradient(rgba(26, 56, 38, 0.035) 0.5px, transparent 0.5px),
+      radial-gradient(rgba(26, 56, 38, 0.03) 0.5px, transparent 0.5px);
+    background-position: 0 0, 12px 12px;
+    background-size: 22px 22px;
+    opacity: 0.65;
+  }
+
+  .landing-display {
+    font-family: var(--font-landing-serif), var(--font-serif), ui-serif, Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .landing-ui {
+    font-family: var(--font-landing-sans), var(--font-geist-sans), sans-serif;
+  }
+
+  .landing-moss-orb {
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    height: 14rem;
+    width: 14rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 40% 40%, rgba(113, 173, 123, 0.32), rgba(57, 101, 65, 0.02) 70%);
+    filter: blur(20px);
+  }
+
   /* Eden-style serif typography utilities */
   .font-heading {
     font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;

@@ -1,46 +1,40 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BRAND_COLORS } from "@/lib/design/colors";
 import {
   useScrollAnimation,
   useStaggeredScrollAnimation,
 } from "@/lib/hooks/useScrollAnimation";
 
-enum ProService {
-  YES = 1,
-  NO = 0,
-}
-
-interface ServiceProps {
+interface ServiceTrack {
   title: string;
-  pro: ProService;
+  state: "Live" | "Roadmap";
   description: string;
 }
 
-const serviceList: ServiceProps[] = [
+const serviceTracks: ServiceTrack[] = [
   {
-    title: "Google Books Integration",
-    pro: 0,
+    title: "Google Books Ingestion",
+    state: "Live",
     description:
-      "Search millions of books and automatically fetch metadata, covers, and descriptions. Add books to your library with one click.",
+      "Metadata enrichment pipeline that reduces manual entry and keeps book records complete.",
   },
   {
-    title: "Firebase Authentication",
-    pro: 0,
+    title: "Firebase Auth + Sync",
+    state: "Live",
     description:
-      "Secure Google sign-in with cloud synchronization across all your devices. Your library stays up-to-date everywhere.",
+      "Secure Google sign-in and cloud-backed persistence for reliable multi-device continuity.",
   },
   {
     title: "Advanced Reading Analytics",
-    pro: 1,
+    state: "Roadmap",
     description:
-      "Detailed insights into your reading patterns, speed, and preferences with comprehensive data visualization. Coming soon!",
+      "Expanded trend lenses for genre behavior, pacing patterns, and deeper long-term reading intelligence.",
   },
   {
-    title: "Social Reading Features",
-    pro: 1,
+    title: "Shared Shelves",
+    state: "Roadmap",
     description:
-      "Share books with friends, join reading groups, and discover what fellow readers are enjoying. In development!",
+      "Optional social layer for exchanging recommendations while preserving core personal-library focus.",
   },
 ];
 
@@ -48,69 +42,53 @@ export const ServicesSection = () => {
   const { elementRef: headerRef, isVisible: headerVisible } =
     useScrollAnimation();
   const { elementRef: cardsRef, visibleItems } = useStaggeredScrollAnimation(
-    serviceList.length
+    serviceTracks.length
   );
 
   return (
-    <section id="services" className="container py-24 sm:py-32">
+    <section id="services" className="container py-16 md:py-24">
       <div
         ref={headerRef as React.RefObject<HTMLDivElement>}
-        className={`text-center mb-16 scroll-fade-in-up ${
-          headerVisible ? "animate" : ""
-        }`}
+        className={`scroll-fade-in-up mb-10 text-center ${headerVisible ? "animate" : ""}`}
       >
-        <h2
-          className={`text-lg ${BRAND_COLORS.primary.text} text-center mb-2 tracking-wider`}
-        >
-          Integrations
-        </h2>
-        <h2 className="text-3xl md:text-4xl text-center mb-4">
-          Current & Planned Integrations
-        </h2>
-        <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground">
-          Essential integrations are live now, with advanced features and social
-          capabilities coming in future releases.
-        </h3>
+        <p className="landing-ui mb-3 text-xs uppercase tracking-[0.2em] text-primary/70">
+          Platform Flow
+        </p>
+        <h2 className="landing-display text-4xl md:text-5xl">Live foundations, clear next chapter.</h2>
       </div>
 
       <div
         ref={cardsRef as React.RefObject<HTMLDivElement>}
-        className="grid lg:grid-cols-2 gap-4 w-full lg:gap-x-4"
+        className="grid gap-4 lg:grid-cols-2"
       >
-        {serviceList.map(({ title, description, pro }, index) => (
+        {serviceTracks.map(({ title, description, state }, index) => (
           <Card
             key={title}
-            className={`bg-muted/60 dark:bg-card h-full relative hover-lift scroll-fade-in-up ${
+            className={`scroll-fade-in-up rounded-3xl border-primary/10 bg-[linear-gradient(165deg,rgba(255,255,255,0.82),rgba(234,246,239,0.58))] shadow-[0_14px_30px_rgba(34,68,51,0.08)] dark:bg-card ${
               visibleItems[index] ? "animate" : ""
             }`}
             style={{
-              transitionDelay: visibleItems[index] ? `${index * 200}ms` : "0ms",
+              transitionDelay: visibleItems[index] ? `${index * 140}ms` : "0ms",
             }}
           >
-            <CardHeader className="pb-2">
-              <div className="flex justify-between">
-                <CardTitle className="mb-2 text-lg">{title}</CardTitle>
-                {pro === ProService.YES && (
-                  <Badge
-                    variant="secondary"
-                    className={`${
-                      BRAND_COLORS.primary.bg
-                    } text-primary-foreground scroll-bounce-in ${
-                      visibleItems[index] ? "animate" : ""
-                    }`}
-                    style={{
-                      transitionDelay: visibleItems[index]
-                        ? `${index * 200 + 400}ms`
-                        : "0ms",
-                    }}
-                  >
-                    PRO
-                  </Badge>
-                )}
+            <CardHeader>
+              <div className="flex items-center justify-between gap-4">
+                <CardTitle className="landing-display text-3xl leading-tight">{title}</CardTitle>
+                <Badge
+                  className={
+                    state === "Live"
+                      ? "landing-ui border border-primary/25 bg-primary/15 text-primary"
+                      : "landing-ui border border-border bg-background/70 text-muted-foreground"
+                  }
+                >
+                  {state}
+                </Badge>
               </div>
             </CardHeader>
-            <CardContent className="text-muted-foreground text-sm">
-              {description}
+            <CardContent>
+              <p className="landing-ui text-sm leading-relaxed text-muted-foreground">
+                {description}
+              </p>
             </CardContent>
           </Card>
         ))}
