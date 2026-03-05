@@ -1,26 +1,21 @@
 "use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BRAND_COLORS, STATUS_COLORS } from "@/lib/design/colors";
 import { useAuthContext } from "@/lib/providers/AuthProvider";
 import { ArrowRightIcon, CircleNotchIcon } from "@phosphor-icons/react";
-import { useTheme } from "next-themes";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const HeroSection = () => {
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [showSuccess, setShowSuccess] = useState(false);
   const router = useRouter();
   const { loading, isAuthenticated, signInWithGoogle } = useAuthContext();
-  const { theme } = useTheme();
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
-  const handleGetStarted = async () => {
+  const handlePrimaryCta = async () => {
     if (isAuthenticated) {
-      // User is already authenticated, redirect to dashboard
       router.push("/dashboard");
       return;
     }
@@ -30,145 +25,97 @@ export const HeroSection = () => {
 
     try {
       await signInWithGoogle();
-      // Show success message briefly before redirecting
-      setShowSuccess(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
-    } catch (err) {
-      setAuthError("Failed to sign in");
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Unable to sign in", error);
       setIsSigningIn(false);
+      setAuthError("Sign-in failed. Please try again.");
     }
   };
 
-  // Show loading state while checking auth
   if (loading) {
     return (
-      <section className="container w-full">
-        <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-          <div className="flex items-center justify-center">
-            <CircleNotchIcon
-              className={`h-8 w-8 animate-spin ${BRAND_COLORS.primary.text}`}
-              weight="bold"
-            />
-          </div>
+      <section className="landing-shell py-24 md:py-28">
+        <div className="flex items-center justify-center">
+          <CircleNotchIcon className="h-8 w-8 animate-spin text-brand-primary" weight="bold" />
         </div>
       </section>
     );
   }
 
   return (
-    <section className="container w-full">
-      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-        <div className="text-center space-y-8">
-          <Badge variant="outline" className="text-sm py-2 animate-fade-in-up">
-            <span className={`mr-2 ${BRAND_COLORS.primary.text}`}>
-              <Badge className={BRAND_COLORS.primary.bg}>New</Badge>
-            </span>
-            <span>AI-powered reading assistant is here!</span>
-          </Badge>
-
-          <div className="max-w-screen-md mx-auto text-center animate-fade-in-up delay-200">
-            <h1 className="text-5xl md:text-[4rem] tracking-tight">
-              Track Your
-              <span
-                className={`text-transparent px-2 bg-gradient-to-r ${BRAND_COLORS.accent.gradientFrom} ${BRAND_COLORS.primary.gradientTo} bg-clip-text`}
-              >
-                Reading
-              </span>
-              Journey
-            </h1>
+    <section className="landing-shell pb-14 pt-6 md:pb-20 md:pt-10">
+      <div className="landing-hero-grid">
+        <div className="space-y-7 reveal-up">
+          <div className="landing-meta-row">
+            <span>Edition Spring 2026</span>
+            <span className="landing-meta-divider" aria-hidden="true" />
+            <span>Personal Library Suite</span>
           </div>
-
-          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground animate-fade-in-up delay-300">
-            Build your personal library, track reading progress, and discover
-            new books. Start with the essentials - more features coming soon.
+          <Badge variant="outline" className="landing-kicker">
+            Editorial Variant A
+          </Badge>
+          <h1 className="landing-display">
+            The reading room
+            <br />
+            for modern collectors.
+          </h1>
+          <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+            Librarium brings literary calm to your digital shelf. Catalog titles, trace your reading rhythm, and move
+            through your library with intention.
           </p>
-
-          <div className="space-y-4 md:space-y-0 md:space-x-4 animate-fade-in-up delay-500">
-            <Button
-              onClick={handleGetStarted}
-              disabled={isSigningIn}
-              aria-label={
-                isAuthenticated
-                  ? "Go to your dashboard"
-                  : "Sign in with Google to start reading"
-              }
-              className={`w-5/6 md:w-1/4 font-bold group/arrow hover-scale ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover}`}
-            >
-              {showSuccess ? (
-                <>✓ Welcome! Redirecting...</>
-              ) : isSigningIn ? (
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button onClick={handlePrimaryCta} disabled={isSigningIn} className="h-11 rounded-full px-7">
+              {isSigningIn ? (
                 <>
-                  <CircleNotchIcon className="size-4 mr-2 animate-spin" weight="bold" />
+                  <CircleNotchIcon className="mr-2 h-4 w-4 animate-spin" weight="bold" />
                   Signing in...
                 </>
               ) : isAuthenticated ? (
                 <>
-                  Go to Dashboard
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                  Enter dashboard
+                  <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </>
               ) : (
                 <>
-                  Start Reading
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                  Start with Google
+                  <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </>
               )}
             </Button>
-
-            <Button
-              asChild
-              variant="secondary"
-              className="w-5/6 md:w-1/4 font-bold hover-scale"
-            >
-              <Link href="/#features">Explore Features</Link>
-            </Button>
+            <a href="#features" className="landing-inline-link">
+              Explore the feature index
+            </a>
           </div>
-
-          {/* Error Message */}
-          {authError && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.error.bgLight} border ${STATUS_COLORS.error.borderLight} rounded-lg animate-slide-in-down`}
-              role="alert"
-            >
-              <p className={`text-sm ${STATUS_COLORS.error.text} text-center`}>
-                {authError}
-              </p>
+          {authError ? <p className="text-sm text-status-error">{authError}</p> : null}
+          <div className="grid max-w-xl grid-cols-3 gap-5 border-t border-border/70 pt-6 text-sm">
+            <div>
+              <p className="font-heading text-2xl">45k+</p>
+              <p className="text-muted-foreground">Books discoverable</p>
             </div>
-          )}
-
-          {/* Success Message */}
-          {showSuccess && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.success.bgLight} ${STATUS_COLORS.success.borderLight} rounded-lg animate-slide-in-down`}
-              role="status"
-            >
-              <p
-                className={`text-sm ${STATUS_COLORS.success.text} text-center`}
-              >
-                ✓ Successfully signed in! Welcome to Librarium.
-              </p>
+            <div>
+              <p className="font-heading text-2xl">3</p>
+              <p className="text-muted-foreground">Reading states</p>
             </div>
-          )}
+            <div>
+              <p className="font-heading text-2xl">24h</p>
+              <p className="text-muted-foreground">Motivation refresh</p>
+            </div>
+          </div>
         </div>
 
-        <div className="relative group mt-24 animate-scale-in delay-700">
-          <div
-            className={`absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 ${BRAND_COLORS.primary.bgBlur} rounded-full blur-3xl`}
-          ></div>
-          <Image
-            width={1200}
-            height={1200}
-            className={`w-full md:w-[1200px] mx-auto rounded-lg relative border border-t-2 border-secondary ${BRAND_COLORS.primary.borderTop} hover-lift`}
-            src={
-              theme === "light"
-                ? "/images/hero-image-light-2.jpg"
-                : "/images/hero-image-dark-2.jpg"
-            }
-            alt="dashboard"
-          />
-
-          <div className="absolute bottom-0 left-0 w-full h-32 md:h-40 bg-gradient-to-b from-background/0 via-background/90 to-background rounded-lg"></div>
+        <div className="reveal-up delay-1">
+          <div className="landing-image-frame">
+            <div className="landing-image-overlay" aria-hidden="true" />
+            <Image
+              src="/images/hero-image-light-2.jpg"
+              alt="Librarium dashboard preview"
+              width={1600}
+              height={1100}
+              priority
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>

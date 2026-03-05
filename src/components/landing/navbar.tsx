@@ -1,56 +1,26 @@
 "use client";
-import { BRAND_COLORS } from "@/lib/design/colors";
+
 import { useAuthContext } from "@/lib/providers/AuthProvider";
-import { BookIcon, ListIcon, CircleNotchIcon } from "@phosphor-icons/react";
-import { ArrowRightIcon, GithubLogoIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon, BookOpenTextIcon, CircleNotchIcon, ListIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { ToggleTheme } from "../toggle-theme";
+import { useState } from "react";
 import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
 
-interface RouteProps {
-  href: string;
-  label: string;
-}
-
-const routeList: RouteProps[] = [
-  {
-    href: "#features",
-    label: "Features",
-  },
-  {
-    href: "#benefits",
-    label: "Benefits",
-  },
-  {
-    href: "#services",
-    label: "Services",
-  },
-  {
-    href: "#testimonials",
-    label: "Reviews",
-  },
-  {
-    href: "#faq",
-    label: "FAQ",
-  },
+const navLinks = [
+  { href: "#benefits", label: "Approach" },
+  { href: "#features", label: "Features" },
+  { href: "#services", label: "Integrations" },
+  { href: "#testimonials", label: "Voices" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [isSigningIn, setIsSigningIn] = useState(false);
   const router = useRouter();
   const { isAuthenticated, signInWithGoogle } = useAuthContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const handleLogin = async () => {
     if (isAuthenticated) {
@@ -59,186 +29,88 @@ export const Navbar = () => {
     }
 
     setIsSigningIn(true);
-
     try {
       await signInWithGoogle();
       router.push("/dashboard");
-    } catch (err) {
-      console.error("Login failed:", err);
+    } catch (error) {
+      console.error("Login failed", error);
       setIsSigningIn(false);
     }
   };
 
   return (
-    <header className="w-[90%] md:w-[80%] lg:w-[85%] lg:max-w-screen-xl top-5 mx-auto sticky border border-border/60 z-40 rounded-xl flex justify-between items-center px-4 py-3 bg-background/95 backdrop-blur-sm">
-      {/* Mobile Menu */}
-      <div className="flex items-center lg:hidden">
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={() => setIsOpen(!isOpen)}
-              className="mr-2 text-muted-foreground hover:text-foreground"
-              aria-label="Open menu"
-            >
-              <ListIcon className="h-5 w-5" weight="light" />
-            </Button>
-          </SheetTrigger>
+    <header className="landing-shell sticky top-5 z-50 mb-10">
+      <div className="landing-nav-frame">
+        <Link href="/" className="inline-flex items-center gap-3" aria-label="Librarium home">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-primary/30 bg-brand-primary/10 text-brand-primary">
+            <BookOpenTextIcon className="h-5 w-5" weight="duotone" />
+          </span>
+          <div className="flex flex-col leading-none">
+            <span className="font-heading text-xl tracking-tight">Librarium</span>
+            <span className="text-[0.62rem] uppercase tracking-[0.18em] text-muted-foreground">Issue 01</span>
+          </div>
+        </Link>
 
-          <SheetContent
-            side="left"
-            className="flex flex-col justify-between bg-background border-border/60"
+        <nav className="hidden items-center gap-7 lg:flex">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="landing-nav-link">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={handleLogin}
+            disabled={isSigningIn}
+            className="hidden h-10 rounded-full px-5 lg:inline-flex"
           >
-            <div>
-              <SheetHeader className="mb-6">
-                <SheetTitle className="flex items-center">
-                  <Link
-                    href="/"
-                    className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
-                  >
-                    <div className="w-9 h-9 bg-brand-accent/20 rounded-xl flex items-center justify-center">
-                      <BookIcon
-                        className="h-5 w-5 text-brand-primary"
-                        weight="duotone"
-                      />
-                    </div>
-                    <span
-                      className="text-xl text-foreground tracking-tight"
-                      style={{ fontFamily: "var(--font-geist-sans)" }}
-                    >
-                      Librarium
-                    </span>
-                  </Link>
-                </SheetTitle>
+            {isSigningIn ? (
+              <>
+                <CircleNotchIcon className="mr-2 h-4 w-4 animate-spin" weight="bold" />
+                Signing in...
+              </>
+            ) : isAuthenticated ? (
+              <>
+                Dashboard
+                <ArrowRightIcon className="ml-2 h-4 w-4" />
+              </>
+            ) : (
+              <>
+                Enter Librarium
+                <ArrowRightIcon className="ml-2 h-4 w-4" />
+              </>
+            )}
+          </Button>
+
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon-sm" className="lg:hidden" aria-label="Open menu">
+                <ListIcon className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-background/95 backdrop-blur-sm">
+              <SheetHeader>
+                <SheetTitle className="font-heading text-2xl">Explore</SheetTitle>
               </SheetHeader>
-
-              <nav className="flex flex-col gap-1">
-                {routeList.map(({ href, label }) => (
-                  <Button
-                    key={href}
+              <nav className="mt-10 flex flex-col gap-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-lg text-muted-foreground transition-colors hover:text-foreground"
                     onClick={() => setIsOpen(false)}
-                    asChild
-                    variant="ghost"
-                    className="justify-start text-base font-normal text-muted-foreground hover:text-foreground"
                   >
-                    <Link href={href}>{label}</Link>
-                  </Button>
+                    {link.label}
+                  </Link>
                 ))}
-
-                <Separator className="my-3" />
-
-                <Button
-                  onClick={handleLogin}
-                  disabled={isSigningIn}
-                  className={`justify-center font-medium group/arrow ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover} text-white`}
-                >
-                  {isSigningIn ? (
-                    <>
-                      <CircleNotchIcon
-                        className="size-4 mr-2 animate-spin"
-                        weight="bold"
-                      />
-                      Signing in...
-                    </>
-                  ) : isAuthenticated ? (
-                    <>
-                      Go to Dashboard
-                      <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                    </>
-                  ) : (
-                    <>
-                      Login
-                      <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </Button>
               </nav>
-            </div>
-
-            <SheetFooter className="flex-col sm:flex-col justify-start items-start">
-              <Separator className="mb-3" />
-              <ToggleTheme />
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
-      </div>
-
-      {/* Logo - Both Mobile & Desktop */}
-      <Link
-        href="/"
-        className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
-      >
-        <div className="w-9 h-9 bg-brand-accent/20 rounded-xl flex items-center justify-center shrink-0">
-          <BookIcon className="h-5 w-5 text-brand-primary" weight="duotone" />
+              <Button onClick={handleLogin} disabled={isSigningIn} className="mt-8 w-full rounded-full">
+                {isSigningIn ? "Signing in..." : isAuthenticated ? "Open dashboard" : "Sign in with Google"}
+              </Button>
+            </SheetContent>
+          </Sheet>
         </div>
-        <span
-          className="text-xl text-foreground tracking-tight hidden sm:block"
-          style={{ fontFamily: "var(--font-geist-sans)" }}
-        >
-          Librarium
-        </span>
-      </Link>
-
-      {/* Desktop Navigation */}
-      <nav className="hidden lg:flex items-center gap-1">
-        {routeList.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
-
-      {/* Right Side Actions */}
-      <div className="flex items-center gap-2">
-        {/* Desktop Login Button */}
-        <Button
-          onClick={handleLogin}
-          disabled={isSigningIn}
-          className={`hidden lg:flex h-9 px-5 font-medium group/arrow ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover} text-white`}
-        >
-          {isSigningIn ? (
-            <>
-              <CircleNotchIcon
-                className="size-4 mr-2 animate-spin"
-                weight="bold"
-              />
-              Signing in...
-            </>
-          ) : isAuthenticated ? (
-            <>
-              Dashboard
-              <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-            </>
-          ) : (
-            <>
-              Login
-              <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-            </>
-          )}
-        </Button>
-
-        <ToggleTheme />
-
-        <Button
-          asChild
-          size="icon-sm"
-          variant="ghost"
-          aria-label="View on GitHub"
-          className="hidden lg:flex text-muted-foreground hover:text-foreground"
-        >
-          <Link
-            aria-label="View on GitHub"
-            href="https://github.com/andersbekkevard/librarium-app"
-            target="_blank"
-          >
-            <GithubLogoIcon className="size-4" />
-          </Link>
-        </Button>
       </div>
     </header>
   );
