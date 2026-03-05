@@ -4,47 +4,46 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { BRAND_COLORS } from "@/lib/design/colors";
 import {
   useScrollAnimation,
   useStaggeredScrollAnimation,
 } from "@/lib/hooks/useScrollAnimation";
 
-interface FAQProps {
+interface FAQItem {
   question: string;
   answer: string;
   value: string;
 }
 
-const FAQList: FAQProps[] = [
+const faqItems: FAQItem[] = [
   {
-    question: "Is Librarium free to use?",
+    question: "Is Librarium free right now?",
     answer:
-      "Yes! Librarium is currently completely free to use. All current features are available at no cost. Future premium features may be introduced as the app grows.",
+      "Yes. Current core features are available at no cost while the product matures. Roadmap features may later introduce optional paid tiers.",
     value: "item-1",
   },
   {
-    question: "What can I do with Librarium right now?",
+    question: "What does progress tracking include today?",
     answer:
-      "You can build your personal library, track reading progress page-by-page, search and add books via Google Books API, rate finished books, and view basic reading statistics on your dashboard.",
+      "You can update current page counts, move across reading states, and review activity history that reflects your actual reading sessions.",
     value: "item-2",
   },
   {
-    question: "How does reading progress tracking work?",
+    question: "How is my data handled?",
     answer:
-      "Simply update your current page number as you read. Books progress through three states: not started, in progress, and finished. Your dashboard shows real-time stats about your reading habits.",
+      "Your library is stored securely in Firebase with authenticated access. Librarium is designed around private personal-use reading data.",
     value: "item-3",
   },
   {
-    question: "Is my reading data private and secure?",
+    question: "Can I quickly add books without manual entry?",
     answer:
-      "Yes, your privacy is our priority. All your reading data is securely stored in Firebase with encryption. Only you can access your personal library and reading data.",
+      "Yes. Search via Google Books integration to pull metadata automatically, then refine details only if you want to.",
     value: "item-4",
   },
   {
-    question: "What features are coming next?",
+    question: "What is coming next?",
     answer:
-      "We're working on advanced analytics, reading goals, social features, custom shelves, and AI-powered recommendations. The app is actively being developed with regular updates.",
+      "Planned work includes deeper analytics, richer goal tracking, and optional social reading features for shared recommendations.",
     value: "item-5",
   },
 ];
@@ -53,49 +52,43 @@ export const FAQSection = () => {
   const { elementRef: headerRef, isVisible: headerVisible } =
     useScrollAnimation();
   const { elementRef: accordionRef, visibleItems } =
-    useStaggeredScrollAnimation(FAQList.length);
+    useStaggeredScrollAnimation(faqItems.length);
 
   return (
-    <section id="faq" className="container mx-auto md:w-[700px] py-24 sm:py-32">
+    <section id="faq" className="container py-16 md:py-24">
       <div
         ref={headerRef as React.RefObject<HTMLDivElement>}
-        className={`text-center mb-8 scroll-fade-in-up ${
-          headerVisible ? "animate" : ""
-        }`}
+        className={`scroll-fade-in-up mx-auto mb-10 max-w-3xl text-center ${headerVisible ? "animate" : ""}`}
       >
-        <h2
-          className={`text-lg ${BRAND_COLORS.primary.text} text-center mb-2 tracking-wider`}
-        >
-          FAQS
-        </h2>
-
-        <h2 className="text-3xl md:text-4xl text-center">
-          Frequently Asked Questions
-        </h2>
+        <p className="landing-ui mb-3 text-xs uppercase tracking-[0.2em] text-primary/70">
+          Clear Answers
+        </p>
+        <h2 className="landing-display text-4xl md:text-5xl">Questions readers ask before they commit.</h2>
       </div>
 
       <Accordion
         ref={accordionRef as React.RefObject<HTMLDivElement>}
         type="single"
         collapsible
-        className="AccordionRoot"
+        className="mx-auto max-w-3xl"
       >
-        {FAQList.map(({ question, answer, value }, index) => (
+        {faqItems.map(({ question, answer, value }, index) => (
           <AccordionItem
             key={value}
             value={value}
-            className={`hover-scale scroll-fade-in-up ${
+            className={`scroll-fade-in-up rounded-2xl border border-primary/10 bg-background/65 px-5 transition-all ${
               visibleItems[index] ? "animate" : ""
             }`}
             style={{
-              transitionDelay: visibleItems[index] ? `${index * 150}ms` : "0ms",
+              transitionDelay: visibleItems[index] ? `${index * 100}ms` : "0ms",
             }}
           >
-            <AccordionTrigger className="text-left">
+            <AccordionTrigger className="landing-ui text-left text-base font-medium hover:no-underline">
               {question}
             </AccordionTrigger>
-
-            <AccordionContent>{answer}</AccordionContent>
+            <AccordionContent className="landing-ui text-sm leading-relaxed text-muted-foreground">
+              {answer}
+            </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>

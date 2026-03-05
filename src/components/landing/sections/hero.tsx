@@ -1,9 +1,14 @@
 "use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BRAND_COLORS, STATUS_COLORS } from "@/lib/design/colors";
 import { useAuthContext } from "@/lib/providers/AuthProvider";
-import { ArrowRightIcon, CircleNotchIcon } from "@phosphor-icons/react";
+import {
+  ArrowRightIcon,
+  CircleNotchIcon,
+  NotebookIcon,
+  SparkleIcon,
+} from "@phosphor-icons/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,14 +18,12 @@ import { useState } from "react";
 export const HeroSection = () => {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
-  const [showSuccess, setShowSuccess] = useState(false);
   const router = useRouter();
   const { loading, isAuthenticated, signInWithGoogle } = useAuthContext();
   const { theme } = useTheme();
 
   const handleGetStarted = async () => {
     if (isAuthenticated) {
-      // User is already authenticated, redirect to dashboard
       router.push("/dashboard");
       return;
     }
@@ -30,145 +33,101 @@ export const HeroSection = () => {
 
     try {
       await signInWithGoogle();
-      // Show success message briefly before redirecting
-      setShowSuccess(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
-    } catch (err) {
-      setAuthError("Failed to sign in");
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Sign in failed:", error);
+      setAuthError("Sign in failed. Please try again.");
       setIsSigningIn(false);
     }
   };
 
-  // Show loading state while checking auth
   if (loading) {
     return (
-      <section className="container w-full">
-        <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-          <div className="flex items-center justify-center">
-            <CircleNotchIcon
-              className={`h-8 w-8 animate-spin ${BRAND_COLORS.primary.text}`}
-              weight="bold"
-            />
-          </div>
+      <section className="container py-28 md:py-36">
+        <div className="grid place-items-center">
+          <CircleNotchIcon className="h-8 w-8 animate-spin text-primary" weight="bold" />
         </div>
       </section>
     );
   }
 
   return (
-    <section className="container w-full">
-      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-        <div className="text-center space-y-8">
-          <Badge variant="outline" className="text-sm py-2 animate-fade-in-up">
-            <span className={`mr-2 ${BRAND_COLORS.primary.text}`}>
-              <Badge className={BRAND_COLORS.primary.bg}>New</Badge>
-            </span>
-            <span>AI-powered reading assistant is here!</span>
-          </Badge>
+    <section className="container relative py-20 md:py-28">
+      <div className="landing-moss-orb left-0 top-16" aria-hidden="true" />
+      <div className="landing-moss-orb right-4 top-[28rem]" aria-hidden="true" />
 
-          <div className="max-w-screen-md mx-auto text-center animate-fade-in-up delay-200">
-            <h1 className="text-5xl md:text-[4rem] tracking-tight">
-              Track Your
-              <span
-                className={`text-transparent px-2 bg-gradient-to-r ${BRAND_COLORS.accent.gradientFrom} ${BRAND_COLORS.primary.gradientTo} bg-clip-text`}
-              >
-                Reading
-              </span>
-              Journey
-            </h1>
-          </div>
+      <div className="mx-auto max-w-5xl text-center">
+        <Badge variant="outline" className="landing-ui animate-fade-in-up rounded-full border-primary/20 bg-background/70 px-4 py-2 text-xs uppercase tracking-[0.14em]">
+          <SparkleIcon className="mr-1.5 size-3.5 text-primary" weight="fill" />
+          Daily AI reading encouragement
+        </Badge>
 
-          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground animate-fade-in-up delay-300">
-            Build your personal library, track reading progress, and discover
-            new books. Start with the essentials - more features coming soon.
-          </p>
+        <h1 className="landing-display mt-8 animate-fade-in-up text-5xl leading-[0.95] tracking-tight md:text-7xl md:leading-[0.92]">
+          A living library
+          <br />
+          for your reading life.
+        </h1>
 
-          <div className="space-y-4 md:space-y-0 md:space-x-4 animate-fade-in-up delay-500">
-            <Button
-              onClick={handleGetStarted}
-              disabled={isSigningIn}
-              aria-label={
-                isAuthenticated
-                  ? "Go to your dashboard"
-                  : "Sign in with Google to start reading"
-              }
-              className={`w-5/6 md:w-1/4 font-bold group/arrow hover-scale ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover}`}
-            >
-              {showSuccess ? (
-                <>✓ Welcome! Redirecting...</>
-              ) : isSigningIn ? (
-                <>
-                  <CircleNotchIcon className="size-4 mr-2 animate-spin" weight="bold" />
-                  Signing in...
-                </>
-              ) : isAuthenticated ? (
-                <>
-                  Go to Dashboard
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                </>
-              ) : (
-                <>
-                  Start Reading
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                </>
-              )}
-            </Button>
+        <p className="landing-ui mx-auto mt-7 max-w-2xl animate-fade-in-up text-lg leading-relaxed text-muted-foreground md:text-xl">
+          Librarium keeps your books, notes, and momentum in one calm place.
+          Track page by page, reflect in context, and watch your year of reading
+          take shape.
+        </p>
 
-            <Button
-              asChild
-              variant="secondary"
-              className="w-5/6 md:w-1/4 font-bold hover-scale"
-            >
-              <Link href="/#features">Explore Features</Link>
-            </Button>
-          </div>
+        <div className="mt-10 flex animate-fade-in-up flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button
+            onClick={handleGetStarted}
+            disabled={isSigningIn}
+            className="landing-ui group h-11 w-full max-w-64 bg-primary text-primary-foreground hover:bg-brand-primary-hover"
+          >
+            {isSigningIn ? (
+              <>
+                <CircleNotchIcon className="mr-2 size-4 animate-spin" weight="bold" />
+                Signing in...
+              </>
+            ) : isAuthenticated ? (
+              <>
+                Open Dashboard
+                <ArrowRightIcon className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+              </>
+            ) : (
+              <>
+                Begin Your Shelves
+                <ArrowRightIcon className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+              </>
+            )}
+          </Button>
 
-          {/* Error Message */}
-          {authError && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.error.bgLight} border ${STATUS_COLORS.error.borderLight} rounded-lg animate-slide-in-down`}
-              role="alert"
-            >
-              <p className={`text-sm ${STATUS_COLORS.error.text} text-center`}>
-                {authError}
-              </p>
-            </div>
-          )}
-
-          {/* Success Message */}
-          {showSuccess && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.success.bgLight} ${STATUS_COLORS.success.borderLight} rounded-lg animate-slide-in-down`}
-              role="status"
-            >
-              <p
-                className={`text-sm ${STATUS_COLORS.success.text} text-center`}
-              >
-                ✓ Successfully signed in! Welcome to Librarium.
-              </p>
-            </div>
-          )}
+          <Button asChild variant="outline" className="landing-ui h-11 w-full max-w-64 border-primary/20 bg-background/70 hover:bg-primary/5">
+            <Link href="#features">
+              Explore the Experience
+              <NotebookIcon className="ml-2 size-4" weight="duotone" />
+            </Link>
+          </Button>
         </div>
 
-        <div className="relative group mt-24 animate-scale-in delay-700">
-          <div
-            className={`absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 ${BRAND_COLORS.primary.bgBlur} rounded-full blur-3xl`}
-          ></div>
+        {authError && (
+          <p className="landing-ui mt-4 text-sm text-status-error" role="alert">
+            {authError}
+          </p>
+        )}
+      </div>
+
+      <div className="mx-auto mt-16 max-w-6xl animate-scale-in rounded-[2rem] border border-primary/15 bg-background/80 p-3 shadow-[0_30px_70px_rgba(20,52,35,0.14)] backdrop-blur">
+        <div className="relative overflow-hidden rounded-[1.5rem] border border-primary/10 bg-muted/40">
           <Image
-            width={1200}
-            height={1200}
-            className={`w-full md:w-[1200px] mx-auto rounded-lg relative border border-t-2 border-secondary ${BRAND_COLORS.primary.borderTop} hover-lift`}
+            width={1400}
+            height={940}
+            className="h-auto w-full"
             src={
               theme === "light"
                 ? "/images/hero-image-light-2.jpg"
                 : "/images/hero-image-dark-2.jpg"
             }
-            alt="dashboard"
+            alt="Librarium dashboard preview"
+            priority
           />
-
-          <div className="absolute bottom-0 left-0 w-full h-32 md:h-40 bg-gradient-to-b from-background/0 via-background/90 to-background rounded-lg"></div>
+          <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background via-background/65 to-transparent" />
         </div>
       </div>
     </section>
