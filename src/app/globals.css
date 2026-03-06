@@ -488,3 +488,72 @@
     transform: translateX(0);
   }
 }
+
+/* ============================================
+   OBSIDIAN LANDING PAGE STYLES
+   Neo-baroque digital library aesthetic
+   ============================================ */
+
+.obsidian-landing {
+  background-color: #0A0A08;
+  color: #E8E2D4;
+  min-height: 100vh;
+}
+
+/* Entrance animations */
+.obsidian-fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: obsidianFadeIn 0.8s ease-out forwards;
+}
+
+.obsidian-delay-1 { animation-delay: 0.15s; }
+.obsidian-delay-2 { animation-delay: 0.3s; }
+.obsidian-delay-3 { animation-delay: 0.5s; }
+.obsidian-delay-4 { animation-delay: 0.8s; }
+
+@keyframes obsidianFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll-triggered reveal */
+.obsidian-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.obsidian-visible .obsidian-reveal,
+.obsidian-reveal.obsidian-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Floating animation for scroll indicator */
+.obsidian-float {
+  animation: obsidianFloat 2s ease-in-out infinite;
+}
+
+@keyframes obsidianFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(6px); opacity: 0.8; }
+}
+
+/* Section dividers */
+.obsidian-landing section + section {
+  position: relative;
+}
+
+.obsidian-landing section + section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(196, 162, 101, 0.15), transparent);
+}

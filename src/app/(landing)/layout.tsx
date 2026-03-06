@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/landing/navbar";
+import { ObsidianNav } from "@/components/landing/obsidian/obsidian-nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/lib/providers/AuthProvider";
 
@@ -10,12 +10,12 @@ export default function LandingLayout({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      defaultTheme="dark"
+      forcedTheme="dark"
       disableTransitionOnChange
     >
       <AuthProvider>
-        <Navbar />
+        <ObsidianNav />
         {children}
       </AuthProvider>
     </ThemeProvider>
