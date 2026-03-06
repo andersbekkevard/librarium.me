@@ -1,45 +1,35 @@
 "use client";
 
-import { BenefitsSection } from "@/components/landing/sections/benefits";
-import { FAQSection } from "@/components/landing/sections/faq";
-import { FeaturesSection } from "@/components/landing/sections/features";
-import { FooterSection } from "@/components/landing/sections/footer";
-import { HeroSection } from "@/components/landing/sections/hero";
+import { AuroraHeroSection } from "@/components/landing/sections/aurora-hero";
+import { AuroraPhilosophySection } from "@/components/landing/sections/aurora-philosophy";
+import { AuroraExperienceSection } from "@/components/landing/sections/aurora-experience";
+import { AuroraInvitationSection } from "@/components/landing/sections/aurora-invitation";
+import { AuroraFooterSection } from "@/components/landing/sections/aurora-footer";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-// import { PricingSection } from "@/components/landing/sections/pricing";
-import { ServicesSection } from "@/components/landing/sections/services";
-// import { SponsorsSection } from "@/components/landing/sections/sponsors";
-import { TestimonialSection } from "@/components/landing/sections/testimonial";
 import { useAuthContext } from "@/lib/providers/AuthProvider";
 
 export default function LandingPage() {
   const { isAuthenticated, loading } = useAuthContext();
   const router = useRouter();
 
-  // Redirect authenticated users to dashboard
   useEffect(() => {
     if (!loading && isAuthenticated) {
       router.push("/dashboard");
     }
   }, [loading, isAuthenticated, router]);
 
-  // Don't render anything if authenticated (redirect will happen)
   if (!loading && isAuthenticated) {
     return null;
   }
 
   return (
-    <>
-      <HeroSection />
-      {/* <SponsorsSection /> */}
-      <BenefitsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialSection />
-      {/* <PricingSection /> */}
-      <FAQSection />
-      <FooterSection />
-    </>
+    <div className="aurora-page">
+      <AuroraHeroSection />
+      <AuroraPhilosophySection />
+      <AuroraExperienceSection />
+      <AuroraInvitationSection />
+      <AuroraFooterSection />
+    </div>
   );
 }

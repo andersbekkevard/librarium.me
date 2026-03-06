@@ -488,3 +488,121 @@
     transform: translateX(0);
   }
 }
+
+/* ============================================
+   AURORA VARIANT — Cinematic Landing Styles
+   ============================================ */
+
+/* Force dark background on the aurora page */
+.aurora-page {
+  background: #080f0b;
+  color: #f5efe0;
+  overflow-x: hidden;
+}
+
+/* Animated aurora gradient background */
+.aurora-bg {
+  background:
+    radial-gradient(ellipse 120% 80% at 20% 60%, #1a3d28 0%, transparent 50%),
+    radial-gradient(ellipse 100% 70% at 80% 30%, #132d1e 0%, transparent 45%),
+    radial-gradient(ellipse 80% 50% at 50% 80%, #c4841d08 0%, transparent 40%),
+    linear-gradient(180deg, #080f0b 0%, #0a1610 40%, #0d1a14 70%, #080f0b 100%);
+  animation: auroraPulse 12s ease-in-out infinite alternate;
+}
+
+@keyframes auroraPulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Ambient light orb animations */
+.aurora-orb-1 {
+  animation: auroraOrb1 16s ease-in-out infinite alternate;
+}
+
+.aurora-orb-2 {
+  animation: auroraOrb2 20s ease-in-out infinite alternate;
+}
+
+@keyframes auroraOrb1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.1); }
+  100% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+@keyframes auroraOrb2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-25px, 20px) scale(1.15); }
+  100% { transform: translate(15px, -10px) scale(0.9); }
+}
+
+/* Film grain texture */
+.aurora-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+/* Shimmer text effect for hero keywords */
+.aurora-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #e8c066 0%,
+    #c4841d 25%,
+    #f5efe0 50%,
+    #c4841d 75%,
+    #e8c066 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: auroraShimmer 6s ease-in-out infinite;
+}
+
+@keyframes auroraShimmer {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Scroll indicator pulse */
+.aurora-scroll-pulse {
+  animation: scrollPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 0.8; transform: scaleY(1.15); }
+}
+
+/* Staggered entrance animations for aurora hero */
+.aurora-fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: auroraFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.aurora-delay-1 { animation-delay: 0.3s; }
+.aurora-delay-2 { animation-delay: 0.6s; }
+.aurora-delay-3 { animation-delay: 0.9s; }
+.aurora-delay-4 { animation-delay: 1.4s; }
+
+@keyframes auroraFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scrolling for the aurora page */
+.aurora-page {
+  scroll-behavior: smooth;
+}
