@@ -1,198 +1,134 @@
 "use client";
 
-import { useScrollAnimation } from "@/lib/hooks/useScrollAnimation";
+import { useEffect, useRef, useState } from "react";
 
-interface ReviewProps {
-  image: string;
-  name: string;
-  userName: string;
-  comment: string;
-  rating: number;
-}
-
-const reviewList: ReviewProps[] = [
+const testimonials = [
   {
-    image: "https://github.com/shadcn.png",
-    name: "John D.",
-    userName: "Reader",
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsom dolor sit ammet",
-    rating: 5.0,
+    quote:
+      "Librarium changed how I think about my reading life. It is not just tracking — it is reflection.",
+    author: "Maria Engstrom",
+    role: "Literature PhD, Uppsala",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Jane S.",
-    userName: "Book Enthusiast",
-    comment:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    rating: 5.0,
+    quote:
+      "Finally, a book app that does not treat reading like a productivity hack. It feels like it was made by someone who actually reads.",
+    author: "Thomas Nakamura",
+    role: "Independent Bookseller",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Mike R.",
-    userName: "Avid Reader",
-    comment:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.",
-    rating: 5.0,
-  },
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Sarah L.",
-    userName: "Literature Fan",
-    comment:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
-    rating: 5.0,
-  },
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Tom W.",
-    userName: "Book Lover",
-    comment:
-      "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.",
-    rating: 5.0,
-  },
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Emma K.",
-    userName: "Reading Enthusiast",
-    comment:
-      "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.",
-    rating: 5.0,
+    quote:
+      "The barcode scanner alone saved me hours. But what keeps me coming back is how beautiful and calm the whole experience is.",
+    author: "Priya Sharma",
+    role: "Software Engineer & Bibliophile",
   },
 ];
 
-export const TestimonialSection = () => {
-  const { elementRef: headerRef, isVisible: headerVisible } =
-    useScrollAnimation();
-  const { elementRef: cardRef, isVisible: cardVisible } = useScrollAnimation();
+export const VelvetTestimonial = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section id="testimonials" className="container py-24 sm:py-32">
+    <section
+      id="testimonials"
+      ref={ref}
+      className="relative py-28 md:py-40 bg-gradient-to-b from-muted/20 via-muted/40 to-muted/20"
+    >
+      {/* Grain */}
       <div
-        ref={headerRef as React.RefObject<HTMLDivElement>}
-        className={`text-center mb-8 scroll-fade-in-up ${
-          headerVisible ? "animate" : ""
-        }`}
-      >
-        {/* <h2
-          className={`text-lg ${BRAND_COLORS.primary.text} text-center mb-2 tracking-wider`}
-        >
-          Testimonials
-        </h2> */}
+        className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+        }}
+      />
 
-        <h2 className="text-3xl md:text-4xl text-center mb-4">
-          Early Access Preview
-        </h2>
-
-        <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground">
-          Librarium is in active development. Join the early access to help
-          shape the future of reading tracking.
-        </h3>
-      </div>
-
-      <div
-        ref={cardRef as React.RefObject<HTMLDivElement>}
-        className={`bg-muted/50 dark:bg-card rounded-lg p-8 text-center hover-lift scroll-scale-in ${
-          cardVisible ? "animate" : ""
-        }`}
-      >
-        <div className="max-w-2xl mx-auto">
-          <h3
-            className={`text-2xl mb-4 scroll-fade-in-up ${
-              cardVisible ? "animate" : ""
-            }`}
-            style={{ transitionDelay: cardVisible ? "200ms" : "0ms" }}
-          >
-            Be Part of the Journey
-          </h3>
-          <p
-            className={`text-lg text-muted-foreground mb-6 scroll-fade-in-up ${
-              cardVisible ? "animate" : ""
-            }`}
-            style={{ transitionDelay: cardVisible ? "400ms" : "0ms" }}
-          >
-            Librarium is a work in progress, built for readers who want simple,
-            effective book tracking. Your feedback helps us build the features
-            that matter most to you.
-          </p>
+      <div className="relative z-10 px-6 md:px-10 lg:px-16">
+        <div className="max-w-5xl mx-auto">
+          {/* Label */}
           <div
-            className={`flex flex-wrap justify-center gap-4 text-sm text-muted-foreground scroll-fade-in-up ${
-              cardVisible ? "animate" : ""
+            className={`mb-16 md:mb-20 transition-all duration-1000 ease-out ${
+              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
-            style={{ transitionDelay: cardVisible ? "600ms" : "0ms" }}
           >
-            <span>• Essential reading tools ready</span>
-            <span>• Regular updates</span>
-            <span>• Community-driven development</span>
-            <span>• Privacy-focused</span>
+            <span
+              className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              <span className="inline-block w-8 h-px bg-brand-primary mr-3 align-middle" />
+              Praise
+            </span>
+          </div>
+
+          {/* Testimonial display */}
+          <div className="relative min-h-[280px] md:min-h-[240px]">
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 transition-all duration-700 ease-out ${
+                  i === active
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4 pointer-events-none"
+                }`}
+              >
+                <blockquote>
+                  <p
+                    className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.15] tracking-[-0.02em] font-medium"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                  >
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <footer className="mt-8 md:mt-12">
+                    <cite
+                      className="not-italic text-sm md:text-base"
+                      style={{ fontFamily: "var(--font-geist-sans)" }}
+                    >
+                      <span className="text-foreground font-medium">{t.author}</span>
+                      <span className="text-muted-foreground ml-2">{t.role}</span>
+                    </cite>
+                  </footer>
+                </blockquote>
+              </div>
+            ))}
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex items-center gap-2 mt-12">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === active
+                    ? "w-8 bg-foreground"
+                    : "w-1.5 bg-border hover:bg-muted-foreground"
+                }`}
+                aria-label={`View testimonial ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
-
-      {/* Commented out fake testimonials - replace with real ones when available
-      <Carousel
-        opts={{
-          align: "start",
-        }}
-        className="relative w-[80%] sm:w-[90%] lg:max-w-screen-xl mx-auto"
-      >
-        <CarouselContent>
-          {reviewList.map((review) => (
-            <CarouselItem
-              key={review.name}
-              className="md:basis-1/2 lg:basis-1/3"
-            >
-              <Card className="bg-muted/50 dark:bg-card">
-                <CardContent className="pt-6 pb-0">
-                  <div className="flex gap-1 pb-6">
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                  </div>
-                  {`"${review.comment}"`}
-                </CardContent>
-
-                <CardHeader>
-                  <div className="flex flex-row items-center gap-4">
-                    <Avatar>
-                      <AvatarImage
-                        src="https://avatars.githubusercontent.com/u/75042455?v=4"
-                        alt="radix"
-                      />
-                      <AvatarFallback>
-                        {review.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-
-                    <div className="flex flex-col">
-                      <CardTitle className="text-lg">{review.name}</CardTitle>
-                      <CardDescription>{review.userName}</CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-      */}
     </section>
   );
 };

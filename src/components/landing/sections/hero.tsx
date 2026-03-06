@@ -1,176 +1,169 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { BRAND_COLORS, STATUS_COLORS } from "@/lib/design/colors";
+
 import { useAuthContext } from "@/lib/providers/AuthProvider";
 import { ArrowRightIcon, CircleNotchIcon } from "@phosphor-icons/react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const HeroSection = () => {
+export const VelvetHero = () => {
   const [isSigningIn, setIsSigningIn] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const { loading, isAuthenticated, signInWithGoogle } = useAuthContext();
-  const { theme } = useTheme();
+
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 100);
+    return () => clearTimeout(t);
+  }, []);
 
   const handleGetStarted = async () => {
     if (isAuthenticated) {
-      // User is already authenticated, redirect to dashboard
       router.push("/dashboard");
       return;
     }
-
     setIsSigningIn(true);
-    setAuthError(null);
-
     try {
       await signInWithGoogle();
-      // Show success message briefly before redirecting
       setShowSuccess(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
-    } catch (err) {
-      setAuthError("Failed to sign in");
+      setTimeout(() => router.push("/dashboard"), 800);
+    } catch {
       setIsSigningIn(false);
     }
   };
 
-  // Show loading state while checking auth
   if (loading) {
     return (
-      <section className="container w-full">
-        <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-          <div className="flex items-center justify-center">
-            <CircleNotchIcon
-              className={`h-8 w-8 animate-spin ${BRAND_COLORS.primary.text}`}
-              weight="bold"
-            />
-          </div>
-        </div>
+      <section className="h-screen flex items-center justify-center">
+        <CircleNotchIcon className="h-6 w-6 animate-spin text-muted-foreground" weight="bold" />
       </section>
     );
   }
 
   return (
-    <section className="container w-full">
-      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-        <div className="text-center space-y-8">
-          <Badge variant="outline" className="text-sm py-2 animate-fade-in-up">
-            <span className={`mr-2 ${BRAND_COLORS.primary.text}`}>
-              <Badge className={BRAND_COLORS.primary.bg}>New</Badge>
+    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+      {/* Grain overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 z-10 opacity-[0.035] dark:opacity-[0.06]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+        }}
+      />
+
+      {/* Decorative line elements */}
+      <div className="absolute top-0 left-[15%] w-px h-full bg-gradient-to-b from-transparent via-border/30 to-transparent" />
+      <div className="absolute top-0 right-[25%] w-px h-full bg-gradient-to-b from-transparent via-border/20 to-transparent hidden lg:block" />
+
+      {/* Content */}
+      <div className="relative z-20 px-6 md:px-10 lg:px-16 pb-16 md:pb-24 pt-32">
+        {/* Eyebrow */}
+        <div
+          className={`mb-8 md:mb-12 transition-all duration-1000 ease-out ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          <span
+            className="inline-flex items-center gap-3 text-[11px] md:text-[12px] uppercase tracking-[0.2em] text-muted-foreground"
+            style={{ fontFamily: "var(--font-geist-sans)" }}
+          >
+            <span className="inline-block w-8 h-px bg-brand-primary" />
+            Personal Library Management
+          </span>
+        </div>
+
+        {/* Main headline */}
+        <div className="max-w-[90vw] lg:max-w-[75vw]">
+          <h1
+            className={`text-[clamp(3rem,10vw,9rem)] leading-[0.88] tracking-[-0.04em] font-medium transition-all duration-1000 delay-200 ease-out ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ fontFamily: "var(--font-serif)" }}
+          >
+            <span className="block">Your Library,</span>
+            <span className="block mt-1 md:mt-2">
+              <em className="not-italic text-brand-primary dark:text-brand-accent">Redefined</em>
             </span>
-            <span>AI-powered reading assistant is here!</span>
-          </Badge>
+          </h1>
+        </div>
 
-          <div className="max-w-screen-md mx-auto text-center animate-fade-in-up delay-200">
-            <h1 className="text-5xl md:text-[4rem] tracking-tight">
-              Track Your
-              <span
-                className={`text-transparent px-2 bg-gradient-to-r ${BRAND_COLORS.accent.gradientFrom} ${BRAND_COLORS.primary.gradientTo} bg-clip-text`}
-              >
-                Reading
-              </span>
-              Journey
-            </h1>
-          </div>
-
-          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground animate-fade-in-up delay-300">
-            Build your personal library, track reading progress, and discover
-            new books. Start with the essentials - more features coming soon.
+        {/* Subtext + CTA row */}
+        <div
+          className={`mt-10 md:mt-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-16 transition-all duration-1000 delay-500 ease-out ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
+          <p
+            className="max-w-md text-base md:text-lg text-muted-foreground leading-relaxed"
+            style={{ fontFamily: "var(--font-geist-sans)" }}
+          >
+            Build your personal collection. Track every page. Discover what to read next.
+            A contemplative space for readers who care about their craft.
           </p>
 
-          <div className="space-y-4 md:space-y-0 md:space-x-4 animate-fade-in-up delay-500">
-            <Button
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <button
               onClick={handleGetStarted}
               disabled={isSigningIn}
-              aria-label={
-                isAuthenticated
-                  ? "Go to your dashboard"
-                  : "Sign in with Google to start reading"
-              }
-              className={`w-5/6 md:w-1/4 font-bold group/arrow hover-scale ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover}`}
+              className="group inline-flex items-center gap-3 px-7 py-3.5 bg-foreground text-background rounded-full text-[13px] uppercase tracking-[0.12em] font-medium hover:opacity-85 transition-all duration-300 disabled:opacity-50"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
             >
               {showSuccess ? (
-                <>✓ Welcome! Redirecting...</>
+                <span>Welcome</span>
               ) : isSigningIn ? (
                 <>
-                  <CircleNotchIcon className="size-4 mr-2 animate-spin" weight="bold" />
-                  Signing in...
+                  <CircleNotchIcon className="size-4 animate-spin" weight="bold" />
+                  <span>Signing in</span>
                 </>
               ) : isAuthenticated ? (
                 <>
-                  Go to Dashboard
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                  <span>Dashboard</span>
+                  <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
                 </>
               ) : (
                 <>
-                  Start Reading
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                  <span>Start Reading</span>
+                  <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
                 </>
               )}
-            </Button>
+            </button>
 
-            <Button
-              asChild
-              variant="secondary"
-              className="w-5/6 md:w-1/4 font-bold hover-scale"
+            <a
+              href="#features"
+              className="text-[13px] uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors duration-300 underline underline-offset-4 decoration-border hover:decoration-foreground"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
             >
-              <Link href="/#features">Explore Features</Link>
-            </Button>
+              Explore Features
+            </a>
           </div>
-
-          {/* Error Message */}
-          {authError && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.error.bgLight} border ${STATUS_COLORS.error.borderLight} rounded-lg animate-slide-in-down`}
-              role="alert"
-            >
-              <p className={`text-sm ${STATUS_COLORS.error.text} text-center`}>
-                {authError}
-              </p>
-            </div>
-          )}
-
-          {/* Success Message */}
-          {showSuccess && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.success.bgLight} ${STATUS_COLORS.success.borderLight} rounded-lg animate-slide-in-down`}
-              role="status"
-            >
-              <p
-                className={`text-sm ${STATUS_COLORS.success.text} text-center`}
-              >
-                ✓ Successfully signed in! Welcome to Librarium.
-              </p>
-            </div>
-          )}
         </div>
 
-        <div className="relative group mt-24 animate-scale-in delay-700">
-          <div
-            className={`absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 ${BRAND_COLORS.primary.bgBlur} rounded-full blur-3xl`}
-          ></div>
-          <Image
-            width={1200}
-            height={1200}
-            className={`w-full md:w-[1200px] mx-auto rounded-lg relative border border-t-2 border-secondary ${BRAND_COLORS.primary.borderTop} hover-lift`}
-            src={
-              theme === "light"
-                ? "/images/hero-image-light-2.jpg"
-                : "/images/hero-image-dark-2.jpg"
-            }
-            alt="dashboard"
-          />
-
-          <div className="absolute bottom-0 left-0 w-full h-32 md:h-40 bg-gradient-to-b from-background/0 via-background/90 to-background rounded-lg"></div>
+        {/* Bottom feature chips */}
+        <div
+          className={`mt-16 md:mt-24 flex flex-wrap gap-3 transition-all duration-1000 delay-700 ease-out ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          {[
+            "Track Progress",
+            "AI Recommendations",
+            "Reading Analytics",
+            "Barcode Scanning",
+            "Personal Collections",
+          ].map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center px-4 py-1.5 rounded-full border border-border/60 text-[11px] md:text-[12px] uppercase tracking-[0.1em] text-muted-foreground bg-background/50 backdrop-blur-sm"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
+
+      {/* Hard bottom edge */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-border/40" />
     </section>
   );
 };

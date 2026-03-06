@@ -1,118 +1,65 @@
-import { BookIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 
-export const FooterSection = () => {
+export const VelvetFooter = () => {
   return (
-    <footer id="footer" className="container pt-24 sm:pt-32">
-      <div className="p-10 bg-card border border-border/60 rounded-2xl">
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
-          <div className="col-span-full xl:col-span-2">
-            <Link href="#" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-brand-accent/20 rounded-xl flex items-center justify-center shrink-0">
-                <BookIcon
-                  className="h-5 w-5 text-brand-primary"
-                  weight="duotone"
-                />
-              </div>
-              <span
-              className="text-xl tracking-tight"
+    <footer className="relative py-12 md:py-16">
+      <div className="px-6 md:px-10 lg:px-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+            {/* Logo + tagline */}
+            <div>
+              <Link href="/" className="inline-block">
+                <span
+                  className="text-2xl tracking-[-0.04em] font-medium text-foreground"
+                  style={{ fontFamily: "var(--font-serif)" }}
+                >
+                  Librarium
+                </span>
+              </Link>
+              <p
+                className="mt-2 text-sm text-muted-foreground max-w-xs"
+                style={{ fontFamily: "var(--font-geist-sans)" }}
+              >
+                A contemplative space for readers.
+              </p>
+            </div>
+
+            {/* Links */}
+            <nav
+              className="flex flex-wrap gap-x-8 gap-y-3"
               style={{ fontFamily: "var(--font-geist-sans)" }}
             >
-              Librarium
+              {[
+                { label: "Features", href: "#features" },
+                { label: "Philosophy", href: "#manifesto" },
+                { label: "GitHub", href: "https://github.com/andersbekkevard/librarium-app" },
+              ].map(({ label, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="text-[13px] uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="mt-10 pt-6 border-t border-border/30 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <span
+              className="text-[12px] text-muted-foreground tracking-wide"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              &copy; {new Date().getFullYear()} Librarium
             </span>
-            </Link>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Features</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Track Reading
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Book Discovery
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Reading Analytics
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Community</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Book Clubs
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Reading Groups
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Recommendations
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Support</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Help Center
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Contact Us
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Privacy Policy
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Company</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                About
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Blog
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Careers
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-border/60 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-muted-foreground">
-              © 2025 Librarium. All rights reserved.
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Made with ❤️ by Anders Bekkevard
-            </div>
+            <span
+              className="text-[12px] text-muted-foreground/60 tracking-wide"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              Crafted by Anders Bekkevard
+            </span>
           </div>
         </div>
       </div>

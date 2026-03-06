@@ -1,45 +1,37 @@
 "use client";
 
-import { BenefitsSection } from "@/components/landing/sections/benefits";
-import { FAQSection } from "@/components/landing/sections/faq";
-import { FeaturesSection } from "@/components/landing/sections/features";
-import { FooterSection } from "@/components/landing/sections/footer";
-import { HeroSection } from "@/components/landing/sections/hero";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-// import { PricingSection } from "@/components/landing/sections/pricing";
-import { ServicesSection } from "@/components/landing/sections/services";
-// import { SponsorsSection } from "@/components/landing/sections/sponsors";
-import { TestimonialSection } from "@/components/landing/sections/testimonial";
 import { useAuthContext } from "@/lib/providers/AuthProvider";
+import { VelvetHero } from "@/components/landing/sections/hero";
+import { VelvetManifesto } from "@/components/landing/sections/manifesto";
+import { VelvetFeatures } from "@/components/landing/sections/features";
+import { VelvetTestimonial } from "@/components/landing/sections/testimonial";
+import { VelvetCTA } from "@/components/landing/sections/cta";
+import { VelvetFooter } from "@/components/landing/sections/footer";
 
 export default function LandingPage() {
   const { isAuthenticated, loading } = useAuthContext();
   const router = useRouter();
 
-  // Redirect authenticated users to dashboard
   useEffect(() => {
     if (!loading && isAuthenticated) {
       router.push("/dashboard");
     }
   }, [loading, isAuthenticated, router]);
 
-  // Don't render anything if authenticated (redirect will happen)
   if (!loading && isAuthenticated) {
     return null;
   }
 
   return (
-    <>
-      <HeroSection />
-      {/* <SponsorsSection /> */}
-      <BenefitsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialSection />
-      {/* <PricingSection /> */}
-      <FAQSection />
-      <FooterSection />
-    </>
+    <main className="velvet-landing">
+      <VelvetHero />
+      <VelvetManifesto />
+      <VelvetFeatures />
+      <VelvetTestimonial />
+      <VelvetCTA />
+      <VelvetFooter />
+    </main>
   );
 }
