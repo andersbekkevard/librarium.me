@@ -2,7 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { cn } from "@/lib/utils/utils";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,19 +15,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Eden-style elegant serif for headings and display text
-// Playfair Display has substantial weight with editorial elegance
-const playfairDisplay = Playfair_Display({
+// Bold Shelf — Fraunces: heavy editorial serif for GIANT display headlines
+const fraunces = Fraunces({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700", "800", "900"],
   style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "Librarium - Your Personal Book Collection",
+  title: "Librarium — Read More. Together.",
   description:
-    "Track your reading progress and organize your personal library with Librarium",
+    "Track your reading, discover through friends, and build your shelf. The social reading tracker.",
   verification: {
     google: "VUAQN43dnQdrEpyAgK0L9-GeyQHXydSUfI2Zmw9nD1Q",
   },
@@ -48,7 +47,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans",
           geistSans.variable,
           geistMono.variable,
-          playfairDisplay.variable,
+          fraunces.variable,
           "antialiased",
         )}
       >
