@@ -1,176 +1,227 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
+
+import {
+  BookDoodle,
+  BookmarkDoodle,
+  CoffeeDoodle,
+  StarDoodle,
+  HeartDoodle,
+  SparklesDoodle,
+} from "@/components/landing/doodles";
 import { Button } from "@/components/ui/button";
-import { BRAND_COLORS, STATUS_COLORS } from "@/lib/design/colors";
 import { useAuthContext } from "@/lib/providers/AuthProvider";
 import { ArrowRightIcon, CircleNotchIcon } from "@phosphor-icons/react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const HeroSection = () => {
+const bookCovers = [
+  {
+    title: "Norwegian Wood",
+    color: "#789D72",
+    rotation: -6,
+    top: "8%",
+    left: "2%",
+  },
+  {
+    title: "Kafka on the Shore",
+    color: "#C44536",
+    rotation: 4,
+    top: "4%",
+    right: "8%",
+  },
+  {
+    title: "The Great Gatsby",
+    color: "#244633",
+    rotation: -3,
+    top: "38%",
+    left: "6%",
+  },
+  {
+    title: "Educated",
+    color: "#D4A843",
+    rotation: 5,
+    top: "42%",
+    right: "4%",
+  },
+  {
+    title: "Pachinko",
+    color: "#5C82B5",
+    rotation: -2,
+    top: "22%",
+    right: "2%",
+  },
+];
+
+const statCards = [
+  { label: "Books this year", value: "24", emoji: "\u{1F4DA}" },
+  { label: "Pages read", value: "7,342", emoji: "\u{1F4D6}" },
+  { label: "Current streak", value: "12 days", emoji: "\u{1F525}" },
+];
+
+const friendAvatars = [
+  { name: "Emma", initial: "E", bg: "#A7D7C5" },
+  { name: "Marcus", initial: "M", bg: "#789D72" },
+  { name: "Siri", initial: "S", bg: "#D4A843" },
+  { name: "Oliver", initial: "O", bg: "#5C82B5" },
+];
+
+export function HeroSection() {
   const [isSigningIn, setIsSigningIn] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const { loading, isAuthenticated, signInWithGoogle } = useAuthContext();
-  const { theme } = useTheme();
+  const { isAuthenticated, signInWithGoogle } = useAuthContext();
 
   const handleGetStarted = async () => {
     if (isAuthenticated) {
-      // User is already authenticated, redirect to dashboard
       router.push("/dashboard");
       return;
     }
-
     setIsSigningIn(true);
-    setAuthError(null);
-
+    setError(null);
     try {
       await signInWithGoogle();
-      // Show success message briefly before redirecting
-      setShowSuccess(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
+      router.push("/dashboard");
     } catch (err) {
-      setAuthError("Failed to sign in");
+      console.error("Sign in failed:", err);
+      setError("Something went wrong. Please try again.");
       setIsSigningIn(false);
     }
   };
 
-  // Show loading state while checking auth
-  if (loading) {
-    return (
-      <section className="container w-full">
-        <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-          <div className="flex items-center justify-center">
-            <CircleNotchIcon
-              className={`h-8 w-8 animate-spin ${BRAND_COLORS.primary.text}`}
-              weight="bold"
-            />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section className="container w-full">
-      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-        <div className="text-center space-y-8">
-          <Badge variant="outline" className="text-sm py-2 animate-fade-in-up">
-            <span className={`mr-2 ${BRAND_COLORS.primary.text}`}>
-              <Badge className={BRAND_COLORS.primary.bg}>New</Badge>
-            </span>
-            <span>AI-powered reading assistant is here!</span>
-          </Badge>
+    <section className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28">
+      {/* Scattered doodles */}
+      <BookDoodle className="absolute top-20 left-[5%] w-10 h-10 text-nook-sage/20 animate-float-slow hidden md:block" />
+      <CoffeeDoodle className="absolute top-32 right-[8%] w-12 h-12 text-nook-sage/15 animate-float hidden md:block" />
+      <BookmarkDoodle className="absolute bottom-20 left-[10%] w-8 h-8 text-nook-mint/30 animate-float-delay hidden md:block" />
+      <StarDoodle className="absolute top-48 left-[85%] w-7 h-7 text-nook-sage/20 animate-float-slow hidden lg:block" />
+      <SparklesDoodle className="absolute bottom-32 right-[12%] w-8 h-8 text-nook-mint/25 animate-float hidden md:block" />
 
-          <div className="max-w-screen-md mx-auto text-center animate-fade-in-up delay-200">
-            <h1 className="text-5xl md:text-[4rem] tracking-tight">
-              Track Your
-              <span
-                className={`text-transparent px-2 bg-gradient-to-r ${BRAND_COLORS.accent.gradientFrom} ${BRAND_COLORS.primary.gradientTo} bg-clip-text`}
-              >
-                Reading
-              </span>
-              Journey
+      <div className="mx-auto max-w-[720px] px-6 relative z-10">
+        {/* Collage hero area */}
+        <div className="relative mb-12 md:mb-16 min-h-[280px] md:min-h-[320px]">
+          {/* Book covers scattered around */}
+          {bookCovers.map((book, i) => (
+            <div
+              key={book.title}
+              className="absolute w-[90px] md:w-[110px] h-[130px] md:h-[155px] rounded-xl shadow-lg animate-float hidden md:block"
+              style={{
+                backgroundColor: book.color,
+                transform: `rotate(${book.rotation}deg)`,
+                top: book.top,
+                left: book.left,
+                right: book.right,
+                animationDelay: `${i * 0.7}s`,
+              }}
+            >
+              <div className="p-3 h-full flex flex-col justify-end">
+                <p className="text-white/90 text-[10px] md:text-xs font-bold leading-tight font-heading">
+                  {book.title}
+                </p>
+              </div>
+            </div>
+          ))}
+
+          {/* Central content */}
+          <div className="relative z-10 text-center pt-4 md:pt-8">
+            {/* Small badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-nook-mint/20 text-nook-forest text-sm font-medium mb-6 animate-fade-in">
+              <HeartDoodle className="w-4 h-4" color="var(--nook-forest)" />
+              <span>Strava for books</span>
+            </div>
+
+            {/* Main headline */}
+            <h1 className="text-display-lg mb-5 animate-fade-in-up text-nook-forest leading-[1.1]">
+              Your cozy little
+              <br />
+              <span className="italic text-nook-sage">reading corner</span>
             </h1>
-          </div>
 
-          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground animate-fade-in-up delay-300">
-            Build your personal library, track reading progress, and discover
-            new books. Start with the essentials - more features coming soon.
-          </p>
+            {/* Intro paragraph — serif body */}
+            <p className="font-heading text-lg md:text-xl text-foreground/80 leading-relaxed max-w-[540px] mx-auto mb-8 animate-fade-in-up delay-200">
+              Track the books you love, see how far you&apos;ve come, and share
+              your reading journey with friends who get it.
+            </p>
 
-          <div className="space-y-4 md:space-y-0 md:space-x-4 animate-fade-in-up delay-500">
-            <Button
-              onClick={handleGetStarted}
-              disabled={isSigningIn}
-              aria-label={
-                isAuthenticated
-                  ? "Go to your dashboard"
-                  : "Sign in with Google to start reading"
-              }
-              className={`w-5/6 md:w-1/4 font-bold group/arrow hover-scale ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover}`}
-            >
-              {showSuccess ? (
-                <>✓ Welcome! Redirecting...</>
-              ) : isSigningIn ? (
-                <>
-                  <CircleNotchIcon className="size-4 mr-2 animate-spin" weight="bold" />
-                  Signing in...
-                </>
-              ) : isAuthenticated ? (
-                <>
-                  Go to Dashboard
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                </>
-              ) : (
-                <>
-                  Start Reading
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                </>
-              )}
-            </Button>
-
-            <Button
-              asChild
-              variant="secondary"
-              className="w-5/6 md:w-1/4 font-bold hover-scale"
-            >
-              <Link href="/#features">Explore Features</Link>
-            </Button>
-          </div>
-
-          {/* Error Message */}
-          {authError && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.error.bgLight} border ${STATUS_COLORS.error.borderLight} rounded-lg animate-slide-in-down`}
-              role="alert"
-            >
-              <p className={`text-sm ${STATUS_COLORS.error.text} text-center`}>
-                {authError}
-              </p>
-            </div>
-          )}
-
-          {/* Success Message */}
-          {showSuccess && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.success.bgLight} ${STATUS_COLORS.success.borderLight} rounded-lg animate-slide-in-down`}
-              role="status"
-            >
-              <p
-                className={`text-sm ${STATUS_COLORS.success.text} text-center`}
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in-up delay-300">
+              <Button
+                onClick={handleGetStarted}
+                disabled={isSigningIn}
+                className="h-12 px-8 rounded-2xl text-base font-semibold bg-nook-forest hover:bg-[#1A3526] text-white shadow-md hover:shadow-lg transition-all group/arrow"
               >
-                ✓ Successfully signed in! Welcome to Librarium.
-              </p>
+                {isSigningIn ? (
+                  <>
+                    <CircleNotchIcon
+                      className="size-5 mr-2 animate-spin"
+                      weight="bold"
+                    />
+                    Signing in...
+                  </>
+                ) : isAuthenticated ? (
+                  <>
+                    Go to Dashboard
+                    <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                  </>
+                ) : (
+                  <>
+                    Start reading
+                    <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </Button>
+              <Button
+                variant="ghost"
+                asChild
+                className="h-12 px-6 rounded-2xl text-base font-medium text-nook-forest hover:bg-nook-mint/10"
+              >
+                <a href="#how-it-works">See how it works</a>
+              </Button>
             </div>
-          )}
+
+            {error && (
+              <p className="text-sm text-red-600 mt-3 animate-fade-in" role="alert">
+                {error}
+              </p>
+            )}
+          </div>
         </div>
 
-        <div className="relative group mt-24 animate-scale-in delay-700">
-          <div
-            className={`absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 ${BRAND_COLORS.primary.bgBlur} rounded-full blur-3xl`}
-          ></div>
-          <Image
-            width={1200}
-            height={1200}
-            className={`w-full md:w-[1200px] mx-auto rounded-lg relative border border-t-2 border-secondary ${BRAND_COLORS.primary.borderTop} hover-lift`}
-            src={
-              theme === "light"
-                ? "/images/hero-image-light-2.jpg"
-                : "/images/hero-image-dark-2.jpg"
-            }
-            alt="dashboard"
-          />
+        {/* Stats + friends collage row */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 animate-fade-in-up delay-500">
+          {statCards.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-card rounded-2xl px-5 py-4 shadow-sm border border-border/50 hover-lift"
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg">{stat.emoji}</span>
+                <span className="text-2xl font-bold text-nook-forest font-heading">
+                  {stat.value}
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground">{stat.label}</p>
+            </div>
+          ))}
 
-          <div className="absolute bottom-0 left-0 w-full h-32 md:h-40 bg-gradient-to-b from-background/0 via-background/90 to-background rounded-lg"></div>
+          {/* Friend avatars card */}
+          <div className="bg-card rounded-2xl px-5 py-4 shadow-sm border border-border/50 hover-lift">
+            <div className="flex -space-x-2 mb-1">
+              {friendAvatars.map((friend) => (
+                <div
+                  key={friend.name}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-card"
+                  style={{ backgroundColor: friend.bg }}
+                  title={friend.name}
+                >
+                  {friend.initial}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground">Friends reading</p>
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}

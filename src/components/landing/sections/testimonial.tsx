@@ -2,197 +2,106 @@
 
 import { useScrollAnimation } from "@/lib/hooks/useScrollAnimation";
 
-interface ReviewProps {
-  image: string;
-  name: string;
-  userName: string;
-  comment: string;
-  rating: number;
-}
-
-const reviewList: ReviewProps[] = [
+const testimonials = [
   {
-    image: "https://github.com/shadcn.png",
-    name: "John D.",
-    userName: "Reader",
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsom dolor sit ammet",
-    rating: 5.0,
+    quote:
+      "I finally stopped losing track of what page I was on across five different books. Librarium just gets it.",
+    name: "Emilie K.",
+    detail: "28 books this year",
+    bookColor: "#789D72",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Jane S.",
-    userName: "Book Enthusiast",
-    comment:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    rating: 5.0,
+    quote:
+      "It\u2019s like having a cozy reading journal that lives in your pocket. The stats are addictive in the best way.",
+    name: "Jakob R.",
+    detail: "42-day reading streak",
+    bookColor: "#244633",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Mike R.",
-    userName: "Avid Reader",
-    comment:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.",
-    rating: 5.0,
-  },
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Sarah L.",
-    userName: "Literature Fan",
-    comment:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
-    rating: 5.0,
-  },
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Tom W.",
-    userName: "Book Lover",
-    comment:
-      "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.",
-    rating: 5.0,
-  },
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Emma K.",
-    userName: "Reading Enthusiast",
-    comment:
-      "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.",
-    rating: 5.0,
+    quote:
+      "No noise, no social pressure \u2014 just a beautiful way to track my reading. Exactly what I wanted.",
+    name: "Thea M.",
+    detail: "Shelf organizer extraordinaire",
+    bookColor: "#5C82B5",
   },
 ];
 
-export const TestimonialSection = () => {
-  const { elementRef: headerRef, isVisible: headerVisible } =
-    useScrollAnimation();
-  const { elementRef: cardRef, isVisible: cardVisible } = useScrollAnimation();
+export function TestimonialSection() {
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.15 });
 
   return (
-    <section id="testimonials" className="container py-24 sm:py-32">
-      <div
-        ref={headerRef as React.RefObject<HTMLDivElement>}
-        className={`text-center mb-8 scroll-fade-in-up ${
-          headerVisible ? "animate" : ""
-        }`}
-      >
-        {/* <h2
-          className={`text-lg ${BRAND_COLORS.primary.text} text-center mb-2 tracking-wider`}
+    <section id="testimonials" className="py-20 md:py-28">
+      <div className="mx-auto max-w-[720px] px-6">
+        <div
+          ref={elementRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-14 scroll-fade-in-up ${isVisible ? "animate" : ""}`}
         >
-          Testimonials
-        </h2> */}
-
-        <h2 className="text-3xl md:text-4xl text-center mb-4">
-          Early Access Preview
-        </h2>
-
-        <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground">
-          Librarium is in active development. Join the early access to help
-          shape the future of reading tracking.
-        </h3>
-      </div>
-
-      <div
-        ref={cardRef as React.RefObject<HTMLDivElement>}
-        className={`bg-muted/50 dark:bg-card rounded-lg p-8 text-center hover-lift scroll-scale-in ${
-          cardVisible ? "animate" : ""
-        }`}
-      >
-        <div className="max-w-2xl mx-auto">
-          <h3
-            className={`text-2xl mb-4 scroll-fade-in-up ${
-              cardVisible ? "animate" : ""
-            }`}
-            style={{ transitionDelay: cardVisible ? "200ms" : "0ms" }}
-          >
-            Be Part of the Journey
-          </h3>
-          <p
-            className={`text-lg text-muted-foreground mb-6 scroll-fade-in-up ${
-              cardVisible ? "animate" : ""
-            }`}
-            style={{ transitionDelay: cardVisible ? "400ms" : "0ms" }}
-          >
-            Librarium is a work in progress, built for readers who want simple,
-            effective book tracking. Your feedback helps us build the features
-            that matter most to you.
+          <h2 className="text-display mb-4 text-nook-forest">
+            Readers are <span className="italic">loving</span> it
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Don&apos;t just take our word for it.
           </p>
-          <div
-            className={`flex flex-wrap justify-center gap-4 text-sm text-muted-foreground scroll-fade-in-up ${
-              cardVisible ? "animate" : ""
-            }`}
-            style={{ transitionDelay: cardVisible ? "600ms" : "0ms" }}
-          >
-            <span>• Essential reading tools ready</span>
-            <span>• Regular updates</span>
-            <span>• Community-driven development</span>
-            <span>• Privacy-focused</span>
-          </div>
+        </div>
+
+        <div className="flex flex-col gap-5">
+          {testimonials.map((testimonial, i) => (
+            <TestimonialCard
+              key={testimonial.name}
+              testimonial={testimonial}
+              index={i}
+            />
+          ))}
         </div>
       </div>
-
-      {/* Commented out fake testimonials - replace with real ones when available
-      <Carousel
-        opts={{
-          align: "start",
-        }}
-        className="relative w-[80%] sm:w-[90%] lg:max-w-screen-xl mx-auto"
-      >
-        <CarouselContent>
-          {reviewList.map((review) => (
-            <CarouselItem
-              key={review.name}
-              className="md:basis-1/2 lg:basis-1/3"
-            >
-              <Card className="bg-muted/50 dark:bg-card">
-                <CardContent className="pt-6 pb-0">
-                  <div className="flex gap-1 pb-6">
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                    <Star
-                      className={`size-4 fill-brand-primary ${BRAND_COLORS.primary.text}`}
-                    />
-                  </div>
-                  {`"${review.comment}"`}
-                </CardContent>
-
-                <CardHeader>
-                  <div className="flex flex-row items-center gap-4">
-                    <Avatar>
-                      <AvatarImage
-                        src="https://avatars.githubusercontent.com/u/75042455?v=4"
-                        alt="radix"
-                      />
-                      <AvatarFallback>
-                        {review.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-
-                    <div className="flex flex-col">
-                      <CardTitle className="text-lg">{review.name}</CardTitle>
-                      <CardDescription>{review.userName}</CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-      */}
     </section>
   );
-};
+}
+
+function TestimonialCard({
+  testimonial,
+  index,
+}: {
+  testimonial: (typeof testimonials)[number];
+  index: number;
+}) {
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.2,
+    rootMargin: `0px 0px -${30 + index * 20}px 0px`,
+  });
+
+  return (
+    <div
+      ref={elementRef as React.RefObject<HTMLDivElement>}
+      className={`scroll-fade-in-up ${isVisible ? "animate" : ""} bg-card rounded-3xl p-6 md:p-8 border border-border/30 shadow-sm relative`}
+      style={{ transitionDelay: `${index * 120}ms` }}
+    >
+      {/* Decorative book accent */}
+      <div
+        className="absolute top-6 right-6 w-8 h-12 rounded-md opacity-20"
+        style={{ backgroundColor: testimonial.bookColor }}
+      />
+
+      {/* Quote */}
+      <blockquote className="font-heading text-lg md:text-xl italic text-foreground/85 leading-relaxed mb-5">
+        &ldquo;{testimonial.quote}&rdquo;
+      </blockquote>
+
+      {/* Attribution */}
+      <div className="flex items-center gap-3">
+        <div
+          className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold"
+          style={{ backgroundColor: testimonial.bookColor }}
+        >
+          {testimonial.name[0]}
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-foreground">
+            {testimonial.name}
+          </p>
+          <p className="text-xs text-muted-foreground">{testimonial.detail}</p>
+        </div>
+      </div>
+    </div>
+  );
+}

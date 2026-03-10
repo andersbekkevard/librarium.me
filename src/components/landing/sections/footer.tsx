@@ -1,121 +1,83 @@
-import { BookIcon } from "@phosphor-icons/react";
+import { BookDoodle } from "@/components/landing/doodles";
 import Link from "next/link";
 
-export const FooterSection = () => {
+const footerLinks = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Features", href: "#features" },
+      { label: "How it works", href: "#how-it-works" },
+      { label: "Reviews", href: "#testimonials" },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/andersbekkevard/librarium-app",
+        external: true,
+      },
+      { label: "Privacy", href: "#" },
+      { label: "Terms", href: "#" },
+    ],
+  },
+];
+
+export function FooterSection() {
   return (
-    <footer id="footer" className="container pt-24 sm:pt-32">
-      <div className="p-10 bg-card border border-border/60 rounded-2xl">
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
-          <div className="col-span-full xl:col-span-2">
-            <Link href="#" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-brand-accent/20 rounded-xl flex items-center justify-center shrink-0">
-                <BookIcon
-                  className="h-5 w-5 text-brand-primary"
-                  weight="duotone"
-                />
-              </div>
-              <span
-              className="text-xl tracking-tight"
-              style={{ fontFamily: "var(--font-geist-sans)" }}
-            >
-              Librarium
-            </span>
-            </Link>
+    <footer className="bg-nook-forest text-white/90 py-14">
+      <div className="mx-auto max-w-[720px] px-6">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-10">
+          {/* Branding */}
+          <div className="flex-1 max-w-[280px]">
+            <div className="flex items-center gap-2.5 mb-3">
+              <BookDoodle className="w-7 h-7" color="#A7D7C5" />
+              <span className="text-xl font-heading font-semibold text-white">
+                Librarium
+              </span>
+            </div>
+            <p className="text-sm text-white/60 leading-relaxed">
+              A cozy reading tracker for people who love books. Built with care
+              in Trondheim, Norway.
+            </p>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Features</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Track Reading
-              </Link>
+          {/* Links */}
+          {footerLinks.map((group) => (
+            <div key={group.heading}>
+              <h4 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3 font-body">
+                {group.heading}
+              </h4>
+              <ul className="space-y-2">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/70 hover:text-white transition-colors"
+                      {...("external" in link && link.external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Book Discovery
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Reading Analytics
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Community</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Book Clubs
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Reading Groups
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Recommendations
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Support</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Help Center
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Contact Us
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Privacy Policy
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Company</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                About
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Blog
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Careers
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <div className="border-t border-border/60 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-muted-foreground">
-              © 2025 Librarium. All rights reserved.
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Made with ❤️ by Anders Bekkevard
-            </div>
-          </div>
+        {/* Bottom bar */}
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-white/40">
+            &copy; {new Date().getFullYear()} Librarium. All rights reserved.
+          </p>
+          <p className="text-xs text-white/30 font-heading italic">
+            Made with love & lots of coffee
+          </p>
         </div>
       </div>
     </footer>
   );
-};
+}

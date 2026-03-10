@@ -6,9 +6,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-nunito);
   --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-serif);
+  --font-serif: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,6 +48,12 @@
   --color-status-warning: var(--status-warning);
   --color-status-error: var(--status-error);
   --color-status-info: var(--status-info);
+  --color-nook-cream: var(--nook-cream);
+  --color-nook-cream-dark: var(--nook-cream-dark);
+  --color-nook-sage: var(--nook-sage);
+  --color-nook-forest: var(--nook-forest);
+  --color-nook-mint: var(--nook-mint);
+  --color-nook-warm-gray: var(--nook-warm-gray);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -56,148 +62,152 @@
 
 :root {
   --radius: 0.75rem;
-  
-  /* Eden Light Mode - Warm, elegant library aesthetic */
-  --background: oklch(0.995 0.002 100); /* Warm white */
-  --foreground: oklch(0.25 0.02 50); /* Warm dark charcoal #3C3B39 */
-  --card: oklch(0.995 0.002 100); /* Warm white */
-  --card-foreground: oklch(0.25 0.02 50);
-  --popover: oklch(1 0 0); /* Pure white for popovers */
-  --popover-foreground: oklch(0.25 0.02 50);
-  
-  /* Primary - Dark Forest Green #244633 */
-  --primary: oklch(0.32 0.06 155);
-  --primary-foreground: oklch(0.99 0 0);
-  
-  /* Secondary - Light sage surfaces */
-  --secondary: oklch(0.965 0.01 145); /* Very light sage */
-  --secondary-foreground: oklch(0.32 0.06 155);
-  
-  /* Muted - Warm off-white #F8F8F6 */
-  --muted: oklch(0.975 0.003 100);
-  --muted-foreground: oklch(0.55 0.01 50); /* Warm gray #929291 */
-  
-  /* Accent - Light sage for hover states */
-  --accent: oklch(0.955 0.015 145);
-  --accent-foreground: oklch(0.32 0.06 155);
-  
-  --destructive: oklch(0.577 0.2 25);
-  
-  /* Borders - Soft warm gray #E8E8E6 */
-  --border: oklch(0.925 0.003 100);
-  --input: oklch(0.965 0.005 100); /* Light cream input bg */
-  --ring: oklch(0.62 0.08 145); /* Sage green focus ring */
-  
-  /* Charts - Eden green palette */
-  --chart-1: oklch(0.32 0.06 155); /* Dark forest */
-  --chart-2: oklch(0.62 0.08 145); /* Sage green */
-  --chart-3: oklch(0.46 0.05 160); /* Forest green */
-  --chart-4: oklch(0.72 0.06 145); /* Light sage */
-  --chart-5: oklch(0.58 0.09 245); /* Muted blue accent */
-  
-  /* Sidebar */
-  --sidebar: oklch(0.995 0.002 100);
-  --sidebar-foreground: oklch(0.25 0.02 50);
-  --sidebar-primary: oklch(0.32 0.06 155);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.955 0.015 145);
-  --sidebar-accent-foreground: oklch(0.32 0.06 155);
-  --sidebar-border: oklch(0.925 0.003 100);
-  --sidebar-ring: oklch(0.62 0.08 145);
 
-  /* Brand Colors - Eden Green Palette */
-  --brand-primary: oklch(0.32 0.06 155); /* Dark forest green #244633 */
-  --brand-primary-hover: oklch(0.28 0.05 155); /* Darker forest */
-  --brand-secondary: oklch(0.46 0.05 160); /* Forest green #526D5E */
-  --brand-secondary-hover: oklch(0.40 0.05 160); /* Darker forest green */
-  --brand-accent: oklch(0.62 0.08 145); /* Sage green #789D72 */
-  --brand-accent-hover: oklch(0.56 0.07 145); /* Darker sage */
+  /* Reading Nook — Warm, cozy, handmade feel */
+  --background: #FFF8F0;
+  --foreground: #3C3B39;
+  --card: #FFF5EB;
+  --card-foreground: #3C3B39;
+  --popover: #FFFCF7;
+  --popover-foreground: #3C3B39;
+
+  /* Primary - Dark Forest Green #244633 */
+  --primary: #244633;
+  --primary-foreground: #FFF8F0;
+
+  /* Secondary - Light sage surfaces */
+  --secondary: #EEF4EC;
+  --secondary-foreground: #244633;
+
+  /* Muted */
+  --muted: #F5F0E8;
+  --muted-foreground: #8A8680;
+
+  /* Accent */
+  --accent: #E8F0E6;
+  --accent-foreground: #244633;
+
+  --destructive: #C44536;
+
+  /* Borders */
+  --border: #E8E2D8;
+  --input: #F5F0E8;
+  --ring: #789D72;
+
+  /* Charts */
+  --chart-1: #244633;
+  --chart-2: #789D72;
+  --chart-3: #526D5E;
+  --chart-4: #A7D7C5;
+  --chart-5: #5C82B5;
+
+  /* Sidebar */
+  --sidebar: #FFF8F0;
+  --sidebar-foreground: #3C3B39;
+  --sidebar-primary: #244633;
+  --sidebar-primary-foreground: #FFF8F0;
+  --sidebar-accent: #E8F0E6;
+  --sidebar-accent-foreground: #244633;
+  --sidebar-border: #E8E2D8;
+  --sidebar-ring: #789D72;
+
+  /* Brand Colors */
+  --brand-primary: #244633;
+  --brand-primary-hover: #1A3526;
+  --brand-secondary: #526D5E;
+  --brand-secondary-hover: #445A4E;
+  --brand-accent: #789D72;
+  --brand-accent-hover: #6A8B64;
 
   /* Status Colors */
-  --status-success: oklch(0.62 0.10 145); /* Sage green */
-  --status-warning: oklch(0.85 0.12 85); /* Warm amber */
-  --status-error: oklch(0.60 0.18 25); /* Muted red */
-  --status-info: oklch(0.58 0.09 245); /* Muted blue #5C82B5 */
-  
-  /* Reading State Colors - Green themed */
-  --reading-finished-bg: oklch(0.94 0.03 145);
-  --reading-finished-text: oklch(0.32 0.06 155);
-  --reading-finished-border: oklch(0.85 0.05 145);
-  --reading-in-progress-bg: oklch(0.32 0.06 155 / 0.1);
-  --reading-in-progress-text: oklch(0.32 0.06 155);
-  --reading-in-progress-border: oklch(0.32 0.06 155);
+  --status-success: #789D72;
+  --status-warning: #D4A843;
+  --status-error: #C44536;
+  --status-info: #5C82B5;
+
+  /* Reading Nook palette */
+  --nook-cream: #FFF8F0;
+  --nook-cream-dark: #F5EDDF;
+  --nook-sage: #789D72;
+  --nook-forest: #244633;
+  --nook-mint: #A7D7C5;
+  --nook-warm-gray: #8A8680;
+
+  /* Reading State Colors */
+  --reading-finished-bg: #E8F0E6;
+  --reading-finished-text: #244633;
+  --reading-finished-border: #B5CEB0;
+  --reading-in-progress-bg: rgba(36, 70, 51, 0.1);
+  --reading-in-progress-text: #244633;
+  --reading-in-progress-border: #244633;
 }
 
 .dark {
-  /* Eden Dark Mode - Notion/Cursor inspired with subtle green warmth */
-  --background: oklch(0.16 0.005 155); /* Soft dark - not pure black */
-  --foreground: oklch(0.93 0.005 100); /* Warm off-white text */
-  --card: oklch(0.19 0.006 155); /* Elevated surface */
-  --card-foreground: oklch(0.93 0.005 100);
-  --popover: oklch(0.21 0.007 155); /* Popover slightly elevated */
-  --popover-foreground: oklch(0.93 0.005 100);
-  
-  /* Primary - Lighter forest green for dark mode visibility */
-  --primary: oklch(0.62 0.08 145); /* Sage green as primary */
-  --primary-foreground: oklch(0.16 0.005 155);
-  
-  /* Secondary - Subtle elevated surface */
-  --secondary: oklch(0.24 0.008 155);
-  --secondary-foreground: oklch(0.90 0.005 100);
-  
-  /* Muted - For subtle backgrounds */
-  --muted: oklch(0.22 0.006 155);
-  --muted-foreground: oklch(0.60 0.008 100);
-  
-  /* Accent - Hover states and highlights */
-  --accent: oklch(0.26 0.012 155);
-  --accent-foreground: oklch(0.90 0.005 100);
-  
-  --destructive: oklch(0.65 0.18 25);
-  
-  /* Borders - Subtle definition */
-  --border: oklch(0.30 0.008 155);
-  --input: oklch(0.20 0.006 155);
-  --ring: oklch(0.62 0.08 145);
-  
-  /* Charts - Eden green palette for dark mode */
-  --chart-1: oklch(0.62 0.08 145); /* Sage green */
-  --chart-2: oklch(0.72 0.06 145); /* Light sage */
-  --chart-3: oklch(0.55 0.06 160); /* Forest green */
-  --chart-4: oklch(0.80 0.05 145); /* Very light sage */
-  --chart-5: oklch(0.68 0.08 245); /* Muted blue accent */
-  
-  /* Sidebar - Slightly darker than main content */
-  --sidebar: oklch(0.14 0.004 155);
-  --sidebar-foreground: oklch(0.93 0.005 100);
-  --sidebar-primary: oklch(0.62 0.08 145);
-  --sidebar-primary-foreground: oklch(0.14 0.004 155);
-  --sidebar-accent: oklch(0.22 0.010 155);
-  --sidebar-accent-foreground: oklch(0.90 0.005 100);
-  --sidebar-border: oklch(0.26 0.006 155);
-  --sidebar-ring: oklch(0.62 0.08 145);
+  --background: #1A1916;
+  --foreground: #EDE8E0;
+  --card: #222019;
+  --card-foreground: #EDE8E0;
+  --popover: #2A2720;
+  --popover-foreground: #EDE8E0;
 
-  /* Brand Colors - Dark mode variants */
-  --brand-primary: oklch(0.62 0.08 145); /* Sage green for visibility */
-  --brand-primary-hover: oklch(0.55 0.07 145);
-  --brand-secondary: oklch(0.55 0.06 160); /* Forest green */
-  --brand-secondary-hover: oklch(0.50 0.05 160);
-  --brand-accent: oklch(0.72 0.06 145); /* Light sage */
-  --brand-accent-hover: oklch(0.65 0.06 145);
+  --primary: #A7D7C5;
+  --primary-foreground: #1A1916;
 
-  /* Status Colors - Dark mode variants */
-  --status-success: oklch(0.72 0.08 145); /* Brighter sage */
-  --status-warning: oklch(0.85 0.12 85); /* Warm amber */
-  --status-error: oklch(0.70 0.16 25); /* Softer red */
-  --status-info: oklch(0.68 0.08 245); /* Brighter muted blue */
+  --secondary: #2A2720;
+  --secondary-foreground: #EDE8E0;
 
-  /* Reading State Colors - Dark mode variants */
-  --reading-finished-bg: oklch(0.28 0.025 145);
-  --reading-finished-text: oklch(0.80 0.06 145);
-  --reading-finished-border: oklch(0.38 0.04 145);
-  --reading-in-progress-bg: oklch(0.62 0.08 145 / 0.18);
-  --reading-in-progress-text: oklch(0.72 0.06 145);
-  --reading-in-progress-border: oklch(0.62 0.08 145);
+  --muted: #262420;
+  --muted-foreground: #9A958D;
+
+  --accent: #2E2C26;
+  --accent-foreground: #EDE8E0;
+
+  --destructive: #D45545;
+
+  --border: #3A3630;
+  --input: #262420;
+  --ring: #789D72;
+
+  --chart-1: #A7D7C5;
+  --chart-2: #789D72;
+  --chart-3: #526D5E;
+  --chart-4: #B5CEB0;
+  --chart-5: #7DA4CF;
+
+  --sidebar: #181714;
+  --sidebar-foreground: #EDE8E0;
+  --sidebar-primary: #A7D7C5;
+  --sidebar-primary-foreground: #181714;
+  --sidebar-accent: #2E2C26;
+  --sidebar-accent-foreground: #EDE8E0;
+  --sidebar-border: #3A3630;
+  --sidebar-ring: #789D72;
+
+  --brand-primary: #A7D7C5;
+  --brand-primary-hover: #8FC5B3;
+  --brand-secondary: #789D72;
+  --brand-secondary-hover: #6A8B64;
+  --brand-accent: #B5CEB0;
+  --brand-accent-hover: #A0BF9A;
+
+  --status-success: #B5CEB0;
+  --status-warning: #D4A843;
+  --status-error: #D45545;
+  --status-info: #7DA4CF;
+
+  --nook-cream: #1A1916;
+  --nook-cream-dark: #222019;
+  --nook-sage: #789D72;
+  --nook-forest: #A7D7C5;
+  --nook-mint: #526D5E;
+  --nook-warm-gray: #9A958D;
+
+  --reading-finished-bg: #2A3A2E;
+  --reading-finished-text: #B5CEB0;
+  --reading-finished-border: #3A5040;
+  --reading-in-progress-bg: rgba(167, 215, 197, 0.15);
+  --reading-in-progress-text: #A7D7C5;
+  --reading-in-progress-border: #A7D7C5;
 }
 
 @layer base {
@@ -207,69 +217,87 @@
   body {
     @apply bg-background text-foreground;
   }
-  
-  /* Eden-style typography - Serif headings with substantial weight */
-  /* Larger headings use medium weight, smaller headings use semibold for legibility */
+
+  /* Reading Nook typography — Fraunces headings, Nunito body */
   h1, h2 {
-    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    font-weight: 500;
-  }
-  
-  h3, h4, h5, h6 {
-    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
     font-weight: 600;
   }
-  
+
+  h3, h4, h5, h6 {
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-weight: 600;
+  }
+
   h1 {
     @apply text-4xl tracking-tight;
   }
-  
+
   h2 {
     @apply text-3xl tracking-tight;
   }
-  
+
   h3 {
     @apply text-2xl;
   }
-  
+
   h4 {
     @apply text-xl;
   }
-  
+
   h5 {
     @apply text-lg;
   }
-  
+
   h6 {
     @apply text-base;
   }
 }
 
 @layer utilities {
-  /* Eden-style serif typography utilities */
+  /* Fraunces serif utilities */
   .font-heading {
-    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    /* Weight is controlled by the element using this class */
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
   }
-  
+
+  .font-body {
+    font-family: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  }
+
   .text-display {
-    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    font-weight: 500;
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-weight: 600;
     @apply text-4xl tracking-tight;
   }
-  
+
   .text-display-lg {
-    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    font-weight: 500;
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-weight: 700;
     @apply text-5xl md:text-6xl tracking-tight;
   }
-  
+
   .text-display-xl {
-    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    font-weight: 500;
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-weight: 800;
     @apply text-6xl md:text-7xl tracking-tight;
   }
-  
+
+  /* Paper grain noise overlay */
+  .paper-grain {
+    position: relative;
+  }
+  .paper-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
   .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -348,7 +376,20 @@
     transform: translateX(30px);
   }
 
-  /* Scroll-triggered animations - hidden by default */
+  /* Float / bob animation for hero collage */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-delay {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+
+  /* Scroll-triggered animations */
   .scroll-fade-in-up {
     opacity: 0;
     transform: translateY(30px);
@@ -421,7 +462,7 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   }
 
   .hover-scale {
@@ -486,5 +527,14 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
   }
 }

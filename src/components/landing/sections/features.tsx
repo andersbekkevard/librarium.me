@@ -1,127 +1,116 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BRAND_COLORS } from "@/lib/design/colors";
+"use client";
+
 import {
-  useScrollAnimation,
-  useStaggeredScrollAnimation,
-} from "@/lib/hooks/useScrollAnimation";
-import { ChartBarIcon, BookIcon, MagnifyingGlassIcon, StarIcon, UsersIcon } from "@phosphor-icons/react";
+  BookStackDoodle,
+  ReadingGlassesDoodle,
+  SparklesDoodle,
+  StarDoodle,
+  BookmarkDoodle,
+} from "@/components/landing/doodles";
+import { useScrollAnimation } from "@/lib/hooks/useScrollAnimation";
 
-interface FeaturesProps {
-  icon: React.ReactElement;
-  title: string;
-  description: string;
-}
-
-const featureList: FeaturesProps[] = [
+const features = [
   {
-    icon: <BookIcon className="w-6 h-6" />,
-    title: "Reading Progress",
+    title: "Page-by-page progress",
     description:
-      "Track your reading progress page by page with three simple states: not started, in progress, and finished.",
+      "Log exactly where you are. See a beautiful progress bar fill up as you read through every chapter.",
+    Doodle: BookmarkDoodle,
+    color: "#789D72",
   },
   {
-    icon: <BookIcon className="w-6 h-6" />,
-    title: "Personal Library",
+    title: "Your personal library",
     description:
-      "Organize your book collection with basic filtering by reading state and ownership. Search and sort your books easily.",
+      "Organize books into shelves, filter by status, sort by date. Everything in one tidy place.",
+    Doodle: BookStackDoodle,
+    color: "#244633",
   },
   {
-    icon: <MagnifyingGlassIcon className="w-6 h-6" />,
-    title: "Book Discovery",
+    title: "Book discovery",
     description:
-      "Search millions of books through Google Books API and automatically populate details like covers, pages, and descriptions.",
+      "Search millions of titles via Google Books. Scan a barcode or type a title \u2014 we\u2019ll find it.",
+    Doodle: ReadingGlassesDoodle,
+    color: "#5C82B5",
   },
   {
-    icon: <ChartBarIcon className="w-6 h-6" />,
-    title: "Basic Statistics",
+    title: "Reading statistics",
     description:
-      "View essential reading stats on your dashboard: total books, finished books, pages read, and current reading count.",
+      "Pages per day, books per month, reading streaks. Watch your habits form into something beautiful.",
+    Doodle: SparklesDoodle,
+    color: "#D4A843",
   },
   {
-    icon: <StarIcon className="w-6 h-6" />,
-    title: "Book Ratings",
+    title: "Rate & review",
     description:
-      "Rate finished books with a 1-5 star system to remember your favorites and track your reading preferences.",
-  },
-  {
-    icon: <UsersIcon className="w-6 h-6" />,
-    title: "Coming Soon",
-    description:
-      "Social reading features, advanced analytics, reading goals, and custom shelves are planned for future releases.",
+      "Give every book a star rating. Write notes for future-you about what you loved (or didn\u2019t).",
+    Doodle: StarDoodle,
+    color: "#C44536",
   },
 ];
 
-export const FeaturesSection = () => {
-  const { elementRef: headerRef, isVisible: headerVisible } =
-    useScrollAnimation();
-  const { elementRef: cardsRef, visibleItems } = useStaggeredScrollAnimation(
-    featureList.length
-  );
+export function FeaturesSection() {
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section id="features" className="container py-24 sm:py-32">
-      <div
-        ref={headerRef as React.RefObject<HTMLDivElement>}
-        className={`text-center mb-8 scroll-fade-in-up ${
-          headerVisible ? "animate" : ""
-        }`}
-      >
-        <h2
-          className={`text-lg ${BRAND_COLORS.primary.text} text-center mb-2 tracking-wider`}
+    <section id="features" className="py-20 md:py-28 bg-nook-cream-dark/50">
+      <div className="mx-auto max-w-[720px] px-6">
+        <div
+          ref={elementRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-14 scroll-fade-in-up ${isVisible ? "animate" : ""}`}
         >
-          Features
-        </h2>
+          <h2 className="text-display mb-4 text-nook-forest">
+            Everything you need,{" "}
+            <span className="italic">nothing you don&apos;t</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-[480px] mx-auto">
+            Built for readers who want to enjoy their books, not manage a
+            spreadsheet.
+          </p>
+        </div>
 
-        <h2 className="text-3xl md:text-4xl text-center mb-4">
-          Essential Reading Tools
-        </h2>
-        <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground">
-          Core features are ready now, with advanced capabilities planned for
-          future releases. Start tracking your reading journey today.
-        </h3>
-      </div>
-
-      <div
-        ref={cardsRef as React.RefObject<HTMLDivElement>}
-        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
-      >
-        {featureList.map(({ icon, title, description }, index) => (
-          <div
-            key={title}
-            className={`scroll-fade-in-up ${
-              visibleItems[index] ? "animate" : ""
-            }`}
-            style={{
-              transitionDelay: visibleItems[index] ? `${index * 150}ms` : "0ms",
-            }}
-          >
-            <Card className="h-full bg-background border-0 shadow-none hover-lift">
-              <CardHeader className="flex flex-col justify-center items-center">
-                <div
-                  className={`${
-                    BRAND_COLORS.primary.bg
-                  }/20 p-2 rounded-full ring-8 ring-brand-primary/10 mb-4 scroll-bounce-in ${
-                    visibleItems[index] ? "animate" : ""
-                  }`}
-                  style={{
-                    transitionDelay: visibleItems[index]
-                      ? `${index * 150 + 300}ms`
-                      : "0ms",
-                  }}
-                >
-                  <div className={BRAND_COLORS.primary.text}>{icon}</div>
-                </div>
-
-                <CardTitle className="text-center text-lg">{title}</CardTitle>
-              </CardHeader>
-
-              <CardContent className="text-muted-foreground text-center text-sm">
-                {description}
-              </CardContent>
-            </Card>
-          </div>
-        ))}
+        <div className="flex flex-col gap-4">
+          {features.map((feature, i) => (
+            <FeatureCard key={feature.title} feature={feature} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
-};
+}
+
+function FeatureCard({
+  feature,
+  index,
+}: {
+  feature: (typeof features)[number];
+  index: number;
+}) {
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.2,
+    rootMargin: `0px 0px -${20 + index * 15}px 0px`,
+  });
+
+  const DoodleIcon = feature.Doodle;
+
+  return (
+    <div
+      ref={elementRef as React.RefObject<HTMLDivElement>}
+      className={`scroll-fade-in-up ${isVisible ? "animate" : ""} bg-card rounded-2xl p-5 md:p-6 border border-border/40 shadow-sm flex items-start gap-4 hover-lift`}
+      style={{ transitionDelay: `${index * 80}ms` }}
+    >
+      <div
+        className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+        style={{ backgroundColor: `${feature.color}15` }}
+      >
+        <DoodleIcon className="w-7 h-7" color={feature.color} />
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold text-nook-forest mb-1 font-heading">
+          {feature.title}
+        </h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          {feature.description}
+        </p>
+      </div>
+    </div>
+  );
+}
