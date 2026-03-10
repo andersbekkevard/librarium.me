@@ -10,13 +10,15 @@ export default function LandingLayout({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      defaultTheme="light"
+      enableSystem={false}
       disableTransitionOnChange
     >
       <AuthProvider>
-        <Navbar />
-        {children}
+        <div className="min-h-screen bg-white">
+          <Navbar />
+          {children}
+        </div>
       </AuthProvider>
     </ThemeProvider>
   );
