@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/landing/navbar";
+import { ChapterNavbar } from "@/components/landing/ChapterNavbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/lib/providers/AuthProvider";
 
@@ -10,12 +10,11 @@ export default function LandingLayout({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      defaultTheme="light"
       disableTransitionOnChange
     >
       <AuthProvider>
-        <Navbar />
+        <ChapterNavbar />
         {children}
       </AuthProvider>
     </ThemeProvider>

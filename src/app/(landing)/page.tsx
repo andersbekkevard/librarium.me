@@ -1,45 +1,41 @@
 "use client";
 
-import { BenefitsSection } from "@/components/landing/sections/benefits";
-import { FAQSection } from "@/components/landing/sections/faq";
-import { FeaturesSection } from "@/components/landing/sections/features";
-import { FooterSection } from "@/components/landing/sections/footer";
-import { HeroSection } from "@/components/landing/sections/hero";
+import { ChapterProgressIndicator } from "@/components/landing/ChapterProgressIndicator";
+import { ChapterHero } from "@/components/landing/sections/chapter-hero";
+import { ChapterTrack } from "@/components/landing/sections/chapter-track";
+import { ChapterDiscover } from "@/components/landing/sections/chapter-discover";
+import { ChapterConnect } from "@/components/landing/sections/chapter-connect";
+import { ChapterJoin } from "@/components/landing/sections/chapter-join";
+import { ChapterFaq } from "@/components/landing/sections/chapter-faq";
+import { ChapterFooter } from "@/components/landing/sections/chapter-footer";
+import { useAuthContext } from "@/lib/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-// import { PricingSection } from "@/components/landing/sections/pricing";
-import { ServicesSection } from "@/components/landing/sections/services";
-// import { SponsorsSection } from "@/components/landing/sections/sponsors";
-import { TestimonialSection } from "@/components/landing/sections/testimonial";
-import { useAuthContext } from "@/lib/providers/AuthProvider";
 
 export default function LandingPage() {
   const { isAuthenticated, loading } = useAuthContext();
   const router = useRouter();
 
-  // Redirect authenticated users to dashboard
   useEffect(() => {
     if (!loading && isAuthenticated) {
       router.push("/dashboard");
     }
   }, [loading, isAuthenticated, router]);
 
-  // Don't render anything if authenticated (redirect will happen)
   if (!loading && isAuthenticated) {
     return null;
   }
 
   return (
     <>
-      <HeroSection />
-      {/* <SponsorsSection /> */}
-      <BenefitsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialSection />
-      {/* <PricingSection /> */}
-      <FAQSection />
-      <FooterSection />
+      <ChapterProgressIndicator />
+      <ChapterHero />
+      <ChapterTrack />
+      <ChapterDiscover />
+      <ChapterConnect />
+      <ChapterJoin />
+      <ChapterFaq />
+      <ChapterFooter />
     </>
   );
 }
