@@ -2,7 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { cn } from "@/lib/utils/utils";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,8 +15,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Eden-style elegant serif for headings and display text
-// Playfair Display has substantial weight with editorial elegance
+// Fraunces — editorial display serif for the Literary Magazine landing variant
+// Heavy weight, tight leading, magazine masthead feel
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+});
+
+// Playfair Display — used in the app UI headings
 const playfairDisplay = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
@@ -48,6 +56,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans",
           geistSans.variable,
           geistMono.variable,
+          fraunces.variable,
           playfairDisplay.variable,
           "antialiased",
         )}

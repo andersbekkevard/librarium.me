@@ -1,126 +1,93 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BRAND_COLORS } from "@/lib/design/colors";
+"use client";
+
 import {
   useScrollAnimation,
   useStaggeredScrollAnimation,
 } from "@/lib/hooks/useScrollAnimation";
-import { ChartBarIcon, BookIcon, MagnifyingGlassIcon, StarIcon, UsersIcon } from "@phosphor-icons/react";
+import React from "react";
 
-interface FeaturesProps {
-  icon: React.ReactElement;
+interface Feature {
+  label: string;
   title: string;
   description: string;
 }
 
-const featureList: FeaturesProps[] = [
+const features: Feature[] = [
   {
-    icon: <BookIcon className="w-6 h-6" />,
-    title: "Reading Progress",
+    label: "Track",
+    title: "Every page, remembered",
     description:
-      "Track your reading progress page by page with three simple states: not started, in progress, and finished.",
+      "Log reading sessions, track progress page by page, and build a timeline of your literary life. Three simple states\u2014not started, in progress, finished\u2014keep things focused.",
   },
   {
-    icon: <BookIcon className="w-6 h-6" />,
-    title: "Personal Library",
+    label: "Discover",
+    title: "Find your next obsession",
     description:
-      "Organize your book collection with basic filtering by reading state and ownership. Search and sort your books easily.",
+      "Browse what the community is reading, explore curated lists, and search millions of titles. Book details auto-populate so you spend less time typing and more time reading.",
   },
   {
-    icon: <MagnifyingGlassIcon className="w-6 h-6" />,
-    title: "Book Discovery",
+    label: "Connect",
+    title: "Reading is better together",
     description:
-      "Search millions of books through Google Books API and automatically populate details like covers, pages, and descriptions.",
-  },
-  {
-    icon: <ChartBarIcon className="w-6 h-6" />,
-    title: "Basic Statistics",
-    description:
-      "View essential reading stats on your dashboard: total books, finished books, pages read, and current reading count.",
-  },
-  {
-    icon: <StarIcon className="w-6 h-6" />,
-    title: "Book Ratings",
-    description:
-      "Rate finished books with a 1-5 star system to remember your favorites and track your reading preferences.",
-  },
-  {
-    icon: <UsersIcon className="w-6 h-6" />,
-    title: "Coming Soon",
-    description:
-      "Social reading features, advanced analytics, reading goals, and custom shelves are planned for future releases.",
+      "Share your library, compare notes with friends, and see how your taste evolves over time. Coming soon: book clubs, group challenges, and collaborative reading lists.",
   },
 ];
 
 export const FeaturesSection = () => {
   const { elementRef: headerRef, isVisible: headerVisible } =
     useScrollAnimation();
-  const { elementRef: cardsRef, visibleItems } = useStaggeredScrollAnimation(
-    featureList.length
+  const { elementRef: gridRef, visibleItems } = useStaggeredScrollAnimation(
+    features.length
   );
 
   return (
-    <section id="features" className="container py-24 sm:py-32">
-      <div
-        ref={headerRef as React.RefObject<HTMLDivElement>}
-        className={`text-center mb-8 scroll-fade-in-up ${
-          headerVisible ? "animate" : ""
-        }`}
-      >
-        <h2
-          className={`text-lg ${BRAND_COLORS.primary.text} text-center mb-2 tracking-wider`}
+    <section className="bg-[#f5f0e8] py-24 md:py-32">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`mb-16 scroll-fade-in-up ${headerVisible ? "animate" : ""}`}
         >
-          Features
-        </h2>
-
-        <h2 className="text-3xl md:text-4xl text-center mb-4">
-          Essential Reading Tools
-        </h2>
-        <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground">
-          Core features are ready now, with advanced capabilities planned for
-          future releases. Start tracking your reading journey today.
-        </h3>
-      </div>
-
-      <div
-        ref={cardsRef as React.RefObject<HTMLDivElement>}
-        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
-      >
-        {featureList.map(({ icon, title, description }, index) => (
-          <div
-            key={title}
-            className={`scroll-fade-in-up ${
-              visibleItems[index] ? "animate" : ""
-            }`}
-            style={{
-              transitionDelay: visibleItems[index] ? `${index * 150}ms` : "0ms",
-            }}
+          <p className="text-[#789D72] text-xs font-semibold tracking-[0.2em] uppercase mb-2">
+            How It Works
+          </p>
+          <h2
+            className="text-[#1a2e1f] text-2xl md:text-3xl tracking-tight"
+            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 600 }}
           >
-            <Card className="h-full bg-background border-0 shadow-none hover-lift">
-              <CardHeader className="flex flex-col justify-center items-center">
-                <div
-                  className={`${
-                    BRAND_COLORS.primary.bg
-                  }/20 p-2 rounded-full ring-8 ring-brand-primary/10 mb-4 scroll-bounce-in ${
-                    visibleItems[index] ? "animate" : ""
-                  }`}
-                  style={{
-                    transitionDelay: visibleItems[index]
-                      ? `${index * 150 + 300}ms`
-                      : "0ms",
-                  }}
-                >
-                  <div className={BRAND_COLORS.primary.text}>{icon}</div>
-                </div>
+            Built for Readers
+          </h2>
+        </div>
 
-                <CardTitle className="text-center text-lg">{title}</CardTitle>
-              </CardHeader>
-
-              <CardContent className="text-muted-foreground text-center text-sm">
-                {description}
-              </CardContent>
-            </Card>
-          </div>
-        ))}
+        {/* 3-column text grid */}
+        <div
+          ref={gridRef as React.RefObject<HTMLDivElement>}
+          className="grid md:grid-cols-3 gap-12 md:gap-8"
+        >
+          {features.map((feature, index) => (
+            <div
+              key={feature.label}
+              className={`scroll-fade-in-up ${visibleItems[index] ? "animate" : ""}`}
+              style={{
+                transitionDelay: visibleItems[index]
+                  ? `${index * 150}ms`
+                  : "0ms",
+              }}
+            >
+              <p className="text-[#789D72] text-xs font-semibold tracking-[0.15em] uppercase mb-4">
+                {feature.label}
+              </p>
+              <h3
+                className="text-[#1a2e1f] text-xl mb-3"
+                style={{ fontFamily: "var(--font-fraunces)", fontWeight: 600 }}
+              >
+                {feature.title}
+              </h3>
+              <p className="text-[#1a2e1f]/55 text-[15px] leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

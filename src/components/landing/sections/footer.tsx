@@ -1,119 +1,86 @@
 import { BookIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 
+const footerLinks = {
+  Product: [
+    { label: "Features", href: "#features" },
+    { label: "Reading Lists", href: "#reading-lists" },
+    { label: "Trending", href: "#trending" },
+  ],
+  Company: [
+    { label: "About", href: "#" },
+    { label: "Blog", href: "#" },
+    { label: "Careers", href: "#" },
+  ],
+  Resources: [
+    { label: "Help Center", href: "#" },
+    { label: "Privacy", href: "#" },
+    { label: "Terms", href: "#" },
+  ],
+  Community: [
+    {
+      label: "GitHub",
+      href: "https://github.com/andersbekkevard/librarium-app",
+    },
+    { label: "Discord", href: "#" },
+    { label: "Twitter", href: "#" },
+  ],
+};
+
 export const FooterSection = () => {
   return (
-    <footer id="footer" className="container pt-24 sm:pt-32">
-      <div className="p-10 bg-card border border-border/60 rounded-2xl">
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
-          <div className="col-span-full xl:col-span-2">
-            <Link href="#" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-brand-accent/20 rounded-xl flex items-center justify-center shrink-0">
-                <BookIcon
-                  className="h-5 w-5 text-brand-primary"
-                  weight="duotone"
-                />
-              </div>
+    <footer className="bg-[#162618] py-16 md:py-20">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-8">
+          {/* Brand column */}
+          <div className="col-span-2 md:col-span-1">
+            <Link href="/" className="flex items-center gap-2 mb-4">
+              <BookIcon
+                className="h-5 w-5 text-[#789D72]"
+                weight="duotone"
+              />
               <span
-              className="text-xl tracking-tight"
-              style={{ fontFamily: "var(--font-geist-sans)" }}
-            >
-              Librarium
-            </span>
+                className="text-[#FFF8F0] text-lg tracking-tight"
+                style={{ fontFamily: "var(--font-fraunces)", fontWeight: 600 }}
+              >
+                Librarium
+              </span>
             </Link>
+            <p className="text-[#FFF8F0]/35 text-sm leading-relaxed">
+              Your reading life, curated.
+            </p>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Features</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Track Reading
-              </Link>
+          {/* Link columns */}
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category}>
+              <h4 className="text-[#FFF8F0]/50 text-xs font-semibold tracking-[0.15em] uppercase mb-4">
+                {category}
+              </h4>
+              <ul className="space-y-2.5">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[#FFF8F0]/40 text-sm hover:text-[#FFF8F0]/70 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Book Discovery
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Reading Analytics
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Community</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Book Clubs
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Reading Groups
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Recommendations
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Support</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Help Center
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Contact Us
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Privacy Policy
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-lg">Company</h3>
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                About
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Blog
-              </Link>
-            </div>
-
-            <div>
-              <Link href="#" className="opacity-60 hover:opacity-100">
-                Careers
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <div className="border-t border-border/60 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-muted-foreground">
-              © 2025 Librarium. All rights reserved.
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Made with ❤️ by Anders Bekkevard
-            </div>
-          </div>
+        {/* Bottom bar */}
+        <div className="mt-16 pt-8 border-t border-[#FFF8F0]/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[#FFF8F0]/25 text-xs">
+            &copy; {new Date().getFullYear()} Librarium. All rights reserved.
+          </p>
+          <p className="text-[#FFF8F0]/20 text-xs">
+            Made for readers, by readers.
+          </p>
         </div>
       </div>
     </footer>
