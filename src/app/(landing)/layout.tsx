@@ -15,8 +15,10 @@ export default function LandingLayout({
       disableTransitionOnChange
     >
       <AuthProvider>
-        <Navbar />
-        {children}
+        <div className="landing-page">
+          <Navbar />
+          {children}
+        </div>
       </AuthProvider>
     </ThemeProvider>
   );

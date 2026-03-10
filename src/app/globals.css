@@ -433,6 +433,40 @@
   }
 }
 
+/* Landing page overrides - sans-serif headings for Literal-style */
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4,
+.landing-page h5,
+.landing-page h6 {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Book cover carousel */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.carousel-track-left {
+  animation: scroll-left 40s linear infinite;
+}
+
+.carousel-track-right {
+  animation: scroll-right 40s linear infinite;
+}
+
+.carousel-track-left:hover,
+.carousel-track-right:hover {
+  animation-play-state: paused;
+}
+
 /* Animation keyframes */
 @keyframes fadeInUp {
   to {
