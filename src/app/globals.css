@@ -44,6 +44,8 @@
   --color-brand-secondary-hover: var(--brand-secondary-hover);
   --color-brand-accent: var(--brand-accent);
   --color-brand-accent-hover: var(--brand-accent-hover);
+  --color-golden-amber: var(--golden-amber);
+  --color-golden-amber-hover: var(--golden-amber-hover);
   --color-status-success: var(--status-success);
   --color-status-warning: var(--status-warning);
   --color-status-error: var(--status-error);
@@ -56,10 +58,10 @@
 
 :root {
   --radius: 0.75rem;
-  
-  /* Eden Light Mode - Warm, elegant library aesthetic */
-  --background: oklch(0.995 0.002 100); /* Warm white */
-  --foreground: oklch(0.25 0.02 50); /* Warm dark charcoal #3C3B39 */
+
+  /* Editorial Chapters - Warm cream library aesthetic */
+  --background: oklch(0.98 0.012 80); /* Warm cream #FFF8F0 */
+  --foreground: oklch(0.22 0.02 50); /* Deep warm charcoal */
   --card: oklch(0.995 0.002 100); /* Warm white */
   --card-foreground: oklch(0.25 0.02 50);
   --popover: oklch(1 0 0); /* Pure white for popovers */
@@ -113,6 +115,10 @@
   --brand-accent: oklch(0.62 0.08 145); /* Sage green #789D72 */
   --brand-accent-hover: oklch(0.56 0.07 145); /* Darker sage */
 
+  /* Golden Amber Accent */
+  --golden-amber: oklch(0.84 0.15 85); /* #F5C54D */
+  --golden-amber-hover: oklch(0.78 0.14 85);
+
   /* Status Colors */
   --status-success: oklch(0.62 0.10 145); /* Sage green */
   --status-warning: oklch(0.85 0.12 85); /* Warm amber */
@@ -129,13 +135,13 @@
 }
 
 .dark {
-  /* Eden Dark Mode - Notion/Cursor inspired with subtle green warmth */
-  --background: oklch(0.16 0.005 155); /* Soft dark - not pure black */
-  --foreground: oklch(0.93 0.005 100); /* Warm off-white text */
-  --card: oklch(0.19 0.006 155); /* Elevated surface */
-  --card-foreground: oklch(0.93 0.005 100);
-  --popover: oklch(0.21 0.007 155); /* Popover slightly elevated */
-  --popover-foreground: oklch(0.93 0.005 100);
+  /* Editorial Dark Mode - Near-black with warm cream text */
+  --background: oklch(0.13 0.008 160); /* Near-black #0A0F0D */
+  --foreground: oklch(0.94 0.01 80); /* Warm cream text */
+  --card: oklch(0.16 0.008 160); /* Elevated surface */
+  --card-foreground: oklch(0.94 0.01 80);
+  --popover: oklch(0.18 0.008 160); /* Popover slightly elevated */
+  --popover-foreground: oklch(0.94 0.01 80);
   
   /* Primary - Lighter forest green for dark mode visibility */
   --primary: oklch(0.62 0.08 145); /* Sage green as primary */
@@ -184,6 +190,10 @@
   --brand-secondary-hover: oklch(0.50 0.05 160);
   --brand-accent: oklch(0.72 0.06 145); /* Light sage */
   --brand-accent-hover: oklch(0.65 0.06 145);
+
+  /* Golden Amber - preserved in dark mode */
+  --golden-amber: oklch(0.84 0.15 85);
+  --golden-amber-hover: oklch(0.78 0.14 85);
 
   /* Status Colors - Dark mode variants */
   --status-success: oklch(0.72 0.08 145); /* Brighter sage */

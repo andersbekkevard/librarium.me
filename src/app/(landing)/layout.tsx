@@ -1,6 +1,5 @@
-import { Navbar } from "@/components/landing/navbar";
+import { EditorialNavbar } from "@/components/landing/editorial/editorial-navbar";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AuthProvider } from "@/lib/providers/AuthProvider";
 
 export default function LandingLayout({
   children,
@@ -14,10 +13,8 @@ export default function LandingLayout({
       enableSystem
       disableTransitionOnChange
     >
-      <AuthProvider>
-        <Navbar />
-        {children}
-      </AuthProvider>
+      <EditorialNavbar />
+      {children}
     </ThemeProvider>
   );
 }

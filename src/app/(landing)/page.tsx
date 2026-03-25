@@ -1,45 +1,35 @@
 "use client";
 
-import { BenefitsSection } from "@/components/landing/sections/benefits";
-import { FAQSection } from "@/components/landing/sections/faq";
-import { FeaturesSection } from "@/components/landing/sections/features";
-import { FooterSection } from "@/components/landing/sections/footer";
-import { HeroSection } from "@/components/landing/sections/hero";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-// import { PricingSection } from "@/components/landing/sections/pricing";
-import { ServicesSection } from "@/components/landing/sections/services";
-// import { SponsorsSection } from "@/components/landing/sections/sponsors";
-import { TestimonialSection } from "@/components/landing/sections/testimonial";
-import { useAuthContext } from "@/lib/providers/AuthProvider";
+import { ChapterDivider } from "@/components/landing/editorial/chapter-divider";
+import { ChapterFeed } from "@/components/landing/editorial/chapter-feed";
+import { ChapterLibrary } from "@/components/landing/editorial/chapter-library";
+import { ChapterChallenges } from "@/components/landing/editorial/chapter-challenges";
+import { ChapterDiscovery } from "@/components/landing/editorial/chapter-discovery";
+import { ChapterCommunity } from "@/components/landing/editorial/chapter-community";
+import { EditorialHero } from "@/components/landing/editorial/hero";
+import { EditorialFooter } from "@/components/landing/editorial/editorial-footer";
 
 export default function LandingPage() {
-  const { isAuthenticated, loading } = useAuthContext();
-  const router = useRouter();
-
-  // Redirect authenticated users to dashboard
-  useEffect(() => {
-    if (!loading && isAuthenticated) {
-      router.push("/dashboard");
-    }
-  }, [loading, isAuthenticated, router]);
-
-  // Don't render anything if authenticated (redirect will happen)
-  if (!loading && isAuthenticated) {
-    return null;
-  }
-
   return (
-    <>
-      <HeroSection />
-      {/* <SponsorsSection /> */}
-      <BenefitsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialSection />
-      {/* <PricingSection /> */}
-      <FAQSection />
-      <FooterSection />
-    </>
+    <main>
+      <EditorialHero />
+
+      <ChapterDivider chapter={1} total={5} title="Your Feed" id="ch-feed" />
+      <ChapterFeed />
+
+      <ChapterDivider chapter={2} total={5} title="Your Library" id="ch-library" />
+      <ChapterLibrary />
+
+      <ChapterDivider chapter={3} total={5} title="The Challenge" id="ch-challenges" />
+      <ChapterChallenges />
+
+      <ChapterDivider chapter={4} total={5} title="Discover" id="ch-discover" />
+      <ChapterDiscovery />
+
+      <ChapterDivider chapter={5} total={5} title="The Community" id="ch-community" />
+      <ChapterCommunity />
+
+      <EditorialFooter />
+    </main>
   );
 }
