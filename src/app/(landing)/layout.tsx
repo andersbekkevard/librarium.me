@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/landing/navbar";
+import { LandingNavbar } from "@/components/landing/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/lib/providers/AuthProvider";
 
@@ -12,11 +12,12 @@ export default function LandingLayout({
       attribute="class"
       defaultTheme="system"
       enableSystem
-      disableTransitionOnChange
     >
       <AuthProvider>
-        <Navbar />
-        {children}
+        <div className="landing-grain bg-landing-canvas transition-colors duration-500">
+          <LandingNavbar />
+          {children}
+        </div>
       </AuthProvider>
     </ThemeProvider>
   );

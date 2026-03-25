@@ -1,245 +1,95 @@
 "use client";
-import { BRAND_COLORS } from "@/lib/design/colors";
-import { useAuthContext } from "@/lib/providers/AuthProvider";
-import { BookIcon, ListIcon, CircleNotchIcon } from "@phosphor-icons/react";
-import { ArrowRightIcon, GithubLogoIcon } from "@phosphor-icons/react";
+
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { ToggleTheme } from "../toggle-theme";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-interface RouteProps {
-  href: string;
-  label: string;
-}
+export function LandingNavbar() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-const routeList: RouteProps[] = [
-  {
-    href: "#features",
-    label: "Features",
-  },
-  {
-    href: "#benefits",
-    label: "Benefits",
-  },
-  {
-    href: "#services",
-    label: "Services",
-  },
-  {
-    href: "#testimonials",
-    label: "Reviews",
-  },
-  {
-    href: "#faq",
-    label: "FAQ",
-  },
-];
+  useEffect(() => setMounted(true), []);
 
-export const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const router = useRouter();
-  const { isAuthenticated, signInWithGoogle } = useAuthContext();
-
-  const handleLogin = async () => {
-    if (isAuthenticated) {
-      router.push("/dashboard");
-      return;
-    }
-
-    setIsSigningIn(true);
-
-    try {
-      await signInWithGoogle();
-      router.push("/dashboard");
-    } catch (err) {
-      console.error("Login failed:", err);
-      setIsSigningIn(false);
-    }
-  };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="w-[90%] md:w-[80%] lg:w-[85%] lg:max-w-screen-xl top-5 mx-auto sticky border border-border/60 z-40 rounded-xl flex justify-between items-center px-4 py-3 bg-background/95 backdrop-blur-sm">
-      {/* Mobile Menu */}
-      <div className="flex items-center lg:hidden">
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={() => setIsOpen(!isOpen)}
-              className="mr-2 text-muted-foreground hover:text-foreground"
-              aria-label="Open menu"
-            >
-              <ListIcon className="h-5 w-5" weight="light" />
-            </Button>
-          </SheetTrigger>
-
-          <SheetContent
-            side="left"
-            className="flex flex-col justify-between bg-background border-border/60"
-          >
-            <div>
-              <SheetHeader className="mb-6">
-                <SheetTitle className="flex items-center">
-                  <Link
-                    href="/"
-                    className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
-                  >
-                    <div className="w-9 h-9 bg-brand-accent/20 rounded-xl flex items-center justify-center">
-                      <BookIcon
-                        className="h-5 w-5 text-brand-primary"
-                        weight="duotone"
-                      />
-                    </div>
-                    <span
-                      className="text-xl text-foreground tracking-tight"
-                      style={{ fontFamily: "var(--font-geist-sans)" }}
-                    >
-                      Librarium
-                    </span>
-                  </Link>
-                </SheetTitle>
-              </SheetHeader>
-
-              <nav className="flex flex-col gap-1">
-                {routeList.map(({ href, label }) => (
-                  <Button
-                    key={href}
-                    onClick={() => setIsOpen(false)}
-                    asChild
-                    variant="ghost"
-                    className="justify-start text-base font-normal text-muted-foreground hover:text-foreground"
-                  >
-                    <Link href={href}>{label}</Link>
-                  </Button>
-                ))}
-
-                <Separator className="my-3" />
-
-                <Button
-                  onClick={handleLogin}
-                  disabled={isSigningIn}
-                  className={`justify-center font-medium group/arrow ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover} text-white`}
-                >
-                  {isSigningIn ? (
-                    <>
-                      <CircleNotchIcon
-                        className="size-4 mr-2 animate-spin"
-                        weight="bold"
-                      />
-                      Signing in...
-                    </>
-                  ) : isAuthenticated ? (
-                    <>
-                      Go to Dashboard
-                      <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                    </>
-                  ) : (
-                    <>
-                      Login
-                      <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </Button>
-              </nav>
-            </div>
-
-            <SheetFooter className="flex-col sm:flex-col justify-start items-start">
-              <Separator className="mb-3" />
-              <ToggleTheme />
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
-      </div>
-
-      {/* Logo - Both Mobile & Desktop */}
+    <motion.nav
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.1 }}
+      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 py-4 transition-all duration-700 ${
+        scrolled
+          ? "bg-landing-canvas/90 backdrop-blur-xl"
+          : ""
+      }`}
+    >
       <Link
         href="/"
-        className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
+        className="font-display text-xl font-bold tracking-tight text-landing-text"
       >
-        <div className="w-9 h-9 bg-brand-accent/20 rounded-xl flex items-center justify-center shrink-0">
-          <BookIcon className="h-5 w-5 text-brand-primary" weight="duotone" />
-        </div>
-        <span
-          className="text-xl text-foreground tracking-tight hidden sm:block"
-          style={{ fontFamily: "var(--font-geist-sans)" }}
-        >
-          Librarium
-        </span>
+        Librarium
       </Link>
 
-      {/* Desktop Navigation */}
-      <nav className="hidden lg:flex items-center gap-1">
-        {routeList.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
+      <div className="flex items-center gap-3">
+        {mounted && (
+          <button
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+            className="p-2 text-landing-muted transition-colors duration-500 hover:text-landing-text"
+            aria-label="Toggle theme"
           >
-            {label}
-          </Link>
-        ))}
-      </nav>
+            {resolvedTheme === "dark" ? (
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+            ) : (
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
+        )}
 
-      {/* Right Side Actions */}
-      <div className="flex items-center gap-2">
-        {/* Desktop Login Button */}
-        <Button
-          onClick={handleLogin}
-          disabled={isSigningIn}
-          className={`hidden lg:flex h-9 px-5 font-medium group/arrow ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover} text-white`}
+        <Link
+          href="/dashboard"
+          className="rounded-full bg-landing-amber px-5 py-2.5 font-display text-sm font-semibold text-[#244633] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_24px_rgba(245,197,77,0.35)]"
         >
-          {isSigningIn ? (
-            <>
-              <CircleNotchIcon
-                className="size-4 mr-2 animate-spin"
-                weight="bold"
-              />
-              Signing in...
-            </>
-          ) : isAuthenticated ? (
-            <>
-              Dashboard
-              <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-            </>
-          ) : (
-            <>
-              Login
-              <ArrowRightIcon className="size-4 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-            </>
-          )}
-        </Button>
-
-        <ToggleTheme />
-
-        <Button
-          asChild
-          size="icon-sm"
-          variant="ghost"
-          aria-label="View on GitHub"
-          className="hidden lg:flex text-muted-foreground hover:text-foreground"
-        >
-          <Link
-            aria-label="View on GitHub"
-            href="https://github.com/andersbekkevard/librarium-app"
-            target="_blank"
-          >
-            <GithubLogoIcon className="size-4" />
-          </Link>
-        </Button>
+          Get started
+        </Link>
       </div>
-    </header>
+    </motion.nav>
   );
-};
+}

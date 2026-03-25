@@ -1,45 +1,52 @@
 "use client";
 
-import { BenefitsSection } from "@/components/landing/sections/benefits";
-import { FAQSection } from "@/components/landing/sections/faq";
-import { FeaturesSection } from "@/components/landing/sections/features";
-import { FooterSection } from "@/components/landing/sections/footer";
+import { FinalCTASection } from "@/components/landing/sections/final-cta";
 import { HeroSection } from "@/components/landing/sections/hero";
+import { StatementSection } from "@/components/landing/sections/statement";
+import { StatsSection } from "@/components/landing/sections/stats";
+import { TestimonialsSection } from "@/components/landing/sections/testimonials";
+import { SocialFeedMockup } from "@/components/landing/mockups/social-feed";
+import { LibraryViewMockup } from "@/components/landing/mockups/library-view";
+import { ChallengesMockup } from "@/components/landing/mockups/challenges";
+import { useAuthContext } from "@/lib/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-// import { PricingSection } from "@/components/landing/sections/pricing";
-import { ServicesSection } from "@/components/landing/sections/services";
-// import { SponsorsSection } from "@/components/landing/sections/sponsors";
-import { TestimonialSection } from "@/components/landing/sections/testimonial";
-import { useAuthContext } from "@/lib/providers/AuthProvider";
 
 export default function LandingPage() {
   const { isAuthenticated, loading } = useAuthContext();
   const router = useRouter();
 
-  // Redirect authenticated users to dashboard
   useEffect(() => {
     if (!loading && isAuthenticated) {
       router.push("/dashboard");
     }
   }, [loading, isAuthenticated, router]);
 
-  // Don't render anything if authenticated (redirect will happen)
   if (!loading && isAuthenticated) {
     return null;
   }
 
   return (
-    <>
+    <main className="overflow-x-hidden">
       <HeroSection />
-      {/* <SponsorsSection /> */}
-      <BenefitsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialSection />
-      {/* <PricingSection /> */}
-      <FAQSection />
-      <FooterSection />
-    </>
+
+      <StatementSection headline="See what your friends are reading" direction="right">
+        <SocialFeedMockup />
+      </StatementSection>
+
+      <StatementSection headline="Build your library" direction="left">
+        <LibraryViewMockup />
+      </StatementSection>
+
+      <StatsSection />
+
+      <StatementSection headline="Join the challenge" direction="right">
+        <ChallengesMockup />
+      </StatementSection>
+
+      <TestimonialsSection />
+
+      <FinalCTASection />
+    </main>
   );
 }

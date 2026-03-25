@@ -9,6 +9,13 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-serif);
+  --font-display: var(--font-instrument);
+  --color-landing-canvas: var(--landing-canvas);
+  --color-landing-text: var(--landing-text);
+  --color-landing-amber: var(--landing-amber);
+  --color-landing-sage: var(--landing-sage);
+  --color-landing-card: var(--landing-card);
+  --color-landing-muted: var(--landing-muted);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -56,7 +63,15 @@
 
 :root {
   --radius: 0.75rem;
-  
+
+  /* Landing - Kinetic Type variant */
+  --landing-canvas: #FFF8F0;
+  --landing-text: #244633;
+  --landing-amber: #F5C54D;
+  --landing-sage: #789D72;
+  --landing-card: #FFFFFF;
+  --landing-muted: #9CA89A;
+
   /* Eden Light Mode - Warm, elegant library aesthetic */
   --background: oklch(0.995 0.002 100); /* Warm white */
   --foreground: oklch(0.25 0.02 50); /* Warm dark charcoal #3C3B39 */
@@ -129,6 +144,14 @@
 }
 
 .dark {
+  /* Landing - Kinetic Type variant (dark) */
+  --landing-canvas: #0C1210;
+  --landing-text: #FFF8F0;
+  --landing-amber: #F5C54D;
+  --landing-sage: #789D72;
+  --landing-card: #182420;
+  --landing-muted: #6B7A6F;
+
   /* Eden Dark Mode - Notion/Cursor inspired with subtle green warmth */
   --background: oklch(0.16 0.005 155); /* Soft dark - not pure black */
   --foreground: oklch(0.93 0.005 100); /* Warm off-white text */
@@ -304,6 +327,19 @@
     .container {
       max-width: 1400px;
     }
+  }
+
+  /* Landing - grain texture overlay */
+  .landing-grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
   }
 
   /* Landing page animations */

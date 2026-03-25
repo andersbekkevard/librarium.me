@@ -2,7 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { cn } from "@/lib/utils/utils";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,8 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Eden-style elegant serif for headings and display text
-// Playfair Display has substantial weight with editorial elegance
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 const playfairDisplay = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
@@ -48,6 +52,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans",
           geistSans.variable,
           geistMono.variable,
+          instrumentSans.variable,
           playfairDisplay.variable,
           "antialiased",
         )}

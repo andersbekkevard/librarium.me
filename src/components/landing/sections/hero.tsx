@@ -1,176 +1,135 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { BRAND_COLORS, STATUS_COLORS } from "@/lib/design/colors";
-import { useAuthContext } from "@/lib/providers/AuthProvider";
-import { ArrowRightIcon, CircleNotchIcon } from "@phosphor-icons/react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
+
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef } from "react";
 
-export const HeroSection = () => {
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const router = useRouter();
-  const { loading, isAuthenticated, signInWithGoogle } = useAuthContext();
-  const { theme } = useTheme();
+const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-  const handleGetStarted = async () => {
-    if (isAuthenticated) {
-      // User is already authenticated, redirect to dashboard
-      router.push("/dashboard");
-      return;
-    }
+const wordVariants = {
+  hidden: { opacity: 0, y: 60, filter: "blur(10px)" },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 1.1,
+      delay: 0.5 + i * 0.2,
+      ease: EASE_OUT,
+    },
+  }),
+};
 
-    setIsSigningIn(true);
-    setAuthError(null);
+export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
-    try {
-      await signInWithGoogle();
-      // Show success message briefly before redirecting
-      setShowSuccess(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
-    } catch (err) {
-      setAuthError("Failed to sign in");
-      setIsSigningIn(false);
-    }
-  };
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const glowScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.5]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-  // Show loading state while checking auth
-  if (loading) {
-    return (
-      <section className="container w-full">
-        <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-          <div className="flex items-center justify-center">
-            <CircleNotchIcon
-              className={`h-8 w-8 animate-spin ${BRAND_COLORS.primary.text}`}
-              weight="bold"
-            />
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const words = ["Your", "reading,", "amplified."];
 
   return (
-    <section className="container w-full">
-      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-        <div className="text-center space-y-8">
-          <Badge variant="outline" className="text-sm py-2 animate-fade-in-up">
-            <span className={`mr-2 ${BRAND_COLORS.primary.text}`}>
-              <Badge className={BRAND_COLORS.primary.bg}>New</Badge>
-            </span>
-            <span>AI-powered reading assistant is here!</span>
-          </Badge>
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6"
+    >
+      {/* Ambient radial glow behind headline */}
+      <motion.div
+        style={{ scale: glowScale, opacity: glowOpacity }}
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, delay: 0.8, ease: EASE_OUT }}
+          className="h-[50vh] w-[70vw] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,197,77,0.12)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(245,197,77,0.08)_0%,transparent_70%)]"
+        />
+      </motion.div>
 
-          <div className="max-w-screen-md mx-auto text-center animate-fade-in-up delay-200">
-            <h1 className="text-5xl md:text-[4rem] tracking-tight">
-              Track Your
-              <span
-                className={`text-transparent px-2 bg-gradient-to-r ${BRAND_COLORS.accent.gradientFrom} ${BRAND_COLORS.primary.gradientTo} bg-clip-text`}
-              >
-                Reading
-              </span>
-              Journey
-            </h1>
-          </div>
-
-          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground animate-fade-in-up delay-300">
-            Build your personal library, track reading progress, and discover
-            new books. Start with the essentials - more features coming soon.
-          </p>
-
-          <div className="space-y-4 md:space-y-0 md:space-x-4 animate-fade-in-up delay-500">
-            <Button
-              onClick={handleGetStarted}
-              disabled={isSigningIn}
-              aria-label={
-                isAuthenticated
-                  ? "Go to your dashboard"
-                  : "Sign in with Google to start reading"
-              }
-              className={`w-5/6 md:w-1/4 font-bold group/arrow hover-scale ${BRAND_COLORS.primary.bg} ${BRAND_COLORS.primary.bgHover}`}
+      <motion.div
+        style={{ y: headlineY, opacity: headlineOpacity }}
+        className="relative z-10 max-w-[90rem] text-center"
+      >
+        <h1
+          className="font-display font-bold leading-[0.85] tracking-[-0.05em] text-landing-text"
+          style={{
+            fontSize: "clamp(3.5rem, 14vw, 12rem)",
+          }}
+        >
+          {words.map((word, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={wordVariants}
+              initial="hidden"
+              animate="visible"
+              className="mr-[0.2em] inline-block last:mr-0"
             >
-              {showSuccess ? (
-                <>✓ Welcome! Redirecting...</>
-              ) : isSigningIn ? (
-                <>
-                  <CircleNotchIcon className="size-4 mr-2 animate-spin" weight="bold" />
-                  Signing in...
-                </>
-              ) : isAuthenticated ? (
-                <>
-                  Go to Dashboard
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                </>
-              ) : (
-                <>
-                  Start Reading
-                  <ArrowRightIcon className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-                </>
-              )}
-            </Button>
+              {word}
+            </motion.span>
+          ))}
+        </h1>
 
-            <Button
-              asChild
-              variant="secondary"
-              className="w-5/6 md:w-1/4 font-bold hover-scale"
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1.4, ease: EASE_OUT }}
+          className="mx-auto mt-10 max-w-lg text-base text-landing-sage md:text-lg"
+        >
+          Track your books. See what friends are reading. Build a reading life
+          worth sharing.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1.7, ease: EASE_OUT }}
+          className="mt-12"
+        >
+          <Link
+            href="/dashboard"
+            className="group inline-flex items-center gap-2 rounded-full bg-landing-amber px-10 py-4.5 font-display text-lg font-bold text-[#244633] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_rgba(245,197,77,0.4)]"
+          >
+            Start tracking — it&apos;s free
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-300 group-hover:translate-x-1"
             >
-              <Link href="/#features">Explore Features</Link>
-            </Button>
-          </div>
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </Link>
+        </motion.div>
+      </motion.div>
 
-          {/* Error Message */}
-          {authError && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.error.bgLight} border ${STATUS_COLORS.error.borderLight} rounded-lg animate-slide-in-down`}
-              role="alert"
-            >
-              <p className={`text-sm ${STATUS_COLORS.error.text} text-center`}>
-                {authError}
-              </p>
-            </div>
-          )}
-
-          {/* Success Message */}
-          {showSuccess && (
-            <div
-              className={`mt-4 p-3 ${STATUS_COLORS.success.bgLight} ${STATUS_COLORS.success.borderLight} rounded-lg animate-slide-in-down`}
-              role="status"
-            >
-              <p
-                className={`text-sm ${STATUS_COLORS.success.text} text-center`}
-              >
-                ✓ Successfully signed in! Welcome to Librarium.
-              </p>
-            </div>
-          )}
-        </div>
-
-        <div className="relative group mt-24 animate-scale-in delay-700">
-          <div
-            className={`absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 ${BRAND_COLORS.primary.bgBlur} rounded-full blur-3xl`}
-          ></div>
-          <Image
-            width={1200}
-            height={1200}
-            className={`w-full md:w-[1200px] mx-auto rounded-lg relative border border-t-2 border-secondary ${BRAND_COLORS.primary.borderTop} hover-lift`}
-            src={
-              theme === "light"
-                ? "/images/hero-image-light-2.jpg"
-                : "/images/hero-image-dark-2.jpg"
-            }
-            alt="dashboard"
-          />
-
-          <div className="absolute bottom-0 left-0 w-full h-32 md:h-40 bg-gradient-to-b from-background/0 via-background/90 to-background rounded-lg"></div>
-        </div>
-      </div>
+      {/* Scroll prompt — typographic, not a generic pill */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.5, duration: 1.2 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+      >
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="block font-display text-xs font-semibold uppercase tracking-[0.25em] text-landing-sage/50"
+        >
+          Scroll
+        </motion.span>
+      </motion.div>
     </section>
   );
-};
+}
