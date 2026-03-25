@@ -47,20 +47,21 @@ const feedItems = [
 
 export function ChapterFeed() {
   return (
-    <section className="py-20 md:py-32 px-6 md:px-8">
+    <section className="py-24 md:py-36 px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 md:gap-20 items-start">
           {/* Left: Editorial copy */}
           <div className="md:sticky md:top-32">
             <ScrollReveal>
-              <h2 className="font-heading font-bold text-4xl md:text-5xl leading-tight tracking-tight text-foreground mb-6">
-                Reading is better
+              <h2 className="font-heading font-bold text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tight text-foreground mb-8">
+                Reading is
                 <br />
-                <span className="text-brand-primary dark:text-brand-accent">together.</span>
+                better{" "}
+                <span className="text-brand-primary dark:text-brand-accent italic">together.</span>
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-md">
                 See what friends are reading in real-time. Celebrate their
                 milestones, share recommendations, and find your next great read
                 through the people you trust most.

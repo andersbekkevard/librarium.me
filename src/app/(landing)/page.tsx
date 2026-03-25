@@ -20,8 +20,10 @@ export default function LandingPage() {
       <ChapterDivider chapter={2} total={5} title="Your Library" id="ch-library" />
       <ChapterLibrary />
 
-      <ChapterDivider chapter={3} total={5} title="The Challenge" id="ch-challenges" />
-      <ChapterChallenges />
+      {/* Ch 3 is full-bleed dark — has its own built-in marker */}
+      <div id="ch-challenges">
+        <ChapterChallenges />
+      </div>
 
       <ChapterDivider chapter={4} total={5} title="Discover" id="ch-discover" />
       <ChapterDiscovery />

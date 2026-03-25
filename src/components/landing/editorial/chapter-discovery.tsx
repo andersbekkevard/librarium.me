@@ -50,20 +50,20 @@ export function ChapterDiscovery() {
   const genreInView = useInView(genreRef, { once: true, margin: "-40px" });
 
   return (
-    <section className="py-20 md:py-32 px-6 md:px-8">
+    <section className="py-24 md:py-36 px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 md:gap-20 items-start">
           {/* Left: Recommendations */}
           <div>
             <ScrollReveal>
-              <h2 className="font-heading font-bold text-4xl md:text-5xl leading-tight tracking-tight text-foreground mb-6">
+              <h2 className="font-heading font-bold text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tight text-foreground mb-8">
                 Find your next
                 <br />
-                <span className="text-brand-primary dark:text-brand-accent">obsession.</span>
+                <span className="text-brand-primary dark:text-brand-accent italic">obsession.</span>
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-12">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-12 max-w-md">
                 Personalized recommendations powered by what you and your friends
                 love. Not algorithms — real taste, real people, real books.
               </p>
