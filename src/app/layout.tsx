@@ -1,36 +1,29 @@
-import { ThemeProvider } from "@/components/theme-provider";
-import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { cn } from "@/lib/utils/utils";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-// Eden-style elegant serif for headings and display text
-// Playfair Display has substantial weight with editorial elegance
-const playfairDisplay = Playfair_Display({
-  variable: "--font-serif",
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "Librarium - Your Personal Book Collection",
+  title: "Librarium — Reading is better together",
   description:
-    "Track your reading progress and organize your personal library with Librarium",
-  verification: {
-    google: "VUAQN43dnQdrEpyAgK0L9-GeyQHXydSUfI2Zmw9nD1Q",
-  },
+    "Track your reading, share with friends, and build your reading identity. A social book tracker for people who love books.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -45,28 +38,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans",
-          geistSans.variable,
-          geistMono.variable,
-          playfairDisplay.variable,
-          "antialiased",
+          "min-h-screen bg-background font-sans antialiased grain",
+          inter.variable,
+          plusJakarta.variable,
+          caveat.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ErrorBoundary
-            context={{
-              component: "RootLayout",
-              action: "render",
-            }}
-          >
-            {children}
-          </ErrorBoundary>
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
