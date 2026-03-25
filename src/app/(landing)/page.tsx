@@ -1,45 +1,27 @@
 "use client";
 
-import { BenefitsSection } from "@/components/landing/sections/benefits";
-import { FAQSection } from "@/components/landing/sections/faq";
-import { FeaturesSection } from "@/components/landing/sections/features";
-import { FooterSection } from "@/components/landing/sections/footer";
-import { HeroSection } from "@/components/landing/sections/hero";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-// import { PricingSection } from "@/components/landing/sections/pricing";
-import { ServicesSection } from "@/components/landing/sections/services";
-// import { SponsorsSection } from "@/components/landing/sections/sponsors";
-import { TestimonialSection } from "@/components/landing/sections/testimonial";
-import { useAuthContext } from "@/lib/providers/AuthProvider";
+import { Navbar } from "@/components/landing/warm-bento/navbar";
+import { HeroSection } from "@/components/landing/warm-bento/hero";
+import { BentoSectionOne } from "@/components/landing/warm-bento/bento-section-one";
+import { BentoSectionTwo } from "@/components/landing/warm-bento/bento-section-two";
+import { SocialProofStrip } from "@/components/landing/warm-bento/social-proof";
+import { TestimonialsSection } from "@/components/landing/warm-bento/testimonials";
+import { FinalCTA } from "@/components/landing/warm-bento/final-cta";
+import { Footer } from "@/components/landing/warm-bento/footer";
 
 export default function LandingPage() {
-  const { isAuthenticated, loading } = useAuthContext();
-  const router = useRouter();
-
-  // Redirect authenticated users to dashboard
-  useEffect(() => {
-    if (!loading && isAuthenticated) {
-      router.push("/dashboard");
-    }
-  }, [loading, isAuthenticated, router]);
-
-  // Don't render anything if authenticated (redirect will happen)
-  if (!loading && isAuthenticated) {
-    return null;
-  }
-
   return (
     <>
-      <HeroSection />
-      {/* <SponsorsSection /> */}
-      <BenefitsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialSection />
-      {/* <PricingSection /> */}
-      <FAQSection />
-      <FooterSection />
+      <Navbar />
+      <main>
+        <HeroSection />
+        <BentoSectionOne />
+        <BentoSectionTwo />
+        <SocialProofStrip />
+        <TestimonialsSection />
+        <FinalCTA />
+      </main>
+      <Footer />
     </>
   );
 }
