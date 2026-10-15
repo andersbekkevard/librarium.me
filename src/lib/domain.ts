@@ -50,9 +50,9 @@ export function editProblems(b: Partial<Book>, now = new Date()): string[] {
   }
   const isbn = b.isbn?.replace(/[-\s]/g, "");
   if (isbn) {
-    if (isbn.length === 10) !/^\d{9}[\dX]$/.test(isbn) && errors.push("Invalid ISBN-10 format");
-    else if (isbn.length === 13) !/^\d{13}$/.test(isbn) && errors.push("Invalid ISBN-13 format");
-    else errors.push("ISBN must be 10 or 13 digits long");
+    const format = { 10: /^\d{9}[\dX]$/, 13: /^\d{13}$/ }[isbn.length];
+    if (!format) errors.push("ISBN must be 10 or 13 digits long");
+    else if (!format.test(isbn)) errors.push(`Invalid ISBN-${isbn.length} format`);
   }
   if (b.coverImage?.trim()) {
     if (!URL.canParse(b.coverImage)) errors.push("Invalid URL format");

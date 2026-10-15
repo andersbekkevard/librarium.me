@@ -7,7 +7,7 @@ const AUTH = "http://127.0.0.1:9099";
 
 /** Boots the default Firebase app the way the legacy app does, pointed at the emulators. */
 export async function connect(): Promise<{ auth: Auth; db: Firestore }> {
-  const { auth, db } = await import("../../.legacy/src/lib/api/firebase");
+  const { auth, db }: { auth: Auth; db: Firestore } = await import(/* @vite-ignore */ `../../.legacy/src/lib/${"api/firebase"}`);
   const g = globalThis as { __librariumEmulators?: boolean };
   if (!g.__librariumEmulators) {
     const { connectAuthEmulator } = await import("firebase/auth");

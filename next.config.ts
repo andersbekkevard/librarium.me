@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    domains: ["books.google.com", "books.googleusercontent.com", "lh3.googleusercontent.com"],
-  },
+  // The oracle keeps the pre-modernization code in .legacy/; it is not part of the app.
+  outputFileTracingExcludes: { "*": [".legacy/**"] },
 };
 
 export default nextConfig;

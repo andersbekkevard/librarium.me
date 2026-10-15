@@ -2,12 +2,16 @@
 import type { User } from "firebase/auth";
 import type { Derived, Driver, LibraryQuery, ManualForm, PlainBook, ReadingState, ScanMeta } from "./driver";
 
+/** Legacy modules are untyped from here on: their `@/` imports only resolve inside the oracle's Vite runtime. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const legacy = (path: string): Promise<any> => import(/* @vite-ignore */ `../../.legacy/src/lib/${path}`);
+
 export async function legacyDriver(user: User): Promise<Driver> {
-  const { bookService } = await import("../../.legacy/src/lib/services/BookService");
-  const { eventService } = await import("../../.legacy/src/lib/services/EventService");
-  const { userService } = await import("../../.legacy/src/lib/services/UserService");
-  const { messageService } = await import("../../.legacy/src/lib/services/MessageService");
-  const { convertGoogleBookToBook, convertManualEntryToBook } = await import("../../.legacy/src/lib/books/book-utils");
+  const { bookService } = await legacy("services/BookService");
+  const { eventService } = await legacy("services/EventService");
+  const { userService } = await legacy("services/UserService");
+  const { messageService } = await legacy("services/MessageService");
+  const { convertGoogleBookToBook, convertManualEntryToBook } = await legacy("books/book-utils");
   const uid = user.uid;
 
   // Legacy services report failures as values; the oracle surfaces them as thrown messages.
@@ -18,7 +22,8 @@ export async function legacyDriver(user: User): Promise<Driver> {
   };
   const book = async (id: string) => (await bookService.getBook(uid, id)).data;
   const add = async (b: Record<string, unknown>) => {
-    const { id: _ignored, ...data } = b;
+    const data = { ...b };
+    delete data.id;
     return must<string>(bookService.addBook(uid, data));
   };
 
