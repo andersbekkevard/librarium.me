@@ -1,90 +1,13 @@
 ---
 alwaysApply: false
 ---
-### Key Architecture Principles
+### Architecture
 
-1. **Service Layer Architecture**: Clean separation between presentation, business logic, and data access
-2. **Firebase-Native Approach**: Direct Firebase SDK integration with real-time Firestore listeners
-3. **TypeScript-First**: Comprehensive type safety throughout the entire codebase
-4. **Repository Pattern**: Abstraction layer for all data operations
-5. **Component Composition**: Reusable UI components following Notion-inspired minimal design
-6. **Centralized Color System**: All colors linked to predefined brand colors in `src/lib/colors.ts`
-7. **User-Centric Data Structure**: Firestore collections organized under user documents for security
+Read `docs/ARCHITECTURE.md`. In short:
 
-## Architecture Layers
-
-### 🎨 Presentation Layer
-- **Components**: React components (`.tsx` files in `/components`)
-- **Pages**: Next.js page components (`.tsx` files in `/app`)
-- **Providers**: React context providers (`.tsx` files in `/lib/providers`)
-
-### 🧠 Service Layer
-- **Services**: Business logic classes (`.ts` files in `/lib/services`)
-- **AuthService**: Authentication operations
-- **UserService**: User profile and statistics management
-- **BookService**: Book operations and reading state management
-- **EventService**: Event logging and activity tracking
-
-### 💾 Repository Layer
-- **Repositories**: Data access classes (`.ts` files in `/lib/repositories`)
-- **FirebaseBookRepository**: Book data operations
-- **FirebaseUserRepository**: User profile data operations
-- **FirebaseEventRepository**: Event logging operations
-
-### 🔌 External Layer
-- **Firebase**: Firestore, Auth, Storage
-- **Google Books API**: Book metadata fetching
-
-## Strict Calling Rules
-
-### ✅ ALLOWED CALLS
-
-1. **Components → Providers ONLY**
-   ```typescript
-   // ✅ Components can ONLY call Provider hooks
-   const BookCard = () => {
-     const { updateBookProgress } = useBooksContext(); // ✅ ALLOWED
-     const { user } = useAuthContext(); // ✅ ALLOWED
-   };
-   ```
-
-2. **Providers → Services ONLY**
-   ```typescript
-   // ✅ Providers can call Service methods
-   export const BooksProvider = () => {
-     const updateBookProgress = async (bookId: string, currentPage: number) => {
-       const result = await bookService.updateBookProgress(userId, bookId, currentPage); // ✅ ALLOWED
-     };
-   };
-   ```
-
-3. **Services → Repositories ONLY**
-   ```typescript
-   // ✅ Services can call Repository methods
-   export class BookService {
-     async updateBookProgress(userId: string, bookId: string, currentPage: number) {
-       const book = await this.bookRepository.getBook(userId, bookId); // ✅ ALLOWED
-       await this.eventRepository.logEvent(userId, eventData); // ✅ ALLOWED
-     }
-   }
-   ```
-
-4. **Repositories → External Services ONLY**
-   ```typescript
-   // ✅ Repositories can call Firebase/external APIs
-   export class FirebaseBookRepository {
-     async getBook(userId: string, bookId: string) {
-       const bookRef = doc(db, `users/${userId}/books/${bookId}`); // ✅ ALLOWED
-       const bookDoc = await getDoc(bookRef); // ✅ ALLOWED
-     }
-   }
-   ```
-
-### ❌ FORBIDDEN CALLS
-
-1. **Components → Services (NEVER)**
-2. **Components → Repositories (NEVER)**
-3. **Components → External Services (NEVER)**
-4. **Providers → Repositories (NEVER)**
-5. **Repositories → Services (NEVER)**
-6. **Repositories → Providers (NEVER)**
+- **Pure rules** live in `src/lib/domain.ts` (validation, state machine, queries) and `src/lib/insights.ts` (stats and charts). No Firebase or React in them.
+- **Writes** are functions in `src/lib/library.ts`. Each validates, then commits the book change and its audit events in one `writeBatch`, and throws an `Error` with a reader-facing message on failure.
+- **Components** get data and commands from `useLibrary()` (`src/lib/store.tsx`), never from Firestore directly. Commands are listed in `COMMANDS` and receive the uid automatically.
+- Show results with `attempt(promise, "Success text")` from `src/components/toast.tsx`.
+- Derived data (activity, comments, reviews, stats) is computed from the live `books` and `events`; never cache it in state.
+- The Firestore document shapes are a contract with live data (`analysis/librarium/DATA_OBJECTS.md`); add fields, don't rename them.

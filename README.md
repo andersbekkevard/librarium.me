@@ -1,6 +1,6 @@
 # Librarium
 
-A modern, production-ready personal book collection management app with real-time synchronization and reading analytics.
+A personal reading companion: track the books you own and want, your progress, ratings, comments and reviews, and see your reading life in charts and a daily AI-written note.
 
 ### Landing page
 
@@ -10,78 +10,43 @@ A modern, production-ready personal book collection management app with real-tim
 
 ![Dashboard](docs/images/dashboard.png "Dashboard")
 
-## Overview
+## Features
 
-Librarium is a personal book collection management app built with modern web technologies. It provides a seamless reading experience with real-time data synchronization, detailed analytics, and a clean, Notion-inspired interface. The application follows service layer architecture principles and production-ready error handling.
+- **Google sign-in** with an automatic profile and a welcome book on first visit
+- **Library** of owned and wishlist books, with search, status/ownership/genre filters, sorting and grid or list views (filters live in the URL)
+- **Reading lifecycle** `not_started → in_progress → finished`, page progress with automatic start and finish, 1–5 star ratings
+- **Comments and reviews** tied to the page and state you were at
+- **Activity history**: every action is an append-only event, filterable by type, book and date
+- **Statistics**: streak, pages read per month by genre, genre distribution, daily pace
+- **Add books** by Google Books search, manual entry or barcode scan (camera with torch, or an uploaded photo)
+- **Reading companion**: a daily Gemini message based on your stats and recent activity, with offline fallbacks
+- Light and dark themes, responsive layout, quick search (⌘K)
 
-## Production-Ready Features
+## Stack
 
-Librarium is fully production-ready with 15+ major features implemented:
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS 4 · Firebase 12 (Auth, Firestore, AI Logic/Gemini) · Recharts · Radix Dialog · Phosphor icons
 
-### Core Functionality
-- **Firebase Authentication**: Complete Google OAuth with automatic profile creation
-- **Personal Library Management**: Full CRUD operations with real-time synchronization
-- **Reading State Management**: Enforced state machine (not_started → in_progress → finished)
-- **Progress Tracking**: Page-by-page reading progress with percentage calculations
-- **Google Books API Integration**: Automated book metadata fetching and search
-- **Book Rating System**: 1-5 star ratings with visual display
-- **Advanced Search & Discovery**: Multi-criteria filtering and sorting capabilities
+## Getting started
 
-### Enhanced Features
-- **Comment System**: Contextual comments with page numbers and reading state
-- **Review System**: Comprehensive book reviews with timestamps
-- **Event Logging & Activity Tracking**: Complete timeline of all reading activities
-- **Statistics Dashboard**: Real-time reading insights with visual stat cards
-- **Advanced Analytics**: Genre-based charts and 12-month activity visualization
-- **AI Reading Motivation**: Each day, Librarium generates a personalized, encouraging message using Google Gemini AI. The message is tailored to your reading stats, recent activity, and book preferences, and is designed to motivate and celebrate your reading journey. If the AI is unavailable, a thoughtful fallback message is provided. All messages are stored securely and refreshed every 24 hours.
-- **Mobile-First Design**: Fully responsive with touch-optimized interactions
-- **Error Handling**: Comprehensive error boundaries and recovery actions
-
-### Architecture
-- **Service Layer Architecture**: Clean separation with repository pattern
-- **Real-time Updates**: Firebase listeners for live data synchronization
-- **Type Safety**: Comprehensive TypeScript with centralized models
-- **Testing**: Jest test suite with 70% coverage threshold
-
-## Technology Stack
-
-### Frontend
-- **Next.js 15** (App Router, React 19, TypeScript)
-- **Tailwind CSS 4** + **shadcn/ui** (Radix UI primitives)
-- **React 19** with functional components and hooks
-- **TypeScript** with strict mode and comprehensive typing
-- **Recharts** for advanced analytics and visualizations
-- **Lucide React** for consistent iconography
-
-### Backend & Database
-- **Firebase Auth** (Google OAuth 2.0 with session management)
-- **Firestore** (Real-time NoSQL database with user-centric security)
-- **Google Books API** (Automatic metadata fetching and search)
-
-### Development & Testing
-- **Jest** + **React Testing Library** (70% coverage threshold)
-- **ESLint** (next/core-web-vitals, next/typescript configurations)
-- **Turbopack** (Fast development bundler for Next.js 15)
-- **Firebase Emulator** (Local development and testing)
-
-## Architecture
-
-Librarium implements **strict service layer architecture** with enforced separation of concerns:
-
-```
-Components → Providers → Services → Repositories → External APIs
+```bash
+npm install
+cp .env.example .env.local   # fill in your Firebase project and Google Books key
+npm run dev
 ```
 
-### Architectural Layers (STRICT RULES)
-- **Components** (`/src/components`, `/src/app`) - Call ONLY Provider hooks
-- **Providers** (`/src/lib/providers`) - Call ONLY Service methods  
-- **Services** (`/src/lib/services`) - Call ONLY Repository methods + other Services
-- **Repositories** (`/src/lib/repositories`) - Call ONLY external APIs (Firebase)
+## Scripts
 
-### Key Design Patterns
-- **Firebase-Native Approach**: Real-time listeners with optimistic updates
-- **Event-Driven Architecture**: All user actions logged as BookEvents
-- **TypeScript-First Development**: Centralized models with validation functions
-- **Provider Context Pattern**: Specialized contexts for auth, users, books, and events
-- **Repository Pattern**: Data access abstraction with standardized error handling
-- **AI Motivation System**: Personalized motivational messages are generated daily using Google Gemini AI, based on user reading data. The system follows the strict service layer architecture: UI components request messages from a Provider, which calls a Service that orchestrates AI prompt generation and message storage via the Repository layer and Firebase AI.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` / `build` / `start` | Next.js |
+| `npm run typecheck`, `npm run lint` | `tsc --noEmit`, ESLint |
+| `npm test` | unit and property-based tests (Vitest) |
+| `npm run test:oracle` | runs the legacy implementation and the current one side by side against the Firebase emulators and compares every document they write (needs Java 21) |
+| `npm run test:e2e` | Playwright against a production build and the emulators, desktop and mobile; Google APIs are stubbed |
+| `npm run emulators` | Auth + Firestore emulators (`NEXT_PUBLIC_FIREBASE_EMULATORS=true` points the app at them) |
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Firestore schema](analysis/librarium/DATA_OBJECTS.md)
+- [Business rules](analysis/librarium/BUSINESS_RULES.md) and the [modernization notes](analysis/librarium/TRANSFORMATION_NOTES.md), which include behaviour changes from the previous version

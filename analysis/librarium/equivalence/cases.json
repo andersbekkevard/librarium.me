@@ -1,0 +1,140 @@
+{
+  "system": "librarium",
+  "legacy": {
+    "label": "Next 15 / Firebase 11 services+repositories (git b6304a9)",
+    "command": "npm run test:oracle (tests/oracle/legacy-driver.ts)"
+  },
+  "new": {
+    "label": "Next 16 / Firebase 12 domain + batched commands",
+    "command": "npm run test:oracle (tests/oracle/modern-driver.ts)"
+  },
+  "cases": [
+    {
+      "id": "S01",
+      "title": "First sign-in: profile and welcome book",
+      "legacy": "legacy/S01.json",
+      "new": "new/S01.json"
+    },
+    {
+      "id": "S02",
+      "title": "Adding books from Google Books",
+      "legacy": "legacy/S02.json",
+      "new": "new/S02.json"
+    },
+    {
+      "id": "S03",
+      "title": "Manual entry",
+      "legacy": "legacy/S03.json",
+      "new": "new/S03.json"
+    },
+    {
+      "id": "S04",
+      "title": "Reading lifecycle",
+      "legacy": "legacy/S04.json",
+      "new": "new/S04.json",
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md)."
+    },
+    {
+      "id": "S04-strict",
+      "title": "Reading lifecycle \u2014 with the approved deviation fields omitted on both sides",
+      "legacy": "strict/legacy/S04.json",
+      "new": "strict/new/S04.json",
+      "note": "Must be byte-identical: proves the raw difference is only D3."
+    },
+    {
+      "id": "S05",
+      "title": "Guards and validation messages",
+      "legacy": "legacy/S05.json",
+      "new": "new/S05.json",
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md)."
+    },
+    {
+      "id": "S05-strict",
+      "title": "Guards and validation messages \u2014 with the approved deviation fields omitted on both sides",
+      "legacy": "strict/legacy/S05.json",
+      "new": "strict/new/S05.json",
+      "note": "Must be byte-identical: proves the raw difference is only D3."
+    },
+    {
+      "id": "S06",
+      "title": "Comments",
+      "legacy": "legacy/S06.json",
+      "new": "new/S06.json",
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md)."
+    },
+    {
+      "id": "S06-strict",
+      "title": "Comments \u2014 with the approved deviation fields omitted on both sides",
+      "legacy": "strict/legacy/S06.json",
+      "new": "strict/new/S06.json",
+      "note": "Must be byte-identical: proves the raw difference is only D3."
+    },
+    {
+      "id": "S07",
+      "title": "Reviews",
+      "legacy": "legacy/S07.json",
+      "new": "new/S07.json",
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D5: The duplicate-review message no longer tells readers to 'Use updateReview to modify it.' Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md)."
+    },
+    {
+      "id": "S07-strict",
+      "title": "Reviews \u2014 with the approved deviation fields omitted on both sides",
+      "legacy": "strict/legacy/S07.json",
+      "new": "strict/new/S07.json",
+      "note": "Must be byte-identical: proves the raw difference is only D3, D5."
+    },
+    {
+      "id": "S08",
+      "title": "Manual edits",
+      "legacy": "legacy/S08.json",
+      "new": "new/S08.json",
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D8: A manual edit that marks a book finished records finishedAt, so it counts toward this month/year. Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md)."
+    },
+    {
+      "id": "S08-strict",
+      "title": "Manual edits \u2014 with the approved deviation fields omitted on both sides",
+      "legacy": "strict/legacy/S08.json",
+      "new": "strict/new/S08.json",
+      "note": "Must be byte-identical: proves the raw difference is only D3, D8."
+    },
+    {
+      "id": "S09",
+      "title": "Deleting books",
+      "legacy": "legacy/S09.json",
+      "new": "new/S09.json"
+    },
+    {
+      "id": "S10",
+      "title": "Barcode-scan audit",
+      "legacy": "legacy/S10.json",
+      "new": "new/S10.json"
+    },
+    {
+      "id": "S11",
+      "title": "Daily AI message",
+      "legacy": "legacy/S11.json",
+      "new": "new/S11.json"
+    },
+    {
+      "id": "S12",
+      "title": "Rich library read models",
+      "legacy": "legacy/S12.json",
+      "new": "new/S12.json",
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D4: The reading streak counts distinct days, not books finished on the same day. Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md)."
+    },
+    {
+      "id": "S12-strict",
+      "title": "Rich library read models \u2014 with the approved deviation fields omitted on both sides",
+      "legacy": "strict/legacy/S12.json",
+      "new": "strict/new/S12.json",
+      "note": "Must be byte-identical: proves the raw difference is only D3, D4."
+    },
+    {
+      "id": "S13",
+      "title": "Known legacy defects (D1-D3)",
+      "legacy": "legacy/S13.json",
+      "new": "new/S13.json",
+      "approvedDifference": "D1: An out-of-range page on an unstarted book no longer flips it to in_progress before failing.; D2: Jumping from not_started straight to the last page now finishes the book.; D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md)."
+    }
+  ]
+}

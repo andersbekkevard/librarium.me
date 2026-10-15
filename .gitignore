@@ -43,6 +43,7 @@ coverage/
 # Environment & Configuration
 # ===========================
 .env*
+!.env.example
 .env.local
 .env.development.local
 .env.test.local
@@ -189,3 +190,11 @@ AGENTS.md
 history/*.png
 history/*.json
 .serena/
+# ===========================
+# Modernization tooling
+# ===========================
+/.legacy/
+/legacy/
+*-debug.log
+/test-results/
+/playwright-report/

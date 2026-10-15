@@ -1,0 +1,541 @@
+{
+  "books": [
+    {
+      "addedAt": "@step1",
+      "author": "Simon Singh",
+      "coverImage": "http://books.google.com/books/content?id=wvAZAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "In 1963 a schoolboy browsing in his local library stumbled across a great mathematical problem: Fermat's Last Theorem, a puzzle that every child can now understand, but which has baffled mathematicians for over 300 years. Aged just ten, Andrew Wiles dreamed he would crack it.",
+      "genre": "Mathematics",
+      "id": "book:Fermat's Last Theorem",
+      "isOwned": false,
+      "notes": "Welcome to your personal library! This is a sample book to get you started. Feel free to update your reading progress or add your own books.",
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 396
+      },
+      "publishedDate": "1997",
+      "state": "not_started",
+      "title": "Fermat's Last Theorem",
+      "updatedAt": "@step1"
+    },
+    {
+      "addedAt": "@step2",
+      "author": "Frank Herbert",
+      "coverImage": "http://books.google.com/books/content?id=B1hSG45JCX4C&printsec=frontcover&img=1&zoom=1",
+      "description": "<p>Set on the desert planet <b>Arrakis</b>, Dune is the story of Paul Atreides.</p>",
+      "genre": "Fiction",
+      "id": "dune",
+      "isbn": "9780441013593",
+      "isOwned": false,
+      "progress": {
+        "currentPage": 200,
+        "lastUpdated": "@step7",
+        "totalPages": 528
+      },
+      "publishedDate": "2005-08-02",
+      "startedAt": "@step6",
+      "state": "in_progress",
+      "title": "Dune",
+      "updatedAt": "@step7"
+    },
+    {
+      "addedAt": "@step3",
+      "author": "Terry Pratchett, Neil Gaiman and A. N. Other",
+      "coverImage": "http://books.google.com/books/content?id=lHXbDwAAQBAJ&img=1&zoom=5",
+      "finishedAt": "@step9",
+      "genre": "Fantasy",
+      "id": "omens",
+      "isbn": "0060853980",
+      "isOwned": false,
+      "progress": {
+        "currentPage": 412,
+        "lastUpdated": "@step9",
+        "totalPages": 412
+      },
+      "publishedDate": "1990",
+      "rating": 4,
+      "startedAt": "@step8",
+      "state": "finished",
+      "title": "Good Omens",
+      "updatedAt": "@step10"
+    },
+    {
+      "addedAt": "@step4",
+      "author": "Umberto Eco",
+      "genre": "Fiction",
+      "id": "rose",
+      "isOwned": false,
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 536
+      },
+      "state": "not_started",
+      "title": "The Name of the Rose",
+      "updatedAt": "@step15"
+    },
+    {
+      "addedAt": "@step5",
+      "author": "Test Author",
+      "finishedAt": "@step12",
+      "genre": "Politics",
+      "id": "sense",
+      "isOwned": false,
+      "progress": {
+        "currentPage": 1,
+        "lastUpdated": "@step11",
+        "totalPages": 48
+      },
+      "rating": 2,
+      "startedAt": "@step11",
+      "state": "finished",
+      "title": "Common Sense",
+      "updatedAt": "@step13"
+    }
+  ],
+  "derived": {
+    "activity": [
+      {
+        "bookId": "rose",
+        "bookTitle": "The Name of the Rose",
+        "details": "Manual update: title, author, isOwned",
+        "timestamp": "@step15",
+        "type": "manually_updated"
+      },
+      {
+        "bookId": "rose",
+        "bookTitle": "The Name of the Rose",
+        "details": "On the to-read pile.",
+        "timestamp": "@step14",
+        "type": "commented"
+      },
+      {
+        "bookId": "sense",
+        "bookTitle": "Common Sense",
+        "details": "2 stars",
+        "timestamp": "@step13",
+        "type": "rated"
+      },
+      {
+        "bookId": "sense",
+        "bookTitle": "Common Sense",
+        "timestamp": "@step12",
+        "type": "finished"
+      },
+      {
+        "bookId": "sense",
+        "bookTitle": "Common Sense",
+        "details": "1 pages",
+        "timestamp": "@step11",
+        "type": "progress"
+      },
+      {
+        "bookId": "sense",
+        "bookTitle": "Common Sense",
+        "timestamp": "@step11",
+        "type": "started"
+      },
+      {
+        "bookId": "omens",
+        "bookTitle": "Good Omens",
+        "details": "4 stars",
+        "timestamp": "@step10",
+        "type": "rated"
+      },
+      {
+        "bookId": "omens",
+        "bookTitle": "Good Omens",
+        "timestamp": "@step9",
+        "type": "finished"
+      },
+      {
+        "bookId": "omens",
+        "bookTitle": "Good Omens",
+        "details": "411 pages",
+        "timestamp": "@step9",
+        "type": "progress"
+      },
+      {
+        "bookId": "omens",
+        "bookTitle": "Good Omens",
+        "details": "1 pages",
+        "timestamp": "@step8",
+        "type": "progress"
+      },
+      {
+        "bookId": "omens",
+        "bookTitle": "Good Omens",
+        "timestamp": "@step8",
+        "type": "started"
+      },
+      {
+        "bookId": "dune",
+        "bookTitle": "Dune",
+        "details": "199 pages",
+        "timestamp": "@step7",
+        "type": "progress"
+      },
+      {
+        "bookId": "dune",
+        "bookTitle": "Dune",
+        "details": "1 pages",
+        "timestamp": "@step6",
+        "type": "progress"
+      },
+      {
+        "bookId": "dune",
+        "bookTitle": "Dune",
+        "timestamp": "@step6",
+        "type": "started"
+      }
+    ],
+    "comments": {
+      "book:Fermat's Last Theorem": [],
+      "dune": [],
+      "omens": [],
+      "rose": [
+        {
+          "currentPage": 0,
+          "readingState": "not_started",
+          "text": "On the to-read pile.",
+          "timestamp": "@step14"
+        }
+      ],
+      "sense": []
+    },
+    "reviews": {
+      "book:Fermat's Last Theorem": null,
+      "dune": null,
+      "omens": null,
+      "rose": null,
+      "sense": null
+    },
+    "search": {
+      "dune": [
+        "dune"
+      ],
+      "fermat": [
+        "book:Fermat's Last Theorem"
+      ],
+      "mathematics": [
+        "book:Fermat's Last Theorem"
+      ],
+      "o": [
+        "sense",
+        "dune",
+        "book:Fermat's Last Theorem",
+        "omens",
+        "rose"
+      ],
+      "pratchett": [
+        "omens"
+      ],
+      "zzz": []
+    },
+    "stats": {
+      "averageRating": 3,
+      "booksInLibrary": 5,
+      "booksReadThisMonth": 2,
+      "booksReadThisYear": 2,
+      "currentlyReading": 1,
+      "favoriteGenres": [
+        "Fiction",
+        "Politics",
+        "Fantasy"
+      ],
+      "readingStreak": 1,
+      "totalBooksRead": 2,
+      "totalPagesRead": 613
+    },
+    "views": {
+      "authorDesc": [
+        "rose",
+        "sense",
+        "omens",
+        "book:Fermat's Last Theorem",
+        "dune"
+      ],
+      "default": [
+        "sense",
+        "dune",
+        "book:Fermat's Last Theorem",
+        "omens",
+        "rose"
+      ],
+      "fiction": [
+        "dune",
+        "rose"
+      ],
+      "finished": [
+        "sense",
+        "omens"
+      ],
+      "newest": [
+        "sense",
+        "rose",
+        "omens",
+        "dune",
+        "book:Fermat's Last Theorem"
+      ],
+      "owned": [],
+      "pages": [
+        "sense",
+        "book:Fermat's Last Theorem",
+        "omens",
+        "dune",
+        "rose"
+      ],
+      "progress": [
+        "rose",
+        "book:Fermat's Last Theorem",
+        "dune",
+        "sense",
+        "omens"
+      ],
+      "ratingDesc": [
+        "omens",
+        "sense",
+        "rose",
+        "dune",
+        "book:Fermat's Last Theorem"
+      ],
+      "reading": [
+        "dune"
+      ],
+      "searchThe": [
+        "dune",
+        "book:Fermat's Last Theorem",
+        "omens",
+        "rose"
+      ],
+      "wishlist": [
+        "sense",
+        "dune",
+        "book:Fermat's Last Theorem",
+        "omens",
+        "rose"
+      ]
+    }
+  },
+  "events": [
+    {
+      "bookId": "dune",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step6",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "dune",
+      "data": {
+        "newPage": 1,
+        "previousPage": 0
+      },
+      "timestamp": "@step6",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "dune",
+      "data": {
+        "newPage": 200,
+        "previousPage": 1
+      },
+      "timestamp": "@step7",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "omens",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step8",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "omens",
+      "data": {
+        "newPage": 1,
+        "previousPage": 0
+      },
+      "timestamp": "@step8",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "omens",
+      "data": {
+        "newPage": 412,
+        "previousPage": 1
+      },
+      "timestamp": "@step9",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "omens",
+      "data": {
+        "newState": "finished",
+        "previousState": "in_progress"
+      },
+      "timestamp": "@step9",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "omens",
+      "data": {
+        "rating": 4
+      },
+      "timestamp": "@step10",
+      "type": "rating_added",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "sense",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step11",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "sense",
+      "data": {
+        "newPage": 1,
+        "previousPage": 0
+      },
+      "timestamp": "@step11",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "sense",
+      "data": {
+        "newState": "finished",
+        "previousState": "in_progress"
+      },
+      "timestamp": "@step12",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "sense",
+      "data": {
+        "rating": 2
+      },
+      "timestamp": "@step13",
+      "type": "rating_added",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "rose",
+      "data": {
+        "comment": "On the to-read pile.",
+        "commentPage": 0,
+        "commentState": "not_started"
+      },
+      "timestamp": "@step14",
+      "type": "comment",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "rose",
+      "data": {
+        "comment": "Manual update: title, author, isOwned",
+        "commentPage": 0,
+        "commentState": "not_started"
+      },
+      "timestamp": "@step15",
+      "type": "manual_update",
+      "userId": "<uid>"
+    }
+  ],
+  "messages": [],
+  "profile": {
+    "booksInLibrary": 0,
+    "createdAt": "@step1",
+    "currentlyReading": 0,
+    "displayName": "Ada Lovelace",
+    "email": "<email>",
+    "emailVerified": false,
+    "id": "<uid>",
+    "lastSignInTime": "<lastSignInTime>",
+    "photoURL": "https://lh3.googleusercontent.com/a/ada",
+    "totalBooksRead": 0,
+    "updatedAt": "@step1"
+  },
+  "steps": [
+    {
+      "ok": true,
+      "step": "sign in"
+    },
+    {
+      "ok": true,
+      "step": "add Dune",
+      "value": "dune"
+    },
+    {
+      "ok": true,
+      "step": "add Good Omens",
+      "value": "omens"
+    },
+    {
+      "ok": true,
+      "step": "add Rose",
+      "value": "rose"
+    },
+    {
+      "ok": true,
+      "step": "add Pamphlet",
+      "value": "sense"
+    },
+    {
+      "ok": true,
+      "step": "start Dune"
+    },
+    {
+      "ok": true,
+      "step": "Dune page 200"
+    },
+    {
+      "ok": true,
+      "step": "start Omens"
+    },
+    {
+      "ok": true,
+      "step": "Omens page 412"
+    },
+    {
+      "ok": true,
+      "step": "rate Omens"
+    },
+    {
+      "ok": true,
+      "step": "start Sense"
+    },
+    {
+      "ok": true,
+      "step": "finish Sense"
+    },
+    {
+      "ok": true,
+      "step": "rate Sense"
+    },
+    {
+      "ok": true,
+      "step": "comment Rose"
+    },
+    {
+      "ok": true,
+      "step": "edit Rose"
+    }
+  ]
+}

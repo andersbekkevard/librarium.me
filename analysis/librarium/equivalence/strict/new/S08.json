@@ -1,0 +1,252 @@
+{
+  "books": [
+    {
+      "addedAt": "@step1",
+      "author": "Simon Singh",
+      "coverImage": "http://books.google.com/books/content?id=wvAZAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "In 1963 a schoolboy browsing in his local library stumbled across a great mathematical problem: Fermat's Last Theorem, a puzzle that every child can now understand, but which has baffled mathematicians for over 300 years. Aged just ten, Andrew Wiles dreamed he would crack it.",
+      "genre": "Mathematics",
+      "id": "book:Fermat's Last Theorem",
+      "isOwned": false,
+      "notes": "Welcome to your personal library! This is a sample book to get you started. Feel free to update your reading progress or add your own books.",
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 396
+      },
+      "publishedDate": "1997",
+      "state": "not_started",
+      "title": "Fermat's Last Theorem",
+      "updatedAt": "@step1"
+    },
+    {
+      "addedAt": "@step2",
+      "author": "James Joyce",
+      "coverImage": "",
+      "description": "",
+      "genre": "",
+      "id": "ulysses",
+      "isbn": "",
+      "isOwned": false,
+      "progress": {
+        "currentPage": 12,
+        "totalPages": 730
+      },
+      "publishedDate": "1922",
+      "rating": 3,
+      "state": "in_progress",
+      "title": "Ulysses (Annotated)",
+      "updatedAt": "@step5"
+    }
+  ],
+  "derived": {
+    "activity": [
+      {
+        "bookId": "ulysses",
+        "bookTitle": "Ulysses (Annotated)",
+        "timestamp": "@step5",
+        "type": "started"
+      },
+      {
+        "bookId": "ulysses",
+        "bookTitle": "Ulysses (Annotated)",
+        "details": "Manual update: title, author, description, state,...",
+        "timestamp": "@step5",
+        "type": "manually_updated"
+      },
+      {
+        "bookId": "ulysses",
+        "bookTitle": "Ulysses (Annotated)",
+        "details": "Manual update: title, author, description, state,...",
+        "timestamp": "@step4",
+        "type": "manually_updated"
+      },
+      {
+        "bookId": "ulysses",
+        "bookTitle": "Ulysses (Annotated)",
+        "timestamp": "@step3",
+        "type": "finished"
+      },
+      {
+        "bookId": "ulysses",
+        "bookTitle": "Ulysses (Annotated)",
+        "details": "Manual update: title, author, description, state,...",
+        "timestamp": "@step3",
+        "type": "manually_updated"
+      }
+    ],
+    "comments": {
+      "book:Fermat's Last Theorem": [],
+      "ulysses": []
+    },
+    "reviews": {
+      "book:Fermat's Last Theorem": null,
+      "ulysses": null
+    },
+    "search": {
+      "dune": [],
+      "fermat": [
+        "book:Fermat's Last Theorem"
+      ],
+      "mathematics": [
+        "book:Fermat's Last Theorem"
+      ],
+      "o": [
+        "book:Fermat's Last Theorem",
+        "ulysses"
+      ],
+      "pratchett": [],
+      "zzz": []
+    },
+    "stats": {
+      "averageRating": 0,
+      "booksInLibrary": 2,
+      "currentlyReading": 1,
+      "favoriteGenres": [
+        "Mathematics"
+      ],
+      "totalBooksRead": 0,
+      "totalPagesRead": 0
+    },
+    "views": {
+      "authorDesc": [
+        "book:Fermat's Last Theorem",
+        "ulysses"
+      ],
+      "default": [
+        "book:Fermat's Last Theorem",
+        "ulysses"
+      ],
+      "fiction": [],
+      "finished": [],
+      "newest": [
+        "ulysses",
+        "book:Fermat's Last Theorem"
+      ],
+      "owned": [],
+      "pages": [
+        "book:Fermat's Last Theorem",
+        "ulysses"
+      ],
+      "progress": [
+        "book:Fermat's Last Theorem",
+        "ulysses"
+      ],
+      "ratingDesc": [
+        "ulysses",
+        "book:Fermat's Last Theorem"
+      ],
+      "reading": [
+        "ulysses"
+      ],
+      "searchThe": [
+        "book:Fermat's Last Theorem"
+      ],
+      "wishlist": [
+        "book:Fermat's Last Theorem",
+        "ulysses"
+      ]
+    }
+  },
+  "events": [
+    {
+      "bookId": "ulysses",
+      "data": {
+        "comment": "Manual update: title, author, description, state, progress, rating, isbn, genre, publishedDate, coverImage, isOwned",
+        "commentPage": 730,
+        "commentState": "finished"
+      },
+      "timestamp": "@step3",
+      "type": "manual_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "ulysses",
+      "data": {
+        "newState": "finished",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step3",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "ulysses",
+      "data": {
+        "comment": "Manual update: title, author, description, state, progress, isbn, genre, publishedDate, coverImage, isOwned",
+        "commentPage": 730,
+        "commentState": "finished"
+      },
+      "timestamp": "@step4",
+      "type": "manual_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "ulysses",
+      "data": {
+        "comment": "Manual update: title, author, description, state, progress, rating, isbn, genre, publishedDate, coverImage, isOwned",
+        "commentPage": 12,
+        "commentState": "in_progress"
+      },
+      "timestamp": "@step5",
+      "type": "manual_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "ulysses",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "finished"
+      },
+      "timestamp": "@step5",
+      "type": "state_change",
+      "userId": "<uid>"
+    }
+  ],
+  "messages": [],
+  "profile": {
+    "booksInLibrary": 0,
+    "createdAt": "@step1",
+    "currentlyReading": 0,
+    "displayName": "Ada Lovelace",
+    "email": "<email>",
+    "emailVerified": false,
+    "id": "<uid>",
+    "lastSignInTime": "<lastSignInTime>",
+    "photoURL": "https://lh3.googleusercontent.com/a/ada",
+    "totalBooksRead": 0,
+    "updatedAt": "@step1"
+  },
+  "steps": [
+    {
+      "ok": true,
+      "step": "sign in"
+    },
+    {
+      "ok": true,
+      "step": "add",
+      "value": "ulysses"
+    },
+    {
+      "ok": true,
+      "step": "edit everything, jump to finished"
+    },
+    {
+      "ok": true,
+      "step": "edit without state change"
+    },
+    {
+      "ok": true,
+      "step": "edit back to in_progress"
+    },
+    {
+      "error": "Book author cannot be empty",
+      "ok": false,
+      "step": "edit with empty author"
+    },
+    {
+      "error": "Invalid progress data",
+      "ok": false,
+      "step": "edit with bad progress"
+    }
+  ]
+}
