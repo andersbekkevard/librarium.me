@@ -13,7 +13,8 @@ import { Badge, Button, Card, CardHeader, cn, Cover, Dialog, EmptyState, Field, 
 import { plainText } from "@/lib/books-api";
 import { commentsFor, isValidComment, isValidReview, progressPercent, reviewFor, STATE_LABEL } from "@/lib/domain";
 import { useLibrary } from "@/lib/store";
-import type { Book, BookComment, BookReview } from "@/lib/types";
+import type { Timestamp } from "firebase/firestore";
+import type { Book, BookComment, BookEvent, BookReview } from "@/lib/types";
 
 const stagger = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
@@ -43,7 +44,7 @@ export default function BookPage() {
       <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
         <div className="space-y-6">
           <CoverPanel book={book} hasReview={!!review} onEdit={() => setEditing(true)} onReview={() => setReviewing(true)} />
-          <Timeline book={book} />
+          <Timeline book={book} events={events} />
         </div>
         <div className="space-y-6 lg:col-span-2">
           <BookInfo book={book} />
@@ -69,7 +70,7 @@ function CoverPanel({ book, hasReview, onEdit, onReview }: { book: Book; hasRevi
   const pct = progressPercent(book);
   return (
     <Card className="p-5 animate-rise">
-      <Cover src={book.coverImage} title={book.title} author={book.author} sizes="(max-width: 1024px) 60vw, 25vw" className="mx-auto mb-5 w-full max-w-64 text-lg shadow-soft" />
+      <Cover src={book.coverImage} title={book.title} author={book.author} sizes="(max-width: 1024px) 60vw, 25vw" className="mx-auto mb-5 w-full max-w-44 text-lg shadow-soft sm:max-w-64" />
       <div className="mb-4 flex flex-wrap gap-2">
         <StateBadge state={book.state} icon />
         <Badge tone="outline">{book.isOwned ? "Owned" : "Wishlist"}</Badge>
@@ -99,11 +100,13 @@ function CoverPanel({ book, hasReview, onEdit, onReview }: { book: Book; hasRevi
   );
 }
 
-function Timeline({ book }: { book: Book }) {
+/** Dates come from the book; books from before startedAt was recorded fall back to their history. */
+function Timeline({ book, events }: { book: Book; events: BookEvent[] }) {
+  const changed = (to: string) => events.filter((e) => e.bookId === book.id && e.type === "state_change" && e.data.newState === to);
   const steps = [
     ["Added to library", book.addedAt, "bg-brand-accent"],
-    ["Started reading", book.startedAt, "bg-status-info"],
-    ["Finished reading", book.finishedAt, "bg-status-success"],
+    ["Started reading", book.state !== "not_started" && (book.startedAt ?? changed("in_progress").at(-1)?.timestamp), "bg-status-info"],
+    ["Finished reading", book.state === "finished" && (book.finishedAt ?? changed("finished")[0]?.timestamp), "bg-status-success"],
   ] as const;
   return (
     <Card className="animate-rise" style={stagger(1)}>
@@ -113,7 +116,7 @@ function Timeline({ book }: { book: Book }) {
           <li key={label} className="relative">
             <span className={cn("absolute -left-[25px] top-1.5 size-2.5 rounded-full ring-4 ring-card", dot)} />
             <p className="text-sm font-medium">{label}</p>
-            <p className="text-xs text-muted-foreground">{at!.toDate().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</p>
+            <p className="text-xs text-muted-foreground">{(at as Timestamp).toDate().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</p>
           </li>
         ))}
       </ol>

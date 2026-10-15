@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --project unit",
+    "test": "./scripts/legacy.sh && vitest run --project unit",
     "test:oracle": "./scripts/legacy.sh && firebase emulators:exec --only auth,firestore --project demo-librarium \"vitest run --project oracle\"",
     "test:e2e": "playwright test",
     "emulators": "firebase emulators:start --only auth,firestore --project demo-librarium"

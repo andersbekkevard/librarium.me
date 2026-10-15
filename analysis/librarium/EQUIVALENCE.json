@@ -1,0 +1,493 @@
+{
+  "system": "librarium",
+  "generated": "2026-10-15T04:23:52Z",
+  "legacy": {
+    "label": "Next 15 / Firebase 11 services+repositories (git b6304a9)",
+    "command": "npm run test:oracle (tests/oracle/legacy-driver.ts)"
+  },
+  "new": {
+    "label": "Next 16 / Firebase 12 domain + batched commands",
+    "command": "npm run test:oracle (tests/oracle/modern-driver.ts)"
+  },
+  "selfCheck": {
+    "passed": true,
+    "detail": "each legacy output was compared with a copy changed by one byte and reported as different"
+  },
+  "totals": {
+    "cases": 19,
+    "executed": 19,
+    "same": 12,
+    "differs": 0,
+    "differsApproved": 7,
+    "missing": 0
+  },
+  "cases": [
+    {
+      "id": "S01",
+      "title": "First sign-in: profile and welcome book",
+      "verdict": "same",
+      "reason": "Identical, 2878 bytes.",
+      "legacyPath": "equivalence/legacy/S01.json",
+      "newPath": "equivalence/new/S01.json",
+      "legacySha256": "2d7926cc661d28c5ae1fbec8b118b3baaecfb7adf3ef94575c2c14e10d10cc9d",
+      "newSha256": "2d7926cc661d28c5ae1fbec8b118b3baaecfb7adf3ef94575c2c14e10d10cc9d",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "",
+      "bytes": {
+        "legacy": 2878,
+        "new": 2878
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S02",
+      "title": "Adding books from Google Books",
+      "verdict": "same",
+      "reason": "Identical, 5111 bytes.",
+      "legacyPath": "equivalence/legacy/S02.json",
+      "newPath": "equivalence/new/S02.json",
+      "legacySha256": "2a4fd1f27ff1d982637a63274b8530693ffa4e86aee8d569bbb313bb2a2d9574",
+      "newSha256": "2a4fd1f27ff1d982637a63274b8530693ffa4e86aee8d569bbb313bb2a2d9574",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "",
+      "bytes": {
+        "legacy": 5111,
+        "new": 5111
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S03",
+      "title": "Manual entry",
+      "verdict": "same",
+      "reason": "Identical, 4273 bytes.",
+      "legacyPath": "equivalence/legacy/S03.json",
+      "newPath": "equivalence/new/S03.json",
+      "legacySha256": "8bbccc57dc2a500d132e89cacfbdb7dba07eef95813aee262ed5354d6b4189a8",
+      "newSha256": "8bbccc57dc2a500d132e89cacfbdb7dba07eef95813aee262ed5354d6b4189a8",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "",
+      "bytes": {
+        "legacy": 4273,
+        "new": 4273
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S04",
+      "title": "Reading lifecycle",
+      "verdict": "differs-approved",
+      "reason": "The outputs first differ at line 34, byte 1284. A person approved this difference: D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see ",
+      "legacyPath": "equivalence/legacy/S04.json",
+      "newPath": "equivalence/new/S04.json",
+      "legacySha256": "28c9149e1f5a7972e1269df6088b86c44a8d81f1357e042ea6c177dcfc0b7ba8",
+      "newSha256": "15aff34cf6c26f8d3683071e78b00d1b5d1a76abf29859ccd57df980e5d23a01",
+      "masked": [],
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md).",
+      "note": "",
+      "bytes": {
+        "legacy": 6614,
+        "new": 6643
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false,
+      "firstDiff": {
+        "offset": 1284,
+        "line": 34,
+        "legacy": "\\n      \"state\": \"finished\",\\n      \"tit",
+        "new": "\\n      \"startedAt\": \"@step3\",\\n      \"s",
+        "at": 12
+      }
+    },
+    {
+      "id": "S04-strict",
+      "title": "Reading lifecycle \u2014 with the approved deviation fields omitted on both sides",
+      "verdict": "same",
+      "reason": "Identical, 6614 bytes.",
+      "legacyPath": "equivalence/strict/legacy/S04.json",
+      "newPath": "equivalence/strict/new/S04.json",
+      "legacySha256": "28c9149e1f5a7972e1269df6088b86c44a8d81f1357e042ea6c177dcfc0b7ba8",
+      "newSha256": "28c9149e1f5a7972e1269df6088b86c44a8d81f1357e042ea6c177dcfc0b7ba8",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "Must be byte-identical: proves the raw difference is only D3.",
+      "bytes": {
+        "legacy": 6614,
+        "new": 6614
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S05",
+      "title": "Guards and validation messages",
+      "verdict": "differs-approved",
+      "reason": "The outputs first differ at line 32, byte 1238. A person approved this difference: D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see ",
+      "legacyPath": "equivalence/legacy/S05.json",
+      "newPath": "equivalence/new/S05.json",
+      "legacySha256": "f933cfa31b81849de7d1be1381ef4f3b50bffc1338840163a97f824159f29167",
+      "newSha256": "c538be496366b06051ee383e16c54aa8962c097a61786de34ad845a20717fbe2",
+      "masked": [],
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md).",
+      "note": "",
+      "bytes": {
+        "legacy": 7935,
+        "new": 7994
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false,
+      "firstDiff": {
+        "offset": 1238,
+        "line": 32,
+        "legacy": "\\n      \"state\": \"finished\",\\n      \"tit",
+        "new": "\\n      \"startedAt\": \"@step3\",\\n      \"s",
+        "at": 12
+      }
+    },
+    {
+      "id": "S05-strict",
+      "title": "Guards and validation messages \u2014 with the approved deviation fields omitted on both sides",
+      "verdict": "same",
+      "reason": "Identical, 7935 bytes.",
+      "legacyPath": "equivalence/strict/legacy/S05.json",
+      "newPath": "equivalence/strict/new/S05.json",
+      "legacySha256": "f933cfa31b81849de7d1be1381ef4f3b50bffc1338840163a97f824159f29167",
+      "newSha256": "f933cfa31b81849de7d1be1381ef4f3b50bffc1338840163a97f824159f29167",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "Must be byte-identical: proves the raw difference is only D3.",
+      "bytes": {
+        "legacy": 7935,
+        "new": 7935
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S06",
+      "title": "Comments",
+      "verdict": "differs-approved",
+      "reason": "The outputs first differ at line 32, byte 1244. A person approved this difference: D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see ",
+      "legacyPath": "equivalence/legacy/S06.json",
+      "newPath": "equivalence/new/S06.json",
+      "legacySha256": "031c9ebb87f43430bd6f93713be2c825bf34b0d06fef1d7bfbbd3480ebfed336",
+      "newSha256": "fc92c65d77c91cd602e3f1200a74090790dad3e6ab4cbad4e46edd8b9fc87f7a",
+      "masked": [],
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md).",
+      "note": "",
+      "bytes": {
+        "legacy": 12058,
+        "new": 12087
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false,
+      "firstDiff": {
+        "offset": 1244,
+        "line": 32,
+        "legacy": "\\n      \"state\": \"finished\",\\n      \"tit",
+        "new": "\\n      \"startedAt\": \"@step7\",\\n      \"s",
+        "at": 12
+      }
+    },
+    {
+      "id": "S06-strict",
+      "title": "Comments \u2014 with the approved deviation fields omitted on both sides",
+      "verdict": "same",
+      "reason": "Identical, 12058 bytes.",
+      "legacyPath": "equivalence/strict/legacy/S06.json",
+      "newPath": "equivalence/strict/new/S06.json",
+      "legacySha256": "031c9ebb87f43430bd6f93713be2c825bf34b0d06fef1d7bfbbd3480ebfed336",
+      "newSha256": "031c9ebb87f43430bd6f93713be2c825bf34b0d06fef1d7bfbbd3480ebfed336",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "Must be byte-identical: proves the raw difference is only D3.",
+      "bytes": {
+        "legacy": 12058,
+        "new": 12058
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S07",
+      "title": "Reviews",
+      "verdict": "differs-approved",
+      "reason": "The outputs first differ at line 37, byte 1553. A person approved this difference: D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D5: The duplicate-review message no longer tells readers to 'Use updateReview to modify it.' Propo",
+      "legacyPath": "equivalence/legacy/S07.json",
+      "newPath": "equivalence/new/S07.json",
+      "legacySha256": "685e346008b11f814817ecbbf67d14ad7dd1f897a0aa0812cb627bad2f71933b",
+      "newSha256": "a464fa5a9ab55c0f3d68b37b48196515b74085fdfeefc1507e3e1ba7885ca9a4",
+      "masked": [],
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D5: The duplicate-review message no longer tells readers to 'Use updateReview to modify it.' Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md).",
+      "note": "",
+      "bytes": {
+        "legacy": 6542,
+        "new": 6539
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false,
+      "firstDiff": {
+        "offset": 1553,
+        "line": 37,
+        "legacy": "\\n      \"state\": \"finished\",\\n      \"tit",
+        "new": "\\n      \"startedAt\": \"@step4\",\\n      \"s",
+        "at": 12
+      }
+    },
+    {
+      "id": "S07-strict",
+      "title": "Reviews \u2014 with the approved deviation fields omitted on both sides",
+      "verdict": "same",
+      "reason": "Identical, 6454 bytes.",
+      "legacyPath": "equivalence/strict/legacy/S07.json",
+      "newPath": "equivalence/strict/new/S07.json",
+      "legacySha256": "d6d148c9fa5a8c2dbf92bab98dd9a68341f299587c0be7a2a5ccf1ee16889326",
+      "newSha256": "d6d148c9fa5a8c2dbf92bab98dd9a68341f299587c0be7a2a5ccf1ee16889326",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "Must be byte-identical: proves the raw difference is only D3, D5.",
+      "bytes": {
+        "legacy": 6454,
+        "new": 6454
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S08",
+      "title": "Manual edits",
+      "verdict": "differs-approved",
+      "reason": "The outputs first differ at line 26, byte 1097. A person approved this difference: D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D8: A manual edit that marks a book finished records finishedAt, so it counts toward this month/ye",
+      "legacyPath": "equivalence/legacy/S08.json",
+      "newPath": "equivalence/new/S08.json",
+      "legacySha256": "4a62b2259474b4a7af269b1d6138972d256f5f630d2708197ee7a37eeb526c87",
+      "newSha256": "425dae83ac7eb4a61f85bb9c0d2accaaf6b931402ba596aa1680bed43007c980",
+      "masked": [],
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D8: A manual edit that marks a book finished records finishedAt, so it counts toward this month/year. Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md).",
+      "note": "",
+      "bytes": {
+        "legacy": 6477,
+        "new": 6507
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false,
+      "firstDiff": {
+        "offset": 1097,
+        "line": 26,
+        "legacy": "\"\",\\n      \"genre\": \"\",\\n      \"id\": \"ul",
+        "new": "\"\",\\n      \"finishedAt\": \"@step3\",\\n    ",
+        "at": 12
+      }
+    },
+    {
+      "id": "S08-strict",
+      "title": "Manual edits \u2014 with the approved deviation fields omitted on both sides",
+      "verdict": "same",
+      "reason": "Identical, 6390 bytes.",
+      "legacyPath": "equivalence/strict/legacy/S08.json",
+      "newPath": "equivalence/strict/new/S08.json",
+      "legacySha256": "c8a32691ff11e39e251b1b2ce2fdb9ead28a5fb2ddf7a7aa3867426c222d4482",
+      "newSha256": "c8a32691ff11e39e251b1b2ce2fdb9ead28a5fb2ddf7a7aa3867426c222d4482",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "Must be byte-identical: proves the raw difference is only D3, D8.",
+      "bytes": {
+        "legacy": 6390,
+        "new": 6390
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S09",
+      "title": "Deleting books",
+      "verdict": "same",
+      "reason": "Identical, 3815 bytes.",
+      "legacyPath": "equivalence/legacy/S09.json",
+      "newPath": "equivalence/new/S09.json",
+      "legacySha256": "0fe33235650cb970662c925c30c7b092298935ac79a2ab671e9856c2dc11dbab",
+      "newSha256": "0fe33235650cb970662c925c30c7b092298935ac79a2ab671e9856c2dc11dbab",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "",
+      "bytes": {
+        "legacy": 3815,
+        "new": 3815
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S10",
+      "title": "Barcode-scan audit",
+      "verdict": "same",
+      "reason": "Identical, 5626 bytes.",
+      "legacyPath": "equivalence/legacy/S10.json",
+      "newPath": "equivalence/new/S10.json",
+      "legacySha256": "a0b0a05a5982c2e22286763e55c78f284977ac0504212c533c50dd982680245f",
+      "newSha256": "a0b0a05a5982c2e22286763e55c78f284977ac0504212c533c50dd982680245f",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "",
+      "bytes": {
+        "legacy": 5626,
+        "new": 5626
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S11",
+      "title": "Daily AI message",
+      "verdict": "same",
+      "reason": "Identical, 3921 bytes.",
+      "legacyPath": "equivalence/legacy/S11.json",
+      "newPath": "equivalence/new/S11.json",
+      "legacySha256": "b3a11812d533fc829630bf972b80062507bd54969a1887f64bde9da2948ec0f8",
+      "newSha256": "b3a11812d533fc829630bf972b80062507bd54969a1887f64bde9da2948ec0f8",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "",
+      "bytes": {
+        "legacy": 3921,
+        "new": 3921
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S12",
+      "title": "Rich library read models",
+      "verdict": "differs-approved",
+      "reason": "The outputs first differ at line 36, byte 1525. A person approved this difference: D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D4: The reading streak counts distinct days, not books finished on the same day. Proposed by Claud",
+      "legacyPath": "equivalence/legacy/S12.json",
+      "newPath": "equivalence/new/S12.json",
+      "legacySha256": "b2e289f565204e2e4162894fc2f255b25015fe2a4cad91282b33b97c8a6d945f",
+      "newSha256": "89019c5f6b24b9eb77a17f64f2cd588228de81ef821c39132ba8e680d456c4e6",
+      "masked": [],
+      "approvedDifference": "D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it).; D4: The reading streak counts distinct days, not books finished on the same day. Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md).",
+      "note": "",
+      "bytes": {
+        "legacy": 11926,
+        "new": 12014
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false,
+      "firstDiff": {
+        "offset": 1525,
+        "line": 36,
+        "legacy": "\\n      \"state\": \"in_progress\",\\n      \"",
+        "new": "\\n      \"startedAt\": \"@step6\",\\n      \"s",
+        "at": 12
+      }
+    },
+    {
+      "id": "S12-strict",
+      "title": "Rich library read models \u2014 with the approved deviation fields omitted on both sides",
+      "verdict": "same",
+      "reason": "Identical, 11900 bytes.",
+      "legacyPath": "equivalence/strict/legacy/S12.json",
+      "newPath": "equivalence/strict/new/S12.json",
+      "legacySha256": "51325d9d1d303b070f77f7610585ffaaa76630acb21f955d20bc1e0a04a1b099",
+      "newSha256": "51325d9d1d303b070f77f7610585ffaaa76630acb21f955d20bc1e0a04a1b099",
+      "masked": [],
+      "approvedDifference": "",
+      "note": "Must be byte-identical: proves the raw difference is only D3, D4.",
+      "bytes": {
+        "legacy": 11900,
+        "new": 11900
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false
+    },
+    {
+      "id": "S13",
+      "title": "Known legacy defects (D1-D3)",
+      "verdict": "differs-approved",
+      "reason": "The outputs first differ at line 30, byte 1187. A person approved this difference: D1: An out-of-range page on an unstarted book no longer flips it to in_progress before failing.; D2: Jumping from not_started straight to the last page now finishes the book.; D3: startedAt is recorde",
+      "legacyPath": "equivalence/legacy/S13.json",
+      "newPath": "equivalence/new/S13.json",
+      "legacySha256": "8d4c1bd61c55727010d5bf2387929337b8bfa678d3345192d50d82b01cd4aa45",
+      "newSha256": "e873f8f89f844eeb7694dd80208d3243d1a07fabf788ec91d52478a4b54c9843",
+      "masked": [],
+      "approvedDifference": "D1: An out-of-range page on an unstarted book no longer flips it to in_progress before failing.; D2: Jumping from not_started straight to the last page now finishes the book.; D3: startedAt is recorded when reading starts (legacy declared and displayed it but never wrote it). Proposed by Claude as a correctness fix under the owner's brief; pending the owner's sign-off (see TRANSFORMATION_NOTES.md).",
+      "note": "",
+      "bytes": {
+        "legacy": 5392,
+        "new": 5418
+      },
+      "maskedBytes": {
+        "legacy": 0,
+        "new": 0
+      },
+      "empty": false,
+      "firstDiff": {
+        "offset": 1187,
+        "line": 30,
+        "legacy": "  \"state\": \"in_progress\",\\n      \"title\"",
+        "new": "  \"state\": \"not_started\",\\n      \"title\"",
+        "at": 12
+      }
+    }
+  ]
+}

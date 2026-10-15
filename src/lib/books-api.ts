@@ -78,7 +78,7 @@ export function formatAuthors(authors?: string[]): string {
 export const coverOf = ({ volumeInfo: { imageLinks: i } }: GoogleVolume) => i?.medium || i?.small || i?.thumbnail || i?.smallThumbnail;
 
 export function isbnOf({ volumeInfo: { industryIdentifiers: ids } }: GoogleVolume) {
-  return (ids?.find((x) => x.type === "ISBN_13") ?? ids?.find((x) => x.type === "ISBN_10"))?.identifier;
+  return ids?.find((x) => x.type === "ISBN_13")?.identifier || ids?.find((x) => x.type === "ISBN_10")?.identifier;
 }
 
 /** Google descriptions contain markup; the app only ever shows them as text. */

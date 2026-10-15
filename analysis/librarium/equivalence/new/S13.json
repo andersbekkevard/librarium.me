@@ -34,6 +34,7 @@
     {
       "addedAt": "@step4",
       "author": "Test Author",
+      "finishedAt": "@step5",
       "id": "sanditon",
       "isOwned": true,
       "progress": {
@@ -42,13 +43,19 @@
         "totalPages": 120
       },
       "startedAt": "@step5",
-      "state": "in_progress",
+      "state": "finished",
       "title": "Sanditon",
       "updatedAt": "@step5"
     }
   ],
   "derived": {
     "activity": [
+      {
+        "bookId": "sanditon",
+        "bookTitle": "Sanditon",
+        "timestamp": "@step5",
+        "type": "finished"
+      },
       {
         "bookId": "sanditon",
         "bookTitle": "Sanditon",
@@ -92,14 +99,14 @@
     "stats": {
       "averageRating": 0,
       "booksInLibrary": 3,
-      "booksReadThisMonth": 0,
-      "booksReadThisYear": 0,
-      "currentlyReading": 1,
+      "booksReadThisMonth": 1,
+      "booksReadThisYear": 1,
+      "currentlyReading": 0,
       "favoriteGenres": [
         "Mathematics"
       ],
-      "readingStreak": 0,
-      "totalBooksRead": 0,
+      "readingStreak": 1,
+      "totalBooksRead": 1,
       "totalPagesRead": 120
     },
     "views": {
@@ -114,7 +121,9 @@
         "sanditon"
       ],
       "fiction": [],
-      "finished": [],
+      "finished": [
+        "sanditon"
+      ],
       "newest": [
         "sanditon",
         "persuasion",
@@ -139,9 +148,7 @@
         "persuasion",
         "book:Fermat's Last Theorem"
       ],
-      "reading": [
-        "sanditon"
-      ],
+      "reading": [],
       "searchThe": [
         "book:Fermat's Last Theorem"
       ],
@@ -169,6 +176,16 @@
       },
       "timestamp": "@step5",
       "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "sanditon",
+      "data": {
+        "newState": "finished",
+        "previousState": "in_progress"
+      },
+      "timestamp": "@step5",
+      "type": "state_change",
       "userId": "<uid>"
     }
   ],

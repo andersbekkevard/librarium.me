@@ -114,7 +114,7 @@ function QuickSearch() {
         aria-expanded={options.length > 0}
         aria-controls="quick-search"
         aria-label="Search your library"
-        placeholder="Search books, authors, or genres…"
+        placeholder="Search your library…"
         onChange={(e) => (setQ(e.target.value), setActive(0))}
         onKeyDown={(e) => {
           if (e.key === "Enter") choose(active);

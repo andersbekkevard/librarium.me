@@ -42,6 +42,7 @@
       "addedAt": "@step3",
       "author": "Terry Pratchett, Neil Gaiman and A. N. Other",
       "coverImage": "http://books.google.com/books/content?id=lHXbDwAAQBAJ&img=1&zoom=5",
+      "finishedAt": "@step9",
       "genre": "Fantasy",
       "id": "omens",
       "isbn": "0060853980",
@@ -54,7 +55,7 @@
       "publishedDate": "1990",
       "rating": 4,
       "startedAt": "@step8",
-      "state": "in_progress",
+      "state": "finished",
       "title": "Good Omens",
       "updatedAt": "@step10"
     },
@@ -143,6 +144,12 @@
       {
         "bookId": "omens",
         "bookTitle": "Good Omens",
+        "timestamp": "@step9",
+        "type": "finished"
+      },
+      {
+        "bookId": "omens",
+        "bookTitle": "Good Omens",
         "details": "411 pages",
         "timestamp": "@step9",
         "type": "progress"
@@ -225,18 +232,18 @@
       "zzz": []
     },
     "stats": {
-      "averageRating": 2,
+      "averageRating": 3,
       "booksInLibrary": 5,
-      "booksReadThisMonth": 1,
-      "booksReadThisYear": 1,
-      "currentlyReading": 2,
+      "booksReadThisMonth": 2,
+      "booksReadThisYear": 2,
+      "currentlyReading": 1,
       "favoriteGenres": [
         "Fiction",
         "Politics",
         "Fantasy"
       ],
       "readingStreak": 1,
-      "totalBooksRead": 1,
+      "totalBooksRead": 2,
       "totalPagesRead": 613
     },
     "views": {
@@ -259,7 +266,8 @@
         "rose"
       ],
       "finished": [
-        "sense"
+        "sense",
+        "omens"
       ],
       "newest": [
         "sense",
@@ -291,8 +299,7 @@
         "book:Fermat's Last Theorem"
       ],
       "reading": [
-        "dune",
-        "omens"
+        "dune"
       ],
       "searchThe": [
         "dune",
@@ -368,6 +375,16 @@
       },
       "timestamp": "@step9",
       "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "omens",
+      "data": {
+        "newState": "finished",
+        "previousState": "in_progress"
+      },
+      "timestamp": "@step9",
+      "type": "state_change",
       "userId": "<uid>"
     },
     {

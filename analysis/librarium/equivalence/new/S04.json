@@ -21,6 +21,7 @@
     {
       "addedAt": "@step2",
       "author": "Test Author",
+      "finishedAt": "@step6",
       "genre": "Classics",
       "id": "mm",
       "isOwned": true,
@@ -31,7 +32,7 @@
       },
       "rating": 5,
       "startedAt": "@step3",
-      "state": "in_progress",
+      "state": "finished",
       "title": "Middlemarch",
       "updatedAt": "@step8"
     }
@@ -51,6 +52,12 @@
         "details": "4 stars",
         "timestamp": "@step7",
         "type": "rated"
+      },
+      {
+        "bookId": "mm",
+        "bookTitle": "Middlemarch",
+        "timestamp": "@step6",
+        "type": "finished"
       },
       {
         "bookId": "mm",
@@ -111,17 +118,17 @@
       "zzz": []
     },
     "stats": {
-      "averageRating": 0,
+      "averageRating": 5,
       "booksInLibrary": 2,
-      "booksReadThisMonth": 0,
-      "booksReadThisYear": 0,
-      "currentlyReading": 1,
+      "booksReadThisMonth": 1,
+      "booksReadThisYear": 1,
+      "currentlyReading": 0,
       "favoriteGenres": [
         "Classics",
         "Mathematics"
       ],
-      "readingStreak": 0,
-      "totalBooksRead": 0,
+      "readingStreak": 1,
+      "totalBooksRead": 1,
       "totalPagesRead": 340
     },
     "views": {
@@ -134,7 +141,9 @@
         "mm"
       ],
       "fiction": [],
-      "finished": [],
+      "finished": [
+        "mm"
+      ],
       "newest": [
         "mm",
         "book:Fermat's Last Theorem"
@@ -154,9 +163,7 @@
         "mm",
         "book:Fermat's Last Theorem"
       ],
-      "reading": [
-        "mm"
-      ],
+      "reading": [],
       "searchThe": [
         "book:Fermat's Last Theorem"
       ],
@@ -214,6 +221,16 @@
       },
       "timestamp": "@step6",
       "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "mm",
+      "data": {
+        "newState": "finished",
+        "previousState": "in_progress"
+      },
+      "timestamp": "@step6",
+      "type": "state_change",
       "userId": "<uid>"
     },
     {

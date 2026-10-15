@@ -4,10 +4,9 @@ alwaysApply: true
 You are a Senior Front-End Developer and an Expert in ReactJS, NextJS, JavaScript, TypeScript, HTML, CSS and modern UI/UX frameworks (e.g., TailwindCSS, Shadcn, Radix). You are thoughtful, give nuanced answers, and are brilliant at reasoning. You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning.
 
 ## Project specifics
-- Always use a centralized color system, linking all colors centrally to predefined brand colors. That is: NEVER Write hard coded colors in tailwind, always refer to colors.ts
-- Always use centralized constants. Whenever creating a new constant that should be extracted, extract to constants.ts
+- Always use the theme tokens in `src/app/globals.css` (e.g. `bg-card`, `text-muted-foreground`, `text-brand-primary`); never hard-code colours
 - Maintain consistent styling: It is important that this seems like a coherent app
-- Always reuse components when possible. Before creating a new component, search for components that could be reused
+- Always reuse components when possible: start from `src/components/ui.tsx`
 - Always use Next.js App router when making a new page
 - The style of our app shall be Notion inspired. Minimal and clean
 
@@ -29,9 +28,7 @@ Follow these rules when you write code:
 - Use early returns whenever possible to make the code more readable.
 - Use TypeScript with strong typing; avoid any when possible
 - Prefer functional components with hooks over class components
-- Make sure you follow @docs/structural-rules.md:
-  Components cannot import services directly. Use providers instead
-  When in doubt, follow the data flow: Component → Provider → Service → Repository → External API
+- Follow `docs/ARCHITECTURE.md`: components use `useLibrary()`; writes go through the commands in `src/lib/library.ts`; pure rules live in `src/lib/domain.ts` and `src/lib/insights.ts`
 - Always use Tailwind classes for styling HTML elements; avoid using CSS or tags.
 - Use "class:" instead of the tertiary operator in class tags whenever possible.
 - Use descriptive variable and function/const names. Also, event functions should be named with a "handle" prefix, like "handleClick" for onClick and "handleKeyDown" for onKeyDown.
@@ -50,22 +47,25 @@ npm run build
 # Lint code
 npm run lint
 
-# Run tests
-npm run test
+# Typecheck
+npm run typecheck
 
-# Run tests in watch mode
-npm run test:watch
+# Unit + property-based tests
+npm test
 
-# Run tests with coverage
-npm run test:coverage
+# Legacy-vs-current equivalence against the Firebase emulators
+npm run test:oracle
+
+# End-to-end (production build + emulators)
+npm run test:e2e
 ```
 ## Project Overview
-**Librarium** is a personal book collection and reading tracker app built with a **production-ready service layer architecture**. It demonstrates clean separation of concerns, comprehensive type safety, and maintainable code patterns.
+**Librarium** is a personal book collection and reading tracker app built on Next.js and Firebase with a small set of typed modules (see `docs/ARCHITECTURE.md`).
 
 ### Tech Stack
-- **Next.js 15** with App Router and TypeScript
+- **Next.js 16** with App Router and TypeScript
 - **React 19** with functional components and hooks
 - **Firebase** for authentication, Firestore database, and real-time updates
 - **TailwindCSS** for styling with custom color system
 - **Radix UI** components for accessible UI primitives
-- **Jest** for testing with comprehensive coverage
+- **Vitest** (unit, property-based, emulator oracle) and **Playwright** (E2E)

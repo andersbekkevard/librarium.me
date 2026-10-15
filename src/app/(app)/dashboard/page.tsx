@@ -36,7 +36,7 @@ export default function Dashboard() {
         eyebrow={new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
         title={`${greeting()}, ${profile?.displayName?.split(" ")[0] || "Reader"}`}
       />
-      <Card role="group" aria-label="Reading stats" className="mb-6 flex flex-wrap gap-x-8 gap-y-4 px-5 py-4 animate-rise" style={{ "--i": 1 } as React.CSSProperties}>
+      <Card role="group" aria-label="Reading stats" className="mb-6 grid grid-cols-3 gap-x-4 gap-y-4 px-5 py-4 animate-rise sm:flex sm:flex-wrap sm:gap-x-8" style={{ "--i": 1 } as React.CSSProperties}>
         {ribbon.map(([I, value, label]) => (
           <div key={label} className="flex items-center gap-2.5">
             <span className="grid size-8 place-items-center rounded-lg bg-brand-primary/8 text-brand-primary">

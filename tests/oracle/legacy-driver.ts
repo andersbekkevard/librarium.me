@@ -1,10 +1,7 @@
 /* The pre-modernization stack (services → repositories), driven exactly as its React providers drove it. */
 import type { User } from "firebase/auth";
 import type { Derived, Driver, LibraryQuery, ManualForm, PlainBook, ReadingState, ScanMeta } from "./driver";
-
-/** Legacy modules are untyped from here on: their `@/` imports only resolve inside the oracle's Vite runtime. */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const legacy = (path: string): Promise<any> => import(/* @vite-ignore */ `../../.legacy/src/lib/${path}`);
+import { legacy } from "../legacy";
 
 export async function legacyDriver(user: User): Promise<Driver> {
   const { bookService } = await legacy("services/BookService");

@@ -94,7 +94,7 @@ const strict = (id: string, dumpValue: Record<string, unknown>) =>
     .flatMap((d) => d.omit)
     .reduce<unknown>((acc, p) => (p === "*" ? {} : omit(acc, p.split("."))), dumpValue);
 
-function write(side: "legacy" | "new", id: string, value: unknown) {
+function write(side: string, id: string, value: unknown) {
   mkdirSync(join(OUT, side), { recursive: true });
   writeFileSync(join(OUT, side, `${id}.json`), JSON.stringify(value, null, 2) + "\n");
 }
@@ -106,6 +106,8 @@ describe.each(scenarios)("$id $title", (s) => {
     if (!modernDriver) return;
     const modern = await play(s, modernDriver);
     write("new", s.id, modern);
+    write("strict/legacy", s.id, strict(s.id, legacy));
+    write("strict/new", s.id, strict(s.id, modern));
     expect(strict(s.id, modern)).toEqual(strict(s.id, legacy));
     expectImprovements(s.id, legacy, modern);
   });
