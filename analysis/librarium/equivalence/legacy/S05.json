@@ -1,0 +1,355 @@
+{
+  "books": [
+    {
+      "addedAt": "@step1",
+      "author": "Simon Singh",
+      "coverImage": "http://books.google.com/books/content?id=wvAZAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "In 1963 a schoolboy browsing in his local library stumbled across a great mathematical problem: Fermat's Last Theorem, a puzzle that every child can now understand, but which has baffled mathematicians for over 300 years. Aged just ten, Andrew Wiles dreamed he would crack it.",
+      "genre": "Mathematics",
+      "id": "book:Fermat's Last Theorem",
+      "isOwned": false,
+      "notes": "Welcome to your personal library! This is a sample book to get you started. Feel free to update your reading progress or add your own books.",
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 396
+      },
+      "publishedDate": "1997",
+      "state": "not_started",
+      "title": "Fermat's Last Theorem",
+      "updatedAt": "@step1"
+    },
+    {
+      "addedAt": "@step2",
+      "author": "Test Author",
+      "finishedAt": "@step9",
+      "id": "emma",
+      "isOwned": true,
+      "progress": {
+        "currentPage": 1,
+        "lastUpdated": "@step3",
+        "totalPages": 400
+      },
+      "state": "finished",
+      "title": "Emma",
+      "updatedAt": "@step9"
+    },
+    {
+      "addedAt": "@step18",
+      "author": "Test Author",
+      "id": "pamphlet",
+      "isOwned": true,
+      "progress": {
+        "currentPage": 50,
+        "lastUpdated": "@step20",
+        "totalPages": 0
+      },
+      "state": "in_progress",
+      "title": "Pamphlet",
+      "updatedAt": "@step20"
+    }
+  ],
+  "derived": {
+    "activity": [
+      {
+        "bookId": "pamphlet",
+        "bookTitle": "Pamphlet",
+        "details": "49 pages",
+        "timestamp": "@step20",
+        "type": "progress"
+      },
+      {
+        "bookId": "pamphlet",
+        "bookTitle": "Pamphlet",
+        "details": "1 pages",
+        "timestamp": "@step19",
+        "type": "progress"
+      },
+      {
+        "bookId": "pamphlet",
+        "bookTitle": "Pamphlet",
+        "timestamp": "@step19",
+        "type": "started"
+      },
+      {
+        "bookId": "emma",
+        "bookTitle": "Emma",
+        "timestamp": "@step9",
+        "type": "finished"
+      },
+      {
+        "bookId": "emma",
+        "bookTitle": "Emma",
+        "details": "1 pages",
+        "timestamp": "@step3",
+        "type": "progress"
+      },
+      {
+        "bookId": "emma",
+        "bookTitle": "Emma",
+        "timestamp": "@step3",
+        "type": "started"
+      }
+    ],
+    "comments": {
+      "book:Fermat's Last Theorem": [],
+      "emma": [],
+      "pamphlet": []
+    },
+    "reviews": {
+      "book:Fermat's Last Theorem": null,
+      "emma": null,
+      "pamphlet": null
+    },
+    "search": {
+      "dune": [],
+      "fermat": [
+        "book:Fermat's Last Theorem"
+      ],
+      "mathematics": [
+        "book:Fermat's Last Theorem"
+      ],
+      "o": [
+        "emma",
+        "book:Fermat's Last Theorem",
+        "pamphlet"
+      ],
+      "pratchett": [],
+      "zzz": []
+    },
+    "stats": {
+      "averageRating": 0,
+      "booksInLibrary": 3,
+      "booksReadThisMonth": 1,
+      "booksReadThisYear": 1,
+      "currentlyReading": 1,
+      "favoriteGenres": [
+        "Mathematics"
+      ],
+      "readingStreak": 1,
+      "totalBooksRead": 1,
+      "totalPagesRead": 51
+    },
+    "views": {
+      "authorDesc": [
+        "pamphlet",
+        "emma",
+        "book:Fermat's Last Theorem"
+      ],
+      "default": [
+        "emma",
+        "book:Fermat's Last Theorem",
+        "pamphlet"
+      ],
+      "fiction": [],
+      "finished": [
+        "emma"
+      ],
+      "newest": [
+        "pamphlet",
+        "emma",
+        "book:Fermat's Last Theorem"
+      ],
+      "owned": [
+        "emma",
+        "pamphlet"
+      ],
+      "pages": [
+        "pamphlet",
+        "book:Fermat's Last Theorem",
+        "emma"
+      ],
+      "progress": [
+        "pamphlet",
+        "book:Fermat's Last Theorem",
+        "emma"
+      ],
+      "ratingDesc": [
+        "pamphlet",
+        "emma",
+        "book:Fermat's Last Theorem"
+      ],
+      "reading": [
+        "pamphlet"
+      ],
+      "searchThe": [
+        "book:Fermat's Last Theorem"
+      ],
+      "wishlist": [
+        "book:Fermat's Last Theorem"
+      ]
+    }
+  },
+  "events": [
+    {
+      "bookId": "emma",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step3",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "emma",
+      "data": {
+        "newPage": 1,
+        "previousPage": 0
+      },
+      "timestamp": "@step3",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "emma",
+      "data": {
+        "newState": "finished",
+        "previousState": "in_progress"
+      },
+      "timestamp": "@step9",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "pamphlet",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step19",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "pamphlet",
+      "data": {
+        "newPage": 1,
+        "previousPage": 0
+      },
+      "timestamp": "@step19",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "pamphlet",
+      "data": {
+        "newPage": 50,
+        "previousPage": 1
+      },
+      "timestamp": "@step20",
+      "type": "progress_update",
+      "userId": "<uid>"
+    }
+  ],
+  "messages": [],
+  "profile": {
+    "booksInLibrary": 0,
+    "createdAt": "@step1",
+    "currentlyReading": 0,
+    "displayName": "Ada Lovelace",
+    "email": "<email>",
+    "emailVerified": false,
+    "id": "<uid>",
+    "lastSignInTime": "<lastSignInTime>",
+    "photoURL": "https://lh3.googleusercontent.com/a/ada",
+    "totalBooksRead": 0,
+    "updatedAt": "@step1"
+  },
+  "steps": [
+    {
+      "ok": true,
+      "step": "sign in"
+    },
+    {
+      "ok": true,
+      "step": "add",
+      "value": "emma"
+    },
+    {
+      "ok": true,
+      "step": "start reading"
+    },
+    {
+      "error": "Current page cannot be negative",
+      "ok": false,
+      "step": "negative page"
+    },
+    {
+      "error": "Current page cannot exceed total pages",
+      "ok": false,
+      "step": "beyond last page"
+    },
+    {
+      "error": "Cannot transition from in_progress to not_started",
+      "ok": false,
+      "step": "skip back to not_started"
+    },
+    {
+      "error": "Rating must be between 1 and 5",
+      "ok": false,
+      "step": "rate 0"
+    },
+    {
+      "error": "Rating must be between 1 and 5",
+      "ok": false,
+      "step": "rate 6"
+    },
+    {
+      "ok": true,
+      "step": "finish"
+    },
+    {
+      "error": "Cannot transition from finished to in_progress",
+      "ok": false,
+      "step": "reopen finished"
+    },
+    {
+      "error": "Cannot transition from finished to finished",
+      "ok": false,
+      "step": "finish twice"
+    },
+    {
+      "error": "Book not found",
+      "ok": false,
+      "step": "progress on missing book"
+    },
+    {
+      "error": "Book not found",
+      "ok": false,
+      "step": "state on missing book"
+    },
+    {
+      "error": "Book title cannot be empty",
+      "ok": false,
+      "step": "empty title"
+    },
+    {
+      "error": "Invalid progress data",
+      "ok": false,
+      "step": "page beyond total"
+    },
+    {
+      "error": "Invalid progress data",
+      "ok": false,
+      "step": "negative pages"
+    },
+    {
+      "error": "Rating must be between 1 and 5",
+      "ok": false,
+      "step": "bad rating"
+    },
+    {
+      "ok": true,
+      "step": "zero pages, progress",
+      "value": "pamphlet"
+    },
+    {
+      "ok": true,
+      "step": "start pamphlet"
+    },
+    {
+      "ok": true,
+      "step": "pamphlet page 50"
+    }
+  ]
+}

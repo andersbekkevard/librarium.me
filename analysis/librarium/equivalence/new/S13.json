@@ -1,0 +1,214 @@
+{
+  "books": [
+    {
+      "addedAt": "@step1",
+      "author": "Simon Singh",
+      "coverImage": "http://books.google.com/books/content?id=wvAZAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "In 1963 a schoolboy browsing in his local library stumbled across a great mathematical problem: Fermat's Last Theorem, a puzzle that every child can now understand, but which has baffled mathematicians for over 300 years. Aged just ten, Andrew Wiles dreamed he would crack it.",
+      "genre": "Mathematics",
+      "id": "book:Fermat's Last Theorem",
+      "isOwned": false,
+      "notes": "Welcome to your personal library! This is a sample book to get you started. Feel free to update your reading progress or add your own books.",
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 396
+      },
+      "publishedDate": "1997",
+      "state": "not_started",
+      "title": "Fermat's Last Theorem",
+      "updatedAt": "@step1"
+    },
+    {
+      "addedAt": "@step2",
+      "author": "Test Author",
+      "id": "persuasion",
+      "isOwned": true,
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 250
+      },
+      "state": "not_started",
+      "title": "Persuasion",
+      "updatedAt": "@step2"
+    },
+    {
+      "addedAt": "@step4",
+      "author": "Test Author",
+      "id": "sanditon",
+      "isOwned": true,
+      "progress": {
+        "currentPage": 120,
+        "lastUpdated": "@step5",
+        "totalPages": 120
+      },
+      "startedAt": "@step5",
+      "state": "in_progress",
+      "title": "Sanditon",
+      "updatedAt": "@step5"
+    }
+  ],
+  "derived": {
+    "activity": [
+      {
+        "bookId": "sanditon",
+        "bookTitle": "Sanditon",
+        "details": "120 pages",
+        "timestamp": "@step5",
+        "type": "progress"
+      },
+      {
+        "bookId": "sanditon",
+        "bookTitle": "Sanditon",
+        "timestamp": "@step5",
+        "type": "started"
+      }
+    ],
+    "comments": {
+      "book:Fermat's Last Theorem": [],
+      "persuasion": [],
+      "sanditon": []
+    },
+    "reviews": {
+      "book:Fermat's Last Theorem": null,
+      "persuasion": null,
+      "sanditon": null
+    },
+    "search": {
+      "dune": [],
+      "fermat": [
+        "book:Fermat's Last Theorem"
+      ],
+      "mathematics": [
+        "book:Fermat's Last Theorem"
+      ],
+      "o": [
+        "book:Fermat's Last Theorem",
+        "persuasion",
+        "sanditon"
+      ],
+      "pratchett": [],
+      "zzz": []
+    },
+    "stats": {
+      "averageRating": 0,
+      "booksInLibrary": 3,
+      "booksReadThisMonth": 0,
+      "booksReadThisYear": 0,
+      "currentlyReading": 1,
+      "favoriteGenres": [
+        "Mathematics"
+      ],
+      "readingStreak": 0,
+      "totalBooksRead": 0,
+      "totalPagesRead": 120
+    },
+    "views": {
+      "authorDesc": [
+        "sanditon",
+        "persuasion",
+        "book:Fermat's Last Theorem"
+      ],
+      "default": [
+        "book:Fermat's Last Theorem",
+        "persuasion",
+        "sanditon"
+      ],
+      "fiction": [],
+      "finished": [],
+      "newest": [
+        "sanditon",
+        "persuasion",
+        "book:Fermat's Last Theorem"
+      ],
+      "owned": [
+        "persuasion",
+        "sanditon"
+      ],
+      "pages": [
+        "sanditon",
+        "persuasion",
+        "book:Fermat's Last Theorem"
+      ],
+      "progress": [
+        "persuasion",
+        "book:Fermat's Last Theorem",
+        "sanditon"
+      ],
+      "ratingDesc": [
+        "sanditon",
+        "persuasion",
+        "book:Fermat's Last Theorem"
+      ],
+      "reading": [
+        "sanditon"
+      ],
+      "searchThe": [
+        "book:Fermat's Last Theorem"
+      ],
+      "wishlist": [
+        "book:Fermat's Last Theorem"
+      ]
+    }
+  },
+  "events": [
+    {
+      "bookId": "sanditon",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step5",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "sanditon",
+      "data": {
+        "newPage": 120,
+        "previousPage": 0
+      },
+      "timestamp": "@step5",
+      "type": "progress_update",
+      "userId": "<uid>"
+    }
+  ],
+  "messages": [],
+  "profile": {
+    "booksInLibrary": 0,
+    "createdAt": "@step1",
+    "currentlyReading": 0,
+    "displayName": "Ada Lovelace",
+    "email": "<email>",
+    "emailVerified": false,
+    "id": "<uid>",
+    "lastSignInTime": "<lastSignInTime>",
+    "photoURL": "https://lh3.googleusercontent.com/a/ada",
+    "totalBooksRead": 0,
+    "updatedAt": "@step1"
+  },
+  "steps": [
+    {
+      "ok": true,
+      "step": "sign in"
+    },
+    {
+      "ok": true,
+      "step": "add",
+      "value": "persuasion"
+    },
+    {
+      "error": "Current page cannot exceed total pages",
+      "ok": false,
+      "step": "overshoot while not started"
+    },
+    {
+      "ok": true,
+      "step": "add second",
+      "value": "sanditon"
+    },
+    {
+      "ok": true,
+      "step": "jump straight to the last page"
+    }
+  ]
+}

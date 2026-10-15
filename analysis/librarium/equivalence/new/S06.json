@@ -1,0 +1,346 @@
+{
+  "books": [
+    {
+      "addedAt": "@step1",
+      "author": "Simon Singh",
+      "coverImage": "http://books.google.com/books/content?id=wvAZAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "In 1963 a schoolboy browsing in his local library stumbled across a great mathematical problem: Fermat's Last Theorem, a puzzle that every child can now understand, but which has baffled mathematicians for over 300 years. Aged just ten, Andrew Wiles dreamed he would crack it.",
+      "genre": "Mathematics",
+      "id": "book:Fermat's Last Theorem",
+      "isOwned": false,
+      "notes": "Welcome to your personal library! This is a sample book to get you started. Feel free to update your reading progress or add your own books.",
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 396
+      },
+      "publishedDate": "1997",
+      "state": "not_started",
+      "title": "Fermat's Last Theorem",
+      "updatedAt": "@step1"
+    },
+    {
+      "addedAt": "@step2",
+      "author": "Test Author",
+      "finishedAt": "@step10",
+      "id": "beloved",
+      "isOwned": true,
+      "progress": {
+        "currentPage": 100,
+        "lastUpdated": "@step8",
+        "totalPages": 324
+      },
+      "startedAt": "@step7",
+      "state": "finished",
+      "title": "Beloved",
+      "updatedAt": "@step10"
+    }
+  ],
+  "derived": {
+    "activity": [
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "details": "Stayed with me for days.",
+        "timestamp": "@step11",
+        "type": "commented"
+      },
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "timestamp": "@step10",
+        "type": "finished"
+      },
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "details": "Sethe's story is devastating.",
+        "timestamp": "@step9",
+        "type": "commented"
+      },
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "details": "99 pages",
+        "timestamp": "@step8",
+        "type": "progress"
+      },
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "details": "1 pages",
+        "timestamp": "@step7",
+        "type": "progress"
+      },
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "timestamp": "@step7",
+        "type": "started"
+      },
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "details": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy...",
+        "timestamp": "@step6",
+        "type": "commented"
+      },
+      {
+        "bookId": "beloved",
+        "bookTitle": "Beloved",
+        "details": "Looking forward to this one.",
+        "timestamp": "@step3",
+        "type": "commented"
+      }
+    ],
+    "comments": {
+      "beloved": [
+        {
+          "currentPage": 100,
+          "readingState": "finished",
+          "text": "Stayed with me for days.",
+          "timestamp": "@step11"
+        },
+        {
+          "currentPage": 100,
+          "readingState": "in_progress",
+          "text": "Sethe's story is devastating.",
+          "timestamp": "@step9"
+        },
+        {
+          "currentPage": 0,
+          "readingState": "not_started",
+          "text": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+          "timestamp": "@step6"
+        },
+        {
+          "currentPage": 0,
+          "readingState": "not_started",
+          "text": "Looking forward to this one.",
+          "timestamp": "@step3"
+        }
+      ],
+      "book:Fermat's Last Theorem": []
+    },
+    "reviews": {
+      "beloved": null,
+      "book:Fermat's Last Theorem": null
+    },
+    "search": {
+      "dune": [],
+      "fermat": [
+        "book:Fermat's Last Theorem"
+      ],
+      "mathematics": [
+        "book:Fermat's Last Theorem"
+      ],
+      "o": [
+        "beloved",
+        "book:Fermat's Last Theorem"
+      ],
+      "pratchett": [],
+      "zzz": []
+    },
+    "stats": {
+      "averageRating": 0,
+      "booksInLibrary": 2,
+      "booksReadThisMonth": 1,
+      "booksReadThisYear": 1,
+      "currentlyReading": 0,
+      "favoriteGenres": [
+        "Mathematics"
+      ],
+      "readingStreak": 1,
+      "totalBooksRead": 1,
+      "totalPagesRead": 100
+    },
+    "views": {
+      "authorDesc": [
+        "beloved",
+        "book:Fermat's Last Theorem"
+      ],
+      "default": [
+        "beloved",
+        "book:Fermat's Last Theorem"
+      ],
+      "fiction": [],
+      "finished": [
+        "beloved"
+      ],
+      "newest": [
+        "beloved",
+        "book:Fermat's Last Theorem"
+      ],
+      "owned": [
+        "beloved"
+      ],
+      "pages": [
+        "beloved",
+        "book:Fermat's Last Theorem"
+      ],
+      "progress": [
+        "book:Fermat's Last Theorem",
+        "beloved"
+      ],
+      "ratingDesc": [
+        "beloved",
+        "book:Fermat's Last Theorem"
+      ],
+      "reading": [],
+      "searchThe": [
+        "book:Fermat's Last Theorem"
+      ],
+      "wishlist": [
+        "book:Fermat's Last Theorem"
+      ]
+    }
+  },
+  "events": [
+    {
+      "bookId": "beloved",
+      "data": {
+        "comment": "Looking forward to this one.",
+        "commentPage": 0,
+        "commentState": "not_started"
+      },
+      "timestamp": "@step3",
+      "type": "comment",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "beloved",
+      "data": {
+        "comment": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+        "commentPage": 0,
+        "commentState": "not_started"
+      },
+      "timestamp": "@step6",
+      "type": "comment",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "beloved",
+      "data": {
+        "newState": "in_progress",
+        "previousState": "not_started"
+      },
+      "timestamp": "@step7",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "beloved",
+      "data": {
+        "newPage": 1,
+        "previousPage": 0
+      },
+      "timestamp": "@step7",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "beloved",
+      "data": {
+        "newPage": 100,
+        "previousPage": 1
+      },
+      "timestamp": "@step8",
+      "type": "progress_update",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "beloved",
+      "data": {
+        "comment": "Sethe's story is devastating.",
+        "commentPage": 100,
+        "commentState": "in_progress"
+      },
+      "timestamp": "@step9",
+      "type": "comment",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "beloved",
+      "data": {
+        "newState": "finished",
+        "previousState": "in_progress"
+      },
+      "timestamp": "@step10",
+      "type": "state_change",
+      "userId": "<uid>"
+    },
+    {
+      "bookId": "beloved",
+      "data": {
+        "comment": "Stayed with me for days.",
+        "commentPage": 100,
+        "commentState": "finished"
+      },
+      "timestamp": "@step11",
+      "type": "comment",
+      "userId": "<uid>"
+    }
+  ],
+  "messages": [],
+  "profile": {
+    "booksInLibrary": 0,
+    "createdAt": "@step1",
+    "currentlyReading": 0,
+    "displayName": "Ada Lovelace",
+    "email": "<email>",
+    "emailVerified": false,
+    "id": "<uid>",
+    "lastSignInTime": "<lastSignInTime>",
+    "photoURL": "https://lh3.googleusercontent.com/a/ada",
+    "totalBooksRead": 0,
+    "updatedAt": "@step1"
+  },
+  "steps": [
+    {
+      "ok": true,
+      "step": "sign in"
+    },
+    {
+      "ok": true,
+      "step": "add",
+      "value": "beloved"
+    },
+    {
+      "ok": true,
+      "step": "comment before starting"
+    },
+    {
+      "error": "Comment must be between 1 and 2000 characters",
+      "ok": false,
+      "step": "empty comment"
+    },
+    {
+      "error": "Comment must be between 1 and 2000 characters",
+      "ok": false,
+      "step": "too long comment"
+    },
+    {
+      "ok": true,
+      "step": "max length comment"
+    },
+    {
+      "ok": true,
+      "step": "start"
+    },
+    {
+      "ok": true,
+      "step": "page 100"
+    },
+    {
+      "ok": true,
+      "step": "comment on page 100"
+    },
+    {
+      "ok": true,
+      "step": "finish"
+    },
+    {
+      "ok": true,
+      "step": "comment after finishing"
+    }
+  ]
+}

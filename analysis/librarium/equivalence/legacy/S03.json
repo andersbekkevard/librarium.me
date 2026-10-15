@@ -1,0 +1,181 @@
+{
+  "books": [
+    {
+      "addedAt": "@step1",
+      "author": "Simon Singh",
+      "coverImage": "http://books.google.com/books/content?id=wvAZAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "In 1963 a schoolboy browsing in his local library stumbled across a great mathematical problem: Fermat's Last Theorem, a puzzle that every child can now understand, but which has baffled mathematicians for over 300 years. Aged just ten, Andrew Wiles dreamed he would crack it.",
+      "genre": "Mathematics",
+      "id": "book:Fermat's Last Theorem",
+      "isOwned": false,
+      "notes": "Welcome to your personal library! This is a sample book to get you started. Feel free to update your reading progress or add your own books.",
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 396
+      },
+      "publishedDate": "1997",
+      "state": "not_started",
+      "title": "Fermat's Last Theorem",
+      "updatedAt": "@step1"
+    },
+    {
+      "addedAt": "@step2",
+      "author": "Umberto Eco",
+      "description": "A murder in a medieval abbey.",
+      "genre": "Mystery",
+      "id": "rose",
+      "isOwned": true,
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 536
+      },
+      "publishedDate": "1980-01-01",
+      "state": "not_started",
+      "title": "The Name of the Rose",
+      "updatedAt": "@step2"
+    },
+    {
+      "addedAt": "@step3",
+      "author": "Me",
+      "id": "notes",
+      "isOwned": false,
+      "progress": {
+        "currentPage": 0,
+        "totalPages": 0
+      },
+      "state": "not_started",
+      "title": "Notes",
+      "updatedAt": "@step3"
+    }
+  ],
+  "derived": {
+    "activity": [],
+    "comments": {
+      "book:Fermat's Last Theorem": [],
+      "notes": [],
+      "rose": []
+    },
+    "reviews": {
+      "book:Fermat's Last Theorem": null,
+      "notes": null,
+      "rose": null
+    },
+    "search": {
+      "dune": [],
+      "fermat": [
+        "book:Fermat's Last Theorem"
+      ],
+      "mathematics": [
+        "book:Fermat's Last Theorem"
+      ],
+      "o": [
+        "book:Fermat's Last Theorem",
+        "notes",
+        "rose"
+      ],
+      "pratchett": [],
+      "zzz": []
+    },
+    "stats": {
+      "averageRating": 0,
+      "booksInLibrary": 3,
+      "booksReadThisMonth": 0,
+      "booksReadThisYear": 0,
+      "currentlyReading": 0,
+      "favoriteGenres": [
+        "Mystery",
+        "Mathematics"
+      ],
+      "readingStreak": 0,
+      "totalBooksRead": 0,
+      "totalPagesRead": 0
+    },
+    "views": {
+      "authorDesc": [
+        "rose",
+        "book:Fermat's Last Theorem",
+        "notes"
+      ],
+      "default": [
+        "book:Fermat's Last Theorem",
+        "notes",
+        "rose"
+      ],
+      "fiction": [],
+      "finished": [],
+      "newest": [
+        "notes",
+        "rose",
+        "book:Fermat's Last Theorem"
+      ],
+      "owned": [
+        "rose"
+      ],
+      "pages": [
+        "notes",
+        "book:Fermat's Last Theorem",
+        "rose"
+      ],
+      "progress": [
+        "notes",
+        "rose",
+        "book:Fermat's Last Theorem"
+      ],
+      "ratingDesc": [
+        "notes",
+        "rose",
+        "book:Fermat's Last Theorem"
+      ],
+      "reading": [],
+      "searchThe": [
+        "book:Fermat's Last Theorem",
+        "rose"
+      ],
+      "wishlist": [
+        "book:Fermat's Last Theorem",
+        "notes"
+      ]
+    }
+  },
+  "events": [],
+  "messages": [],
+  "profile": {
+    "booksInLibrary": 0,
+    "createdAt": "@step1",
+    "currentlyReading": 0,
+    "displayName": "Ada Lovelace",
+    "email": "<email>",
+    "emailVerified": false,
+    "id": "<uid>",
+    "lastSignInTime": "<lastSignInTime>",
+    "photoURL": "https://lh3.googleusercontent.com/a/ada",
+    "totalBooksRead": 0,
+    "updatedAt": "@step1"
+  },
+  "steps": [
+    {
+      "ok": true,
+      "step": "sign in"
+    },
+    {
+      "ok": true,
+      "step": "add complete",
+      "value": "rose"
+    },
+    {
+      "ok": true,
+      "step": "add minimal",
+      "value": "notes"
+    },
+    {
+      "error": "Book title cannot be empty",
+      "ok": false,
+      "step": "add whitespace title"
+    },
+    {
+      "error": "Book author cannot be empty",
+      "ok": false,
+      "step": "add whitespace author"
+    }
+  ]
+}
