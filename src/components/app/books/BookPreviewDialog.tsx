@@ -1,5 +1,7 @@
 "use client";
 
+import { useSanitizedBookDescription } from "@/lib/hooks/useSanitizedBookDescription";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,6 +57,7 @@ export const BookPreviewDialog: React.FC<BookPreviewDialogProps> = ({
   clickPosition,
 }) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const sanitizedDescription = useSanitizedBookDescription(book?.volumeInfo.description);
 
   // Reset description expansion when book changes
   useEffect(() => {
@@ -335,7 +338,7 @@ export const BookPreviewDialog: React.FC<BookPreviewDialogProps> = ({
                               isDescriptionExpanded ? "" : "line-clamp-6"
                             }`}
                             dangerouslySetInnerHTML={{
-                              __html: book.volumeInfo.description,
+                              __html: sanitizedDescription,
                             }}
                           />
                           {book.volumeInfo.description.length > 300 && (
