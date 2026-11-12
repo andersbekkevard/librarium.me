@@ -1,5 +1,7 @@
 "use client";
 
+import { useSanitizedBookDescription } from "@/lib/hooks/useSanitizedBookDescription";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -42,6 +44,7 @@ export const BookPreviewPage: React.FC<BookPreviewPageProps> = ({
   isAdded = false,
 }) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const sanitizedDescription = useSanitizedBookDescription(book.volumeInfo.description);
 
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
@@ -267,7 +270,7 @@ export const BookPreviewPage: React.FC<BookPreviewPageProps> = ({
                               isDescriptionExpanded ? "" : "line-clamp-6"
                             }`}
                             dangerouslySetInnerHTML={{
-                              __html: book.volumeInfo.description,
+                              __html: sanitizedDescription,
                             }}
                           />
                           {book.volumeInfo.description.length > 300 && (

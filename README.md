@@ -85,3 +85,16 @@ Components → Providers → Services → Repositories → External APIs
 - **Provider Context Pattern**: Specialized contexts for auth, users, books, and events
 - **Repository Pattern**: Data access abstraction with standardized error handling
 - **AI Motivation System**: Personalized motivational messages are generated daily using Google Gemini AI, based on user reading data. The system follows the strict service layer architecture: UI components request messages from a Provider, which calls a Service that orchestrates AI prompt generation and message storage via the Repository layer and Firebase AI.
+
+## Reproducible local checks
+
+Use `npm ci` with the committed `package-lock.json`, then `npm run lint`,
+`npm test -- --runInBand`, and `npm run build`. Set the Firebase public
+configuration in the ignored `.env.local` for a working local app. A local
+compile-only build can use dummy Firebase public values, without credentials
+or access to a real database.
+
+Google Books descriptions are sanitized with DOMPurify in the browser before
+rendering, allowing only basic text formatting and lists, with no attributes.
+Responses disallow framing and MIME sniffing, limit cross-origin referrers,
+and omit the framework identification header.
