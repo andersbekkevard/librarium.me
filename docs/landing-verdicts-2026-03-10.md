@@ -54,8 +54,3 @@ Prompt at "mid-altitude" - not hex codes, not vibes. Specify design *dimensions*
 - Frontend skills library: `runbooks/frontend-skills/` (18 skills injected into agent prompts, not installed into .claude/).
 - Key insight: skills are pasted directly into agent prompts as a "skills block" at the top - more reliable than telling agents to "use /skill".
 - Clone candidates: rollups.com (modular grid).
-
-### AH Project
-- Project: `librarium-v2` (replaces `librarium-landing` which had bad callback URL)
-- Callback: `http://127.0.0.1:7071/harness-webhook` → `#librarium` (1480977465487917097)
-- Provider: claude-code (all variants)
